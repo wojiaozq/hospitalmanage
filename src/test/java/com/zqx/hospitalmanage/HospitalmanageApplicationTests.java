@@ -58,6 +58,31 @@ public class HospitalmanageApplicationTests {
             System.out.println("o.length----------->"+o.length);
         }
     }
+
+    @Test
+    public void contextLoads4() {
+        List<Doctor> list = doctorService.findByNameAndStartAndEnd("张晓", null,"2010-10-10");
+        System.out.println(list.size());
+        System.out.println(list);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public static <T> void caseEntity(List<Object[]> list,Class<T> clazz) throws IllegalAccessException, InstantiationException {
         T t = clazz.newInstance();
 

@@ -52,7 +52,7 @@ public class ToHtmlCotroller {
         List<Menu> all = menuService.findAll(role1.getId());
         Object o = JSONObject.toJSON(all);
         System.out.println(o.toString());
-        return role1.getName()+'\n'+o.toString();
+        return role1.getName()+'\n'+user.getName()+'\n'+o.toString();
     }
     @RequestMapping("Doctor_management.html")
     public String  getAllDoctor(Model model){

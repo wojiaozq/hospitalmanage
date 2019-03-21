@@ -23,6 +23,9 @@ public interface DoctorService {
 
     public List<Doctor> findAll() ;
 
+    public List<Doctor> findByNameAndStartAndEnd(String name,String start,String end);
+    public List<Doctor> findByStartAndEnd(String start, String end);
+
     public Doctor findOneById(String id);
 
     public void add(Doctor doctor) ;
@@ -30,4 +33,6 @@ public interface DoctorService {
     public void update(Doctor doctor);
 
     public void delete(String id);
+
+    public void updatePassword(String nowPassword,String id);
 }

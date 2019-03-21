@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.ParseException;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -69,7 +72,54 @@ public class DoctorServiceImpl implements DoctorService {
 	}
 
 	public List<Doctor> findAll() {
-		return doctorDao.findAll();
+		List<Doctor> all = doctorDao.findAll();
+		Collections.reverse(all);
+		return all;
+	}
+
+	public List<Doctor> findByStartAndEnd(String start, String end){
+		if(Utils.stringIsNull(start) && Utils.stringIsNull(end)){
+			return findAll();
+		}
+		try {
+			if(!Utils.stringIsNull(start) && !Utils.stringIsNull(end)){
+				return doctorDao.findByStartAndEnd(Utils.stringParseDate(start),Utils.stringParseDate(end));
+			}
+			return doctorDao.findByStart(Utils.stringParseDate(start==null?end:start));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public List<Doctor> findByNameAndStartAndEnd(String name, String start, String end) {
+		if(Utils.stringIsNull(name)){
+			return findByStartAndEnd(start,end);
+		}else{
+			if(Utils.stringIsNull(start) && Utils.stringIsNull(end)){
+				return doctorDao.findLikeName('%'+name+'%');
+			}
+			Date startDate;
+			if(Utils.stringIsNull(start) || Utils.stringIsNull(end)){
+				try {
+					startDate = Utils.stringParseDate(Utils.stringIsNull(start)?end:start);
+					return doctorDao.findLikeNameAndStart('%'+name+'%',startDate);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+			}
+			List<Doctor> list = null;
+			try {
+				startDate = Utils.stringParseDate(start);
+				Date endDate = Utils.stringParseDate(end);
+				list = doctorDao.findLikeNameAndStartAndEnd('%'+name+'%',startDate,endDate);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			return list;
+		}
+//		return null;
 	}
 
 
@@ -98,6 +148,12 @@ public class DoctorServiceImpl implements DoctorService {
 	@Transactional
 	public void delete(String id) {
 		doctorDao.deleteById(id);
+	}
+
+	@Override
+	@Transactional
+	public void updatePassword(String nowPassword, String id) {
+		doctorDao.updatePassword(nowPassword,id);
 	}
 
 }

@@ -59,6 +59,11 @@ public class DoctorController {
         return doctorService.getDoctorByName(name);
     }
 
+    @RequestMapping("search")
+    @ResponseBody
+    public List<Doctor> findByStartEndName(String name,String start,String end){
+        return doctorService.findByNameAndStartAndEnd(name,start,end);
+    }
     //分页
     @RequestMapping("page")
     @ResponseBody

@@ -8,6 +8,143 @@
 		<title>网站后台管理模版</title>
 		<link rel="stylesheet" type="text/css" href="./static/admin/layui/css/layui.css"/>
 		<link rel="stylesheet" type="text/css" href="./static/admin/css/admin.css"/>
+		<script src="./lib/jquery/1.9.1/jquery.min.js" ></script>
+		<script type="application/javascript">
+			var string1 = "";
+            $(document).ready(function(){
+                $.get("getMenu",function (data) {
+                    var str = data.split('\n');
+                    if(str[0] == "root"){
+                        var main = document.getElementById("mainIframe").setAttribute("src","welcome.html");
+                    }
+                    if(str[0] == "医生"){
+                        var main = document.getElementById("mainIframe").setAttribute("src","welcome_doctor.html");
+                    }
+                    var value = eval('('+str[2]+')');
+                    // var menu = document.getElementById("treeMenu");//menu菜单对象
+                    var li_1_start = "<li class=\"layui-nav-item\">\n" +
+                        "\t\t\t\t    <a href=\"javascript:;\" data-url=\"";
+                    var li_1_data_id = "\" data-id=\"";
+                    var li_1_data_text = "\" data-text=\"";
+                    var li_1_i = "\"><i class=\"iconfont\"></i>"
+                    var lastStr = "";
+                    var count = 1;
+                    for(var i =0;i<value.length;++i){
+                        var s1li = "";//不包含dl标签
+                        var s1ul = "";//包含dl标签
+                        var dd = "";
+                        if(value[i].pid == 0){
+                            s1li = li_1_start + value[i].url + li_1_data_id+count+li_1_data_text+value[i].name+li_1_i
+                                +value[i].name+"</a></li>";//没有子标签dl
+                            s1ul = "<li class=\"layui-nav-item\"><a href=\"javascript:;\"><i class=\"iconfont\"></i>"+value[i].name+"<span class=\"layui-nav-more\"></span></a><dl class=\"layui-nav-child\">"
+                            count++;
+                            var countdd = count;
+                            for(var k=0;k<value.length;++k){
+                                if(value[i].id == value[k].pid){
+                                    //<dd><a href="javascript:;" data-url="menu1.html" data-id="1" data-text="最新文章"><span class="l-line"></span>最新文章</a></dd>
+                                    dd += "<dd><a href=\"javascript:;\" data-url=\""+value[k].url+"\" data-id=\""+count+"\" data-text=\""+value[k].name
+                                        +"\"><span class=\"l-line\"></span>"+value[k].name+"</a></dd>";
+                                    count++;
+                                }
+                            }
+                            if(count == countdd){//两者相等，说明该标签没有子标签dl,使用s1li
+                                lastStr += s1li;
+                            }else{
+                                lastStr += s1ul;
+                                lastStr += dd;
+                                lastStr += "</dl> </li>";//li开始，也需li结束
+                            }
+                        }
+                    }
+                    lastStr += "<span class=\"layui-nav-bar\" style=\"top: 248px; height: 0px; opacity: 0;\"></span>";
+					alert("欢迎您，"+str[1]);
+					string1 = lastStr;
+                    $("#treeMenu").html(lastStr);
+
+                })
+            });
+
+            document.getElementById("treeMenu").innerHTML = string1;
+          /*  function getHttp(){
+                var xmlhttp;
+                if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp=new XMLHttpRequest();
+                }
+                else {// code for IE6, IE5
+                    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                return xmlhttp;
+            }
+            // window.onload = function () {
+			 abc();
+			//window.onpageshow =
+			function abc() {
+                    //使用ajax函数
+                    var xmlhttp = getHttp();
+                    xmlhttp.onreadystatechange=function() {
+                        if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+                            var str = xmlhttp.responseText.split('\n');
+                            if(str[0] == "root"){
+                                var main = document.getElementById("mainIframe").setAttribute("src","welcome.html");
+                            }
+                            if(str[0] == "医生"){
+                                var main = document.getElementById("mainIframe").setAttribute("src","welcome_doctor.html");
+                            }
+                            // alert(str[0]);
+                            var value = eval('('+str[1]+')');
+                            // alert(value);
+                            var menu = document.getElementById("treeMenu");//menu菜单对象
+                            var li_1_start = "<li class=\"layui-nav-item\">\n" +
+                                "\t\t\t\t    <a href=\"javascript:;\" data-url=\"";
+                            var li_1_data_id = "\" data-id=\"";
+                            var li_1_data_text = "\" data-text=\"";
+                            var li_1_i = "\"><i class=\"iconfont\"></i>"
+                            var lastStr = "";
+                            var count = 1;
+                            for(var i =0;i<value.length;++i){
+                                var s1li = "";//不包含dl标签
+                                var s1ul = "";//包含dl标签
+                                var dd = "";
+                                if(value[i].pid == 0){
+                                    s1li = li_1_start + value[i].url + li_1_data_id+count+li_1_data_text+value[i].name+li_1_i
+                                        +value[i].name+"</a></li>";//没有子标签dl
+                                    s1ul = "<li class=\"layui-nav-item\"><a href=\"javascript:;\"><i class=\"iconfont\"></i>"+value[i].name+"<span class=\"layui-nav-more\"></span></a><dl class=\"layui-nav-child\">"
+                                    count++;
+                                    var countdd = count;
+                                    for(var k=0;k<value.length;++k){
+                                        if(value[i].id == value[k].pid){
+                                            //<dd><a href="javascript:;" data-url="menu1.html" data-id="1" data-text="最新文章"><span class="l-line"></span>最新文章</a></dd>
+                                            dd += "<dd><a href=\"javascript:;\" data-url=\""+value[k].url+"\" data-id=\""+count+"\" data-text=\""+value[k].name
+                                                +"\"><span class=\"l-line\"></span>"+value[k].name+"</a></dd>";
+                                            count++;
+                                        }
+                                    }
+                                    if(count == countdd){//两者相等，说明该标签没有子标签dl,使用s1li
+                                        lastStr += s1li;
+                                    }else{
+                                        lastStr += s1ul;
+                                        lastStr += dd;
+                                        lastStr += "</dl> </li>";//li开始，也需li结束
+                                    }
+                                }
+                            }
+                            lastStr += "<span class=\"layui-nav-bar\" style=\"top: 248px; height: 0px; opacity: 0;\"></span>";
+
+
+                            menu.innerHTML=lastStr;
+                        }
+                    }
+                    xmlhttp.open("GET","getMenu",true);
+                    xmlhttp.send();
+                }
+
+            */
+            function  gotoFuc(value) {
+                var main = document.getElementById("mainIframe");
+                main.setAttribute("src",value.getAttribute("data-url")+"");
+            }
+		</script>
+
 
 	</head>
 	<body>
@@ -16,7 +153,8 @@
 			<div class="main-layout-side">
 				<div class="m-logo">
 				</div>
-				<ul id="treeMenu" class="layui-nav layui-nav-tree" lay-filter="leftNav">
+				<ul id="treeMenu"  class="layui-nav layui-nav-tree" lay-filter="leftNav">
+
 
 				</ul>
 			</div>
@@ -32,7 +170,7 @@
 					<ul class="layui-nav" lay-filter="rightNav">
 					  <li class="layui-nav-item"><a href="javascript:;" data-url="email.html" data-id='15' data-text="邮件系统"><i class="iconfont">&#xe603;</i></a></li>
 					  <li class="layui-nav-item">
-					    <a href="javascript:;" data-url="admin-info.html" data-id='16' data-text="个人信息">小朱</a>
+					    <a href="javascript:;" id="myInfo" data-url="admin-info.html" data-id='16' data-text="个人信息"></a>
 					  </li>
 					  <li class="layui-nav-item"><a href="javascript:;">退出</a></li>
 					</ul>
@@ -70,95 +208,14 @@
 	</body>
 </html>
 
-<script type="application/javascript">
-    function getHttp(){
-        var xmlhttp;
-        if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp=new XMLHttpRequest();
-        }
-        else {// code for IE6, IE5
-            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        return xmlhttp;
-    }
-     // window.onload
-     window.onpageshow = function () {
-        //使用ajax函数
-        var xmlhttp = getHttp();
-        xmlhttp.onreadystatechange=function() {
-            if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-                // console.log(10);
-                // var a = xmlhttp.responseText;
-                // alert(xmlhttp.responseText);
-                var menu = document.getElementById("treeMenu");
-                var str = "<li class=\"layui-nav-item\"><a href=\""+"myindex.html"+"\" data-text=\"首页\"><i class=\"iconfont\">&#xe60e;</i>首页</a>\n" +
-                    " </li>";
-                var liStrat = "<li class=\"layui-nav-item\"> <a href=\"javascript:;\" onclick='gotoFuc(this);' data-url=\"";
-                var liMid1_1 = "\" data-id='";
-                var liMid1_2 = "' data-text=\"";
-                var liMdi2 = "\"><i class=\"iconfont\">&#xe606;</i>";
-                var liaEnd = "</a>";
-                var ddStrt0 = "<ul class=\"layui-nav-child\">";
-                var ddStart = "  <li class=\"layui-nav-item\"><a href=\"javascript:;\" data-url=\"";//+url
-                var ddMid1 = "\" data-id='";//+data-id
-                var ddMid2 = "' data-text=\"";//+name
-                var ddMid3 = "\"><span class=\"l-line\"></span>";//+name
-                var ddEnd = "</a></li>";
-                var liEnd ="</li>";
-                var str = xmlhttp.responseText.split('\n');
-                if(str[0] == "root"){
-                    var main = document.getElementById("mainIframe").setAttribute("src","welcome.html");
-				}
-                if(str[0] == "医生"){
-                    var main = document.getElementById("mainIframe").setAttribute("src","welcome_doctor.html");
-                }
-                var value = eval('('+str[1]+')');
-                var count = 1;
-                for (var i = 0; i < value.length; i++) {
-                     // console.log(value[i].url);
-                    if(value[i].pid == 0){
-                        if(value[i].url==null || value[i].url == ""){
-                            str += "<li class=\"layui-nav-item\"> <a href=\"javascript:;\"><i class=\"iconfont\">&#xe607;</i>"+value[i].name+liaEnd;
-                        }else{
-                            str += liStrat+value[i].url+liMid1_1+count+liMid1_2+value[i].name+liMdi2+value[i].name+liaEnd;
-                        }
-                        ++count;
-                        var c = count;
-                        var next = "";//拼接二级菜单
-                        next += ddStrt0;
-                        // str +=ddStrt0;
-                        for(var j = 0;j<value.length;++j){
-                            if(value[i].id == value[j].pid){
-                                next += ddStart+value[j].url+ddMid1+count+ddMid2+value[j].name+ddMid3+value[j].name+ddEnd;
-                                ++count;
-                            }
-                        }
-                        if(c != count){
-                            next += " </ul>";
-                            str += next;
-                        }
 
-                        str += liEnd;
-                    }
-                }
-                // console.log(str);
-                menu.innerHTML="";
-                menu.innerHTML=str;
-            }
-        }
-        xmlhttp.open("GET","getMenu",true);
-        xmlhttp.send();
-    }
-    function  gotoFuc(value) {
-        // console.log(value);
-        // alert(value.getAttribute("data-url"));
-        // console.log(value.data-url);
-        var main = document.getElementById("mainIframe");
-        // console.log(main);
-        // alert(main.getAttribute("src"));
-        main.setAttribute("src",value.getAttribute("data-url")+"");
-
-		// alert(value);
-    }
+<script>
+    $(document).ready(function(){
+        $.get("getUser",function (data) {
+            $("#myInfo").text(data);
+        })
+    });
 </script>
+
+
 

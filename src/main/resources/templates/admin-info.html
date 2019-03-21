@@ -50,7 +50,7 @@
 				  </div>
 				  <div class="layui-form-item">
 				    <div class="layui-input-block">
-				      <button class="layui-btn layui-btn-normal" lay-submit lay-filter="adminInfo">立即提交</button>
+				      <button class="layui-btn layui-btn-normal" lay-filter="adminInfo">立即提交</button>
 				    </div>
 				  </div>
 				</form>
@@ -60,7 +60,7 @@
 				  <div class="layui-form-item">
 				    <label class="layui-form-label">用户名：</label>
 				    <div class="layui-input-block">
-				      <input type="text" name="username" disabled autocomplete="off" class="layui-input layui-disabled" value="admin">
+				      <input type="text" name="username" id="username" disabled autocomplete="off" class="layui-input layui-disabled" value="">
 				    </div>
 				  </div>
 				  <div class="layui-form-item">
@@ -83,7 +83,7 @@
 				  </div>
 				  <div class="layui-form-item">
 				    <div class="layui-input-block">
-				      <button class="layui-btn layui-btn-normal" lay-submit lay-filter="adminPassword">立即提交</button>
+				      <button class="layui-btn layui-btn-normal" id="updatePwd" lay-filter="adminPassword">立即提交</button>
 				    </div>
 				  </div>
 				</form>
@@ -98,16 +98,39 @@
 		  var element = layui.element();
 		  form.render();
 		  //监听信息提交
-		  form.on('submit(adminInfo)', function(data){
-		    layer.msg(JSON.stringify(data.field));
-		    return false;
-		  });
-		  //监听密码提交
-		   form.on('submit(adminPassword)', function(data){
-		    layer.msg(JSON.stringify(data.field));
-		    return false;
-		  });
+		  // form.on('submit(adminInfo)', function(data){
+		  //   layer.msg(JSON.stringify(data.field));
+		  //   return false;
+		  // });
+		  // //监听密码提交
+		  //  form.on('submit(adminPassword)', function(data){
+		  //   layer.msg(JSON.stringify(data.field));
+		  //   return false;
+		  // });
 		});
 	</script>
 	</body>
+	<script src="./lib/jquery/1.9.1/jquery.min.js" ></script>
+	<script>
+        $(document).ready(function(){
+            $.get("getUserInfo",function (data) {
+               //获取用户的所有信息
+				$("input[name='username']").val(data.username);
+                $("input[name='name']").val(data.name);
+            })
+
+			$("#updatePwd").click(function (){
+			    var a = $("input[name='password3']").val();
+                var a1 = $("input[name='password1']").val();
+                $.post("updatePwd","pwd="+a1+"&password="+a,function (data) {
+					if(data == "success"){
+                        alert("success");
+					}else{
+					    alert(data);
+					}
+
+                })
+            });
+        });
+	</script>
 </html>
