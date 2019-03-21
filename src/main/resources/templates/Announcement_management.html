@@ -1,0 +1,103 @@
+<!doctype html>
+<html class="no-js" lang="">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>Ela Admin - HTML5 Admin Template</title>
+		<link rel="stylesheet" href="assets/css/normalize.css">
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+		<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+		<link rel="stylesheet" href="assets/css/themify-icons.css">
+		<link rel="stylesheet" href="assets/css/pe-icon-7-filled.css">
+		<link rel="stylesheet" href="assets/css/flag-icon.min.css">
+		<link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
+		<link rel="stylesheet" href="assets/css/style.css">
+		<style>
+			.dd {
+				background: #f4f9f9;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="dd">
+			<div class="col-lg-12"><br />
+				<div class="card">
+					<div class="card-body card-block">
+						<div class="col col-md-9">
+							<div class="input-group">
+								<div class="col col-md-3">
+									<a href="javascript:;" onclick="admin_add('发布公告','Announcement.html','800','500')" class="btn btn-primary"><i class="fa fa-plus"></i> 发布公告</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<div class="top_wrapper">
+				<div class="exam_process_top">
+					<div class="float-right">
+						<a href="#"><i class="fa fa-chevron-down"></i>展开更多</a>
+					</div>
+					<h4>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;最近发布</h4>
+					<hr/>
+				</div>
+				<div class="divide_line"></div>
+			</div>
+
+			<div class="animated fadeIn">
+				<!-- Widgets  -->
+				<div class="row">
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<div class="col-lg-3">
+						<div class="card">
+							<div class="card-header">
+								<a href="#"><i class="fa fa-bullhorn"></i>&nbsp;&nbsp;<strong class="card-title">公告名</strong>
+							</div>
+							<div class="card-body">
+								<table class="table">
+
+									<tbody>
+										<div class="row form-group">
+											<div class="col-12 col-md-12"><textarea name="textarea-input" id="textarea-input" rows="9" class="form-control"></textarea></div>
+										</div>
+										<tr>
+											<td>发布时间</td>
+											<td>2015-02-12</td>
+											<td>发布人</td>
+											<td>默多克丽莎</td>
+											<td>
+												<a href="#"><i class="fa fa-trash-o" title="删除"></i></a>
+											</td>
+										</tr>
+										<tr>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
+			<script type="text/javascript" src="lib/layer/2.1/layer.js"></script>
+			<script type="text/javascript" src="static/h-ui/js/H-ui.js"></script>
+			<script type="text/javascript" src="static/h-ui.admin/js/H-ui.admin.js"></script>
+			<script type="text/javascript">
+				/*
+					参数解释：
+					title	标题
+					url		请求的url
+					id		需要操作的数据id
+					w		弹出层宽度（缺省调默认值）
+					h		弹出层高度（缺省调默认值）
+				*/
+				/*管理员-增加*/
+				function admin_add(title, url, w, h) {
+					layer_show(title, url, w, h);
+				}
+			</script>
+	</body>
+
+</html>

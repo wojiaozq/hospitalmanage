@@ -1,0 +1,19 @@
+server:
+  port: 8081
+spring:
+  datasource:
+    username: root
+    url: 123456
+    data-password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+#数据库连接池信息
+    type: com.alibaba.druid.pool.DruidDataSource
+  jpa:
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+#文件上传
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB

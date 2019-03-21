@@ -1,0 +1,148 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="static/h-ui/css/H-ui.min.css" />
+		<title>添加医生</title>
+	</head>
+	<body>
+		
+			<form class="form form-horizontal" id="form-article-add">
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>医生姓名：</label>
+					<div class="formControls col-sm-3">
+						<input type="text" class="input-text" placeholder="" id="name" name="name">
+					</div>
+					<label class="form-label col-xs-1 col-sm-2"><span class="c-red">*</span>性别：</label>
+					<div class="formControls col-xs-2 col-sm-3">
+						<input type="text" class="input-text"  placeholder="" id="sex" name="sex">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>出生年月：</label>
+					<div class="formControls col-sm-3">
+						<input type="text" class="input-text" value="" placeholder="" id="birthday" name="birthday">
+					</div>
+					<label class="form-label col-xs-1 col-sm-2"><span class="c-red">*</span>年龄：</label>
+					<div class="formControls col-xs-2 col-sm-3">
+						<input type="text" class="input-text" value="" placeholder="" id="age" name="age">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>入职时间：</label>
+					<div class="formControls col-sm-3">
+						<input type="text" class="input-text" value="" placeholder="" id="entryTime" name="entryTime">
+					</div>
+					<label class="form-label col-xs-1 col-sm-2"><span class="c-red">*</span>职称：</label>
+					<div class="formControls col-xs-2 col-sm-3">
+						<input type="text" class="input-text" value="" placeholder="" id="job" name="job">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>所属科室：</label>
+					<div class="formControls col-sm-3">
+						<span class="select-box">
+				<select id="administrativeId" name="administrativeId" class="select" >
+					<option>请选择</option>
+				</select>
+				</span>
+					</div>
+					<label class="form-label col-sm-2"><span class="c-red">*</span>擅长项目：</label>
+					<div class="formControls col-xs-2 col-sm-3">
+						<input type="text" class="input-text" value="" placeholder="" id="goodProject" name="goodProject">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>联系方式：</label>
+					<div class="formControls col-sm-3">
+						<input type="text" class="input-text" value="" placeholder="" id="tel" name="tel">
+					</div>
+					<label class="form-label col-xs-1 col-sm-2"><span class="c-red">*</span>家庭住址：</label>
+					<div class="formControls col-xs-2 col-sm-3">
+						<input type="text" class="input-text" value="" placeholder="" id="address" name="address">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>身份证号：</label>
+					<div class="formControls col-sm-3">
+						<input type="text" class="input-text" value="" placeholder="" id="username" name="username">
+					</div>
+					<label class="form-label col-xs-1 col-sm-2"><span class="c-red">*</span>登录密码：</label>
+					<div class="formControls col-xs-2 col-sm-3">
+						<input type="text" class="input-text" value="" placeholder="" id="password" name="password">
+					</div>
+				</div>
+				<div class="row cl">
+					<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>毕业学校：</label>
+					<div class="formControls col-sm-3">
+						<input type="text" class="input-text" value="" placeholder="" id="graduationSchool" name="graduationSchool">
+					</div>
+					<label class="form-label col-xs-1 col-sm-2"><span class="c-red">*</span>学历：</label>
+					<div class="formControls col-xs-2 col-sm-3">
+						<input type="text" class="input-text" value="" placeholder="" id="education" name="education">
+					</div>
+				</div>
+				<div class="row cl">
+					<div class="formControls col-sm-3"></div>
+					<div class="formControls col-sm-2">
+					<button  id="save" class="btn btn-primary radius" type="button">保存</button>
+					</div>
+					<div class="formControls col-xs-2 col-sm-2">
+					<button  class="btn btn-default radius" type="reset">&nbsp;&nbsp;清空&nbsp;&nbsp;</button>
+					</div><!--onClick="article_save_submit();"   onClick="removeIframe();" --->
+				</div>				
+			</form>
+	</center>
+
+		<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="lib/layer/2.1/layer.js"></script>
+		<script type="text/javascript" src="static/h-ui/js/H-ui.js"></script>
+	</body>
+	<script>
+        $(document).ready(function(){
+            $.get("administrative/getAll",function(data,status){
+                 // alert("Data: " + data + "\nStatus: " + status);
+           		 // <option value="0">全部科室</option>
+
+				var str = "<option >请选择</option>";
+                 for (var i=0;i<data.length;++i){
+                     str +="<option value=\""+data[i].id+"\">"+data[i].name+"</option>";
+				 }
+				$('#administrativeId').html(str);
+
+            });
+            $('#save').click(function () {
+                var data = getData(); //eval('('+getData()+')');
+
+
+				$.post('doctor/save',data,function (data,status) {
+					if(data=="success"){
+					    alert("添加成功");
+					}
+                })
+            });
+            function getData() {
+                 var data = "";// = '{';
+                data += "username="+ $('#username').val()+'&';
+                data += "name="+ $('#name').val()+'&';
+                data += "job="+ $('#job').val()+'&';
+                data += "entryTime="+ $('#entryTime').val()+'&';
+                data += "age="+ $('#age').val()+'&';
+                data += "sex="+ $('#sex').val()+'&';
+                data += "birthday="+ $('#birthday').val()+'&';
+                data += "graduationSchool="+ $('#graduationSchool').val()+'&';
+                data += "administrativeId="+ $('#administrativeId').val()+'&';
+                data += "goodProject="+ $('#goodProject').val()+'&';
+                data += "tel="+ $('#tel').val()+'&';
+                data += "address="+ $('#address').val()+'&';
+                data += "password="+ $('#password').val();
+                // data += '}';
+                return data;
+
+            }
+        });
+
+	</script>
+
+
+</html>

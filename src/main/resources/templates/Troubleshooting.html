@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">		
+		<link rel="stylesheet" type="text/css" href="static/h-ui/css/H-ui.min.css" />
+		<link rel="stylesheet" type="text/css" href="./static/admin/layui/css/layui.css" />
+		<link rel="stylesheet" type="text/css" href="./static/admin/css/admin.css" />
+		<title>品牌管理</title>
+	</head>
+	<body>
+		<div class="page-container">
+			<div class="text-c">
+				<form class="Huiform" method="post" action="" target="_self"><br />					
+					<div class="text-c">
+						<button class="layui-btn layui-btn-small layui-btn-normal addBtn" data-url="add-question.html"><i class="layui-icon">&#xe654;</i></button>
+			      日期范围：<input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin" class="input-text Wdate" style="width:120px;"> -
+						<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" id="datemax" class="input-text Wdate" style="width:120px;">
+						<span class="select-box" style="width:150px">
+						<select class="select" name="brandclass" size="1">
+						<option value="1" >请选择</option>
+						<option value="0">分类1</option>
+						<option value="0">分类二</option></select></span>
+						<button type="button" class="btn btn-success" id="" name="" onClick="picture_colume_add(this);"><i class="Hui-iconfont">&#xe600;</i> 搜索</button>
+					</div>
+				</form>
+			</div>	
+			<br />
+		<div class="layui-form" id="table-list">
+						<table class="layui-table" lay-even lay-skin="nob">
+							<colgroup>
+								<col width="10">
+								<col class="hidden-xs" width="650">							
+								<col width="150">
+							</colgroup>
+							<thead>
+								<tr>	
+									<th> </th>
+									<th>问题</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th> </th>																		
+									<td>花儿为什么这样红</td>
+									<td><a href="#">查看回答</a></td>
+								</tr>			
+							</tbody>
+						</table>
+						<div class="page-wrap">
+							<ul class="pagination">
+								<li class="disabled"><span>«</span></li>
+								<li class="active"><span>1</span></li>
+								<li>
+									<a href="#">2</a>
+								</li>
+								<li>
+									<a href="#">»</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					</div>
+			<script type="text/javascript" src="lib/My97DatePicker/WdatePicker.js"></script>
+			<script src="./static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
+		<script src="./static/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>
