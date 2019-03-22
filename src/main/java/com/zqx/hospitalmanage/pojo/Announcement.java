@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.Date;
+
 /*
  * 公告
  */
@@ -17,7 +19,7 @@ public class Announcement implements Serializable {
   private String id;
 
   @Column(name = "release_Time")
-  private String releaseTime;//发布时间
+  private Date releaseTime;//发布时间
 
   @Column(name = "topic")
   private String topic;
@@ -40,11 +42,11 @@ public class Announcement implements Serializable {
     this.id = id;
   }
 
-  public String getReleaseTime() {
+  public Date getReleaseTime() {
     return releaseTime;
   }
 
-  public void setReleaseTime(String releaseTime) {
+  public void setReleaseTime(Date releaseTime) {
     this.releaseTime = releaseTime;
   }
 

@@ -309,9 +309,9 @@ var SimpleCalendar = function () {
       //添加下拉框数据
       this.updateSelect(this.tyear, this.tmonth);
       //刷新日历
-      this.update();
+     this.update();
       //时间刷新
-      self.setInterval('SimpleCalendar.timeupdate()', 200);
+     // self.setInterval('SimpleCalendar.timeupdate()', 200);
     }
 
     //刷新日历

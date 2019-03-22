@@ -32,6 +32,7 @@ public class AnnouncementServiceImpl implements AnnouncementService {
     }
 
     public List<Announcement> findAll(){
+
         return announcementDao.findAll();
     }
 

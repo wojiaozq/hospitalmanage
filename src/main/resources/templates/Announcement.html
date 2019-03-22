@@ -37,7 +37,6 @@
 										<center><button  type="reset" class="btn btn-lg btn-info "><span>重置</span></button>&nbsp;&nbsp;&nbsp;
 										<button id="save" type="button" class="btn btn-lg btn-info "><span id="payment-button-amount">确定</span></button></center>
 									</form>
-									<button id="save1" type="button"  onclick="ab()">确定</button>
 								</div>
 							</div>
 						</div>
@@ -48,8 +47,6 @@
 			<script type="text/javascript" src="lib/layer/2.1/layer.js"></script>
 
 			<script>
-
-
 
 				$(document).ready(function(){
 					$('#save').click(function () {
@@ -63,19 +60,11 @@
 								});
 							}
 						})
-
-
-
-						// location.href="/Announcement_management.html";
 					});
 					function getData() {
 						var data = "";
 						data += "topic="+$('#topic').val()+'&';
-						data += "content="+$('#content').val()+'&';
-						data += "id="+'123'+'&';
-						data += "releaseTime="+'2015-10-11'+'&';
-						data += "person_id="+'123'+'&';
-						data += "personName="+'nklkl'+'&';
+						data += "content="+$('#content').val();
 						return data;
 					}
 				});

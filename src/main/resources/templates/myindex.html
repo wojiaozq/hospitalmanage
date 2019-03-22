@@ -9,150 +9,29 @@
 		<link rel="stylesheet" type="text/css" href="./static/admin/layui/css/layui.css"/>
 		<link rel="stylesheet" type="text/css" href="./static/admin/css/admin.css"/>
 		<script src="./lib/jquery/1.9.1/jquery.min.js" ></script>
-		<script type="application/javascript">
-			var string1 = "";
-            $(document).ready(function(){
-                $.get("getMenu",function (data) {
-                    var str = data.split('\n');
-                    if(str[0] == "root"){
-                        var main = document.getElementById("mainIframe").setAttribute("src","welcome.html");
-                    }
-                    if(str[0] == "医生"){
-                        var main = document.getElementById("mainIframe").setAttribute("src","welcome_doctor.html");
-                    }
-                    var value = eval('('+str[2]+')');
-                    // var menu = document.getElementById("treeMenu");//menu菜单对象
-                    var li_1_start = "<li class=\"layui-nav-item\">\n" +
-                        "\t\t\t\t    <a href=\"javascript:;\" data-url=\"";
-                    var li_1_data_id = "\" data-id=\"";
-                    var li_1_data_text = "\" data-text=\"";
-                    var li_1_i = "\"><i class=\"iconfont\"></i>"
-                    var lastStr = "";
-                    var count = 1;
-                    for(var i =0;i<value.length;++i){
-                        var s1li = "";//不包含dl标签
-                        var s1ul = "";//包含dl标签
-                        var dd = "";
-                        if(value[i].pid == 0){
-                            s1li = li_1_start + value[i].url + li_1_data_id+count+li_1_data_text+value[i].name+li_1_i
-                                +value[i].name+"</a></li>";//没有子标签dl
-                            s1ul = "<li class=\"layui-nav-item\"><a href=\"javascript:;\"><i class=\"iconfont\"></i>"+value[i].name+"<span class=\"layui-nav-more\"></span></a><dl class=\"layui-nav-child\">"
-                            count++;
-                            var countdd = count;
-                            for(var k=0;k<value.length;++k){
-                                if(value[i].id == value[k].pid){
-                                    //<dd><a href="javascript:;" data-url="menu1.html" data-id="1" data-text="最新文章"><span class="l-line"></span>最新文章</a></dd>
-                                    dd += "<dd><a href=\"javascript:;\" data-url=\""+value[k].url+"\" data-id=\""+count+"\" data-text=\""+value[k].name
-                                        +"\"><span class=\"l-line\"></span>"+value[k].name+"</a></dd>";
-                                    count++;
-                                }
-                            }
-                            if(count == countdd){//两者相等，说明该标签没有子标签dl,使用s1li
-                                lastStr += s1li;
-                            }else{
-                                lastStr += s1ul;
-                                lastStr += dd;
-                                lastStr += "</dl> </li>";//li开始，也需li结束
-                            }
-                        }
-                    }
-                    lastStr += "<span class=\"layui-nav-bar\" style=\"top: 248px; height: 0px; opacity: 0;\"></span>";
-					alert("欢迎您，"+str[1]);
-					string1 = lastStr;
-                    $("#treeMenu").html(lastStr);
 
-                })
-            });
-
-
-          /*  function getHttp(){
-                var xmlhttp;
-                if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
-                    xmlhttp=new XMLHttpRequest();
-                }
-                else {// code for IE6, IE5
-                    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-                }
-                return xmlhttp;
-            }
-            // window.onload = function () {
-			 abc();
-			//window.onpageshow =
-			function abc() {
-                    //使用ajax函数
-                    var xmlhttp = getHttp();
-                    xmlhttp.onreadystatechange=function() {
-                        if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-                            var str = xmlhttp.responseText.split('\n');
-                            if(str[0] == "root"){
-                                var main = document.getElementById("mainIframe").setAttribute("src","welcome.html");
-                            }
-                            if(str[0] == "医生"){
-                                var main = document.getElementById("mainIframe").setAttribute("src","welcome_doctor.html");
-                            }
-                            // alert(str[0]);
-                            var value = eval('('+str[1]+')');
-                            // alert(value);
-                            var menu = document.getElementById("treeMenu");//menu菜单对象
-                            var li_1_start = "<li class=\"layui-nav-item\">\n" +
-                                "\t\t\t\t    <a href=\"javascript:;\" data-url=\"";
-                            var li_1_data_id = "\" data-id=\"";
-                            var li_1_data_text = "\" data-text=\"";
-                            var li_1_i = "\"><i class=\"iconfont\"></i>"
-                            var lastStr = "";
-                            var count = 1;
-                            for(var i =0;i<value.length;++i){
-                                var s1li = "";//不包含dl标签
-                                var s1ul = "";//包含dl标签
-                                var dd = "";
-                                if(value[i].pid == 0){
-                                    s1li = li_1_start + value[i].url + li_1_data_id+count+li_1_data_text+value[i].name+li_1_i
-                                        +value[i].name+"</a></li>";//没有子标签dl
-                                    s1ul = "<li class=\"layui-nav-item\"><a href=\"javascript:;\"><i class=\"iconfont\"></i>"+value[i].name+"<span class=\"layui-nav-more\"></span></a><dl class=\"layui-nav-child\">"
-                                    count++;
-                                    var countdd = count;
-                                    for(var k=0;k<value.length;++k){
-                                        if(value[i].id == value[k].pid){
-                                            //<dd><a href="javascript:;" data-url="menu1.html" data-id="1" data-text="最新文章"><span class="l-line"></span>最新文章</a></dd>
-                                            dd += "<dd><a href=\"javascript:;\" data-url=\""+value[k].url+"\" data-id=\""+count+"\" data-text=\""+value[k].name
-                                                +"\"><span class=\"l-line\"></span>"+value[k].name+"</a></dd>";
-                                            count++;
-                                        }
-                                    }
-                                    if(count == countdd){//两者相等，说明该标签没有子标签dl,使用s1li
-                                        lastStr += s1li;
-                                    }else{
-                                        lastStr += s1ul;
-                                        lastStr += dd;
-                                        lastStr += "</dl> </li>";//li开始，也需li结束
-                                    }
-                                }
-                            }
-                            lastStr += "<span class=\"layui-nav-bar\" style=\"top: 248px; height: 0px; opacity: 0;\"></span>";
-
-
-                            menu.innerHTML=lastStr;
-                        }
-                    }
-                    xmlhttp.open("GET","getMenu",true);
-                    xmlhttp.send();
-                }
-
-            */
-            function  gotoFuc(value) {
-                var main = document.getElementById("mainIframe");
-                main.setAttribute("src",value.getAttribute("data-url")+"");
-            }
-		</script>
 		<script>
-			if(!string1==null && !string1.equals("")){
-                document.getElementById("treeMenu").innerHTML = string1;
+			$(function () {
+				if($("dl").find("dd").length == 0){
+					$("dl").remove();
+				}
+				$("li").find("dl").eq(1).remove();
+
+				$.get("getMenu",function (data) {
+					// var str = data.split('\n');
+					if (data == "root") {
+						var main = document.getElementById("mainIframe").setAttribute("src", "welcome.html");
+					}
+					if (data == "医生") {
+						var main = document.getElementById("mainIframe").setAttribute("src", "welcome_doctor.html");
+					}
+				})
+			});
+			function  gotoFuc(value) {
+				var main = document.getElementById("mainIframe");
+				main.setAttribute("src",value.getAttribute("data-url")+"");
 			}
-
-
 		</script>
-
-
 	</head>
 	<body>
 		<div class="main-layout" id='main-layout'>
@@ -160,7 +39,39 @@
 			<div class="main-layout-side">
 				<div class="m-logo">
 				</div>
-				<ul id="treeMenu"  class="layui-nav layui-nav-tree" lay-filter="leftNav">
+				<ul id="treeMenu" class="layui-nav layui-nav-tree" lay-filter="leftNav">
+					<!--<li class="layui-nav-item">-->
+						<!--<a href="myindex.html" data-text="首页"><i class="iconfont">&#xe60e;</i>首页</a>-->
+					<!--</li>-->
+
+
+
+
+					<li class="layui-nav-item" th:each="m,var : ${menu}" th:if="${m.pid} == 0">
+
+						<a href="javascript:;"    th:attr="data-url=${m.url}" th:data-id="${var.count}*100" th:data-text="${m.name}"  th:text="${m.name}" ><i class="iconfont">&#xe606;</i >123456</a>
+						<dl class="layui-nav-child" >
+							<dd th:each="m2,var2 : ${menu}" th:if="${m2.pid} == ${m.id}">
+								<a href="javascript:;" th:data-url="${m2.url}" th:data-id='${var.count}+${var2.count}' th:data-text="${m2.name}" th:text="${m2.name}">
+									<span class="l-line"></span>最新文章
+								</a>
+							</dd>
+
+						</dl>
+
+					</li>
+					<!--<li class="layui-nav-item">-->
+						<!--<a href="javascript:;" data-url="Patient_management.html" data-id='2' data-text="病人管理"><i class="iconfont">&#xe608;</i>病人管理</a>-->
+					<!--</li>-->
+					<!--<li class="layui-nav-item">-->
+						<!--<a href="javascript:;" data-url="Announcement_management.html" data-id='3' data-text="公告管理"><i class="iconfont">&#xe604;</i>公告管理</a>-->
+					<!--</li>-->
+					<!--<li class="layui-nav-item">-->
+						<!--<a href="javascript:;" data-url="Duty_schedule.html" data-id='4' data-text="值班安排"><i class="iconfont">&#xe60c;</i>值班安排</a>-->
+					<!--</li>-->
+					<!--<li class="layui-nav-item">-->
+						<!--<a href="javascript:;" data-url="log.html" data-id='5' data-text="系统日志"><i class="iconfont">&#xe600;</i>系统日志</a>-->
+					<!--</li>-->
 
 
 				</ul>
