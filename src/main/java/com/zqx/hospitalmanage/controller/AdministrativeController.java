@@ -19,6 +19,7 @@ import java.util.List;
 @Controller
 @RequestMapping("administrative")
 public class AdministrativeController {
+
     @Autowired
     private AdministrativeService administrativeService;
 
