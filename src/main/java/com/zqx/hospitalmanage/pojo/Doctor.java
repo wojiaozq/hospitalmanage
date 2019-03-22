@@ -1,5 +1,7 @@
 package com.zqx.hospitalmanage.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -23,6 +25,7 @@ public class Doctor implements Serializable {
     private String job;
 
     @Column(name = "entry_Time")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private java.util.Date entryTime;
 
     @Column(name = "age")
@@ -32,6 +35,7 @@ public class Doctor implements Serializable {
     private String sex;
 
     @Column(name = "birthday")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private java.util.Date birthday;
 
     @Column(name="patient_Num")
