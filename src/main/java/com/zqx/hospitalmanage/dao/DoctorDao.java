@@ -1,6 +1,7 @@
 package com.zqx.hospitalmanage.dao;
 
 import com.zqx.hospitalmanage.pojo.Doctor;
+import com.zqx.hospitalmanage.pojo.vo.DoctorInterfaceVO;
 import jdk.nashorn.internal.runtime.linker.LinkerCallSite;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -53,13 +54,18 @@ public interface DoctorDao extends JpaRepository<Doctor,String >, JpaSpecificati
 
 //    @Query(nativeQuery = true,value = "select count(id) from doctor;")
 //    public int count();
-    //查询获取VO对象
-    @Query(nativeQuery = true,value = "select d.id ,d.name,d.job,a.name administrativeName,d.entry_time,d.sex,d.status,d.tel  from doctor d left join administrative a on d.administrative_id = a.id;")
-    public List<Object[]> findAllDoctorVO();
+
 
     @Modifying
     @Query(nativeQuery = true,value = "update doctor set password = ? where id =?;")
     public void updatePassword(String password,String id);
-    
+
+    //查询获取VO对象
+    @Query(nativeQuery = true,value = "select d.id ,d.name,d.job,a.name administrativeName,d.entry_time,d.sex,d.status,d.tel  from doctor d left join administrative a on d.administrative_id = a.id;")
+    public List<Object[]> findAllDoctorVO();
+
+    //查询获取VO对象
+    @Query(nativeQuery = true,value = "select d.id  id,d.name name,d.job job,a.name administrativeName,d.entry_time entryTime,d.sex sex,d.status status,d.tel tel  from doctor d left join administrative a on d.administrative_id = a.id;")
+    public List<DoctorInterfaceVO> findAllDoctorInterVO();
     
 }
