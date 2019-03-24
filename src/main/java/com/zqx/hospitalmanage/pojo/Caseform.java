@@ -13,7 +13,7 @@ public class Caseform implements Serializable {
 
   @Id
   private String id;
-  private java.util.Date time;
+  private Date time;
 
   @Column(name = "diagnosis_Info")
   private String diagnosisInfo;

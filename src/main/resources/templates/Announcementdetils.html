@@ -28,16 +28,13 @@
                     <form class="form-horizontal">
                         <div class="row form-group">
                             <div class="col col-md-2"><label for="password-input" class=" form-control-label">标题</label></div>
-                            <div class="col-12 col-md-9"><input type="text"  id ="topic" name="topic" placeholder="请输入公告标题" class="form-control"></div>
+                            <div class="col-12 col-md-9"><input type="text"  class="form-control" th:value="${anuouview.topic}" readonly="true"></div>
                         </div>
                         <div class="row form-group">
                             <div class="col col-md-2"><label for="textarea-input" class=" form-control-label">内容</label></div>
-                            <div class="col-12 col-md-9"><textarea id="content" name="content" rows="9" placeholder="请注意公告内容不得超过200字" class="form-control"></textarea></div>
+                            <div class="col-12 col-md-9"><textarea  rows="9" class="form-control" th:value="${anuouview.content}" readonly="true"></textarea></div>
                         </div>
-                        <center><button  type="reset" class="btn btn-lg btn-info "><span>重置</span></button>&nbsp;&nbsp;&nbsp;
-                            <button id="save" type="button" class="btn btn-lg btn-info "><span id="payment-button-amount">确定</span></button></center>
                     </form>
-                    <button id="save1" type="button"  onclick="ab()">确定</button>
                 </div>
             </div>
         </div>
@@ -47,37 +44,6 @@
 <script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="lib/layer/2.1/layer.js"></script>
 
-<script>
-
-    $(document).ready(function(){
-        $('#save').click(function () {
-            var data = getData(); //eval('('+getData()+')');
-            $.post('Announcement/addannou',data,function (data,status) {
-                if(data=="success"){
-                    layer.alert('添加成功',function () {
-                        window.parent.location.reload();
-                        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-                        parent.layer.close(index); //再执行关闭
-                    });
-                }
-            })
-
-
-
-            // location.href="/Announcement_management.html";
-        });
-        function getData() {
-            var data = "";
-            data += "topic="+$('#topic').val()+'&';
-            data += "content="+$('#content').val()+'&';
-            data += "id="+'123'+'&';
-            data += "releaseTime="+'2015-10-11'+'&';
-            data += "person_id="+'123'+'&';
-            data += "personName="+'nklkl'+'&';
-            return data;
-        }
-    });
-</script>
 </body>
 
 </html>

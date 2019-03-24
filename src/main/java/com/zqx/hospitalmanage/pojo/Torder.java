@@ -13,7 +13,7 @@ public class Torder {
   @Id
   private String id;
   @Column(name = "appointment_Time")
-  private java.util.Date appointmentTime;
+  private Date appointmentTime;
 
   @Column(name = "doctor_Id")
   private String doctorId;
@@ -23,7 +23,7 @@ public class Torder {
   private double money;
 
   @Column(name = "pay_Time")
-  private java.util.Date payTime;
+  private Date payTime;
 
   @Column(name = "registration_Id")
   private String registrationId;

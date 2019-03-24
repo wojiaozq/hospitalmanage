@@ -1,90 +1,109 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<meta name="renderer" content="webkit">
-		<title>网站后台管理模版</title>
-		<link rel="stylesheet" type="text/css" href="./static/admin/layui/css/layui.css" />
-		<link rel="stylesheet" type="text/css" href="./static/admin/css/admin.css" />
-	</head>
-	<body>
-		<div class="page-content-wrap">
-			<form class="layui-form" action="">
-				<div class="layui-form-item">
-					<div class="layui-inline tool-btn">
-						<button class="layui-btn layui-btn-small layui-btn-normal go-btn hidden-xs" data-url="publish_article.html"><i class="layui-icon" title="发表文章">&#xe654;</i></button>
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Ela Admin - HTML5 Admin Template</title>
+	<link rel="stylesheet" href="assets/css/normalize.css">
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+	<link rel="stylesheet" href="assets/css/themify-icons.css">
+	<link rel="stylesheet" href="assets/css/pe-icon-7-filled.css">
+	<link rel="stylesheet" href="assets/css/flag-icon.min.css">
+	<link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
+	<link rel="stylesheet" href="assets/css/style.css">
+	<link href="css/layui.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+<div class="col-lg-12">
+	<div class="card">
+		<div class="card-body card-block">
+			<div class="col col-md-9">
+				<div class="input-group">
+					<div class="col col-md-3">
 					</div>
-					<div class="layui-inline">
-						<input type="text" name="title" placeholder="请输入标题" autocomplete="off" class="layui-input">
+					<span class="btn">日期范围</span>&nbsp;
+					<input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin" class="form-control">
+					<span class="btn"><i class="fa fa-calendar"></i>-</span>
+					<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" id="datemax" class="form-control">
+					<span class="btn"><i class="fa fa-calendar"></i></span>
+					<input type="text" id="input1-group2" name="input1-group2" placeholder="请输入" class="form-control">&nbsp;
+					<div class="input-group-btn">
+						<button class="btn btn-primary"><i class="fa fa-search"></i> 搜索</button>
 					</div>
-					<button class="layui-btn layui-btn-normal" lay-submit="search">搜索</button>
 				</div>
-			</form>
-			<div class="layui-form" id="table-list">
-				<table class="layui-table" lay-even lay-skin="nob">
-					<colgroup>
-						
-						<col class="hidden-xs" width="200">				
-						<col class="hidden-xs" width="100">
-						<col width="100">
-						<col width="60">
-					</colgroup>
-					<thead>
-						<tr>							
-							<th class="hidden-xs">标题</th>
-							<th>发布时间</th>
-							<th>作者</th>
-							<th>操作</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>							
-							<td>v奴九分电视剧i发动机哦怕</td>
-							<td>2016-09-06 20:46:16</td>
-							<td>王大锤</td>
-							<td>
-								<div class="layui-inline">
-									<button class="layui-btn layui-btn-mini layui-btn-normal  go-btn" data-id="1" data-url="Article_details.html"><i class="layui-icon" title="查看文章详情">&#xe647;</i></button>									
-								</div>
-							</td>
-						</tr>					
-					</tbody>
-				</table>
-				<div class="page-wrap">
-						<ul class="pagination">
-							<li class="disabled"><span>«</span></li>
-							<li class="active"><span>1</span></li>
-							<li>
-								<a href="#">2</a>
-							</li>
-							<li>
-								<a href="#">»</a>
-							</li>
-						</ul>
-					</div>
 			</div>
+		</div><br />
+		<div class="card-body">
+			<center>
+				<div style="width: 98%;padding-top: 1px">
+					<!--以下为两个必须div元素-->
+					<div id="table"></div>
+					<div id="pageBar"></div>
+				</div>
 		</div>
-		<script src="./static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-		<script src="./static/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
-		<script>
-			layui.use(['form', 'jquery', 'layer', 'dialog'], function() {
-				var $ = layui.jquery;
+		</center>
+	</div>
+</div>
+<!-- .content -->
+<div class="clearfix"></div>
 
-				//修改状态
-				$('#table-list').on('click', '.table-list-status', function() {
-					var That = $(this);
-					var status = That.attr('data-status');
-					var id = That.parent().attr('data-id');
-					if(status == 1) {
-						That.removeClass('layui-btn-normal').addClass('layui-btn-warm').html('隐藏').attr('data-status', 2);
-					} else if(status == 2) {
-						That.removeClass('layui-btn-warm').addClass('layui-btn-normal').html('显示').attr('data-status', 1);
+<script type="text/javascript" src="lib/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="lib/layer/2.1/layer.js"></script>
+<script type="text/javascript" src="static/h-ui/js/H-ui.js"></script>
+<script type="text/javascript" src="static/h-ui.admin/js/H-ui.admin.js"></script>
+<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<script language="Javascript" src="js/layui.js"></script>
+<script language="Javascript" src="js/nicePage.js"></script>
+<script type="text/javascript">
+	function admin_add(title, url, w, h) {
+		layer_show(title, url, w, h);
+	}
 
-					}
-				})
+	//标准json格式 目前只支持[{a:b,c:d},{a:b,c:d}]此种格式
+	var json = [{
+		"id": "1",
+		"name": "Tom",
+		"age": "12",
+		"button":"查看详细信息"
+	}, {
+		"id": "21",
+		"name": "Joy",
+		"age": "13",
+		"button":"查看详细信息"
+	}];
 
-			});
-		</script>
-	</body>
+	//nameList与widthList的数组长度要一致
+	var nameList = ['标题', '发布时间', '作者姓名','操作',] //table的列名
+	var widthList = [350, 350, 350,350] //table每列的宽度
+
+	/**
+	 * 初始化设置nicepage组件    v1.0
+	 *-------------------------------------------------------------
+	 * 进行数据组装,与layui交互进行元素渲染
+	 *-------------------------------------------------------------
+	 * @param    {string}  table     table的div id
+	 * @param    {string}  bar     底部分页的div id
+	 * @param    {int}  limit     每页默认行数
+	 * @param    {string}  color     底部分页的颜色
+	 * @param    {array}  layout     底部分页的布局,具体可参考layui api
+	 *
+	 * @date     2018-10-19
+	 * @author   duzhen wechat：wenxuejn
+	 */
+	$(function() {
+		nicePage.setCfg({
+			table: 'table',
+			bar: 'pageBar',
+			limit: 20,
+			color: '#1E9FFF',
+			layout: ['count', 'prev', 'page', 'next', 'limit', 'skip']
+		});
+	}); //初始化完成
+</script>
+</body>
 
 </html>

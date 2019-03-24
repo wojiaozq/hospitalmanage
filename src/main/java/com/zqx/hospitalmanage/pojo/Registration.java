@@ -32,7 +32,7 @@ public class Registration {
   private String patientName;
 
   @Column(name = "booking_Period")
-  private java.util.Date bookingPeriod;
+  private Date bookingPeriod;
 
   private long no;
   private long status;
@@ -101,11 +101,11 @@ public class Registration {
   }
 
 
-  public java.util.Date getBookingPeriod() {
+  public Date getBookingPeriod() {
     return bookingPeriod;
   }
 
-  public void setBookingPeriod(java.util.Date bookingPeriod) {
+  public void setBookingPeriod(Date bookingPeriod) {
     this.bookingPeriod = bookingPeriod;
   }
 

@@ -1,14 +1,11 @@
 package com.zqx.hospitalmanage;
 
-import com.alibaba.druid.support.json.JSONUtils;
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.zqx.hospitalmanage.dao.DoctorDao;
 import com.zqx.hospitalmanage.dao.MenuDao;
 import com.zqx.hospitalmanage.dao.RoleDao;
 import com.zqx.hospitalmanage.pojo.Doctor;
 import com.zqx.hospitalmanage.pojo.Page;
-import com.zqx.hospitalmanage.pojo.vo.DoctorInterfaceVO;
 import com.zqx.hospitalmanage.service.DoctorService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -62,20 +59,6 @@ public class HospitalmanageApplicationTests {
         System.out.println(list);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     @Test
     public void contextLoads3() {//测试查询VO对象
         List<Object[]> vo = doctorDao.findAllDoctorVO();
@@ -86,32 +69,9 @@ public class HospitalmanageApplicationTests {
                 }
                 System.out.print(o1.toString()+',');
             }
-//            System.out.println("o.length----------->"+o.length);
             System.out.println();
         }
     }
-    @Test
-    public void contextLoads5() {
-        List<DoctorInterfaceVO> list = doctorDao.findAllDoctorInterVO();
-        for (DoctorInterfaceVO vo : list) {
-            Object o = JSONObject.toJSON(vo);
-            Object json = JSONObject.toJSON(vo);
-            JSONObject object = JSONObject.parseObject(json.toString());
-            object.remove("target");
-            object.remove("targetClass");
-
-            System.out.println(JSONObject.toJSON(object));
-//            System.out.println(vo.toStringInfo());
-        }
-        //,"targetClass":"org.springframework.data.jpa.repository.query.AbstractJpaQuery$TupleConverter$TupleBackedMap"
-               //{"entryTime":1445270400000,"administrativeName":"妇产科","sex":"女","name":"张晓云","tel":"456456","id":"1cc9dbf139c244858364ee321bcd4159","job":"主治医生","status":"在职",
-      //"target":{"entryTime":1445270400000,"administrativeName":"妇产科","sex":"女","name":"张晓云","tel":"456456","id":"1cc9dbf139c244858364ee321bcd4159","job":"主治医生","status":"在职"}}
-
-
-    }
-
-
-
     public static <T> void caseEntity(List<Object[]> list,Class<T> clazz,Object model) throws IllegalAccessException, InstantiationException {
         T t = clazz.newInstance();
 
@@ -146,8 +106,6 @@ public class HospitalmanageApplicationTests {
         }catch (Exception e){
             return null;
         }
-
-
 
     }
 

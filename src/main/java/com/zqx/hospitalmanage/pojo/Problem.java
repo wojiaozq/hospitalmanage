@@ -14,7 +14,7 @@ public class Problem {
   private String id;
   private String head;
   private String context;
-  private java.util.Date time;
+  private Date time;
   @Column(name = "quizzer_Id")
   private String quizzerId;
   @Column(name = "quizzer_Name")

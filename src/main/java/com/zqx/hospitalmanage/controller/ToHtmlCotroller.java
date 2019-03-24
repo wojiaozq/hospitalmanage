@@ -76,14 +76,12 @@ public class ToHtmlCotroller {
 
     }
 
-
-
-
     @RequestMapping("Doctor_management.html")
     public String  getAllDoctor(Model model){
         model.addAttribute("list",doctorService.findAll());
         return "Doctor_management.html";
     }
+
     @RequestMapping("Announcement_management.html")
     public String  getAllannou(Model model){
         List<Announcement> list = announcementService.findAll();

@@ -3,14 +3,13 @@ package com.zqx.hospitalmanage.controller;
 import com.zqx.hospitalmanage.pojo.Announcement;
 import com.zqx.hospitalmanage.pojo.Doctor;
 import com.zqx.hospitalmanage.service.AnnouncementService;
-import org.hibernate.sql.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -32,14 +31,18 @@ public class AnnouncementController {
         this.announcementService.add(announcement);
         return "success";
     }
-    @RequestMapping("findallannou")
-    public List<Announcement> selectallannou(){
-        return this.announcementService.findAll();
+
+    @RequestMapping("findannoubyid")
+    public String selectallannoubyid(Model model,String id){
+        Announcement announcement=this.announcementService.findById(id);
+        model.addAttribute("anuouview",announcement);
+            return "Announcementdetils.html";
+       // return  this.announcementService.findAll();
     }
 
     @RequestMapping("deleannoubyid")
     public String DeleteannouById(String id){
         this.announcementService.delete(id);
-        return "success";
+        return "redirect:/Announcement_management.html";
     }
 }

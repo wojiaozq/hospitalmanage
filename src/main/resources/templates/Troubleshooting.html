@@ -1,68 +1,110 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<meta charset="utf-8">		
-		<link rel="stylesheet" type="text/css" href="static/h-ui/css/H-ui.min.css" />
-		<link rel="stylesheet" type="text/css" href="./static/admin/layui/css/layui.css" />
-		<link rel="stylesheet" type="text/css" href="./static/admin/css/admin.css" />
-		<title>品牌管理</title>
-	</head>
-	<body>
-		<div class="page-container">
-			<div class="text-c">
-				<form class="Huiform" method="post" action="" target="_self"><br />					
-					<div class="text-c">
-						<button class="layui-btn layui-btn-small layui-btn-normal addBtn" data-url="add-question.html"><i class="layui-icon">&#xe654;</i></button>
-			      日期范围：<input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin" class="input-text Wdate" style="width:120px;"> -
-						<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" id="datemax" class="input-text Wdate" style="width:120px;">
-						<span class="select-box" style="width:150px">
-						<select class="select" name="brandclass" size="1">
-						<option value="1" >请选择</option>
-						<option value="0">分类1</option>
-						<option value="0">分类二</option></select></span>
-						<button type="button" class="btn btn-success" id="" name="" onClick="picture_colume_add(this);"><i class="Hui-iconfont">&#xe600;</i> 搜索</button>
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Ela Admin - HTML5 Admin Template</title>
+	<link rel="stylesheet" href="assets/css/normalize.css">
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+	<link rel="stylesheet" href="assets/css/themify-icons.css">
+	<link rel="stylesheet" href="assets/css/pe-icon-7-filled.css">
+	<link rel="stylesheet" href="assets/css/flag-icon.min.css">
+	<link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
+	<link rel="stylesheet" href="assets/css/style.css">
+	<link href="css/layui.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+<div class="col-lg-12">
+	<div class="card">
+		<div class="card-body card-block">
+			<div class="col col-md-9">
+				<div class="input-group">
+					<div class="col col-md-3">
+						<a href="javascript:;" onclick="admin_add('我要提问','add-question.html','800','450')" class="btn btn-primary"><i class="fa fa-plus"></i> 我要提问</a>
 					</div>
-				</form>
-			</div>	
-			<br />
-		<div class="layui-form" id="table-list">
-						<table class="layui-table" lay-even lay-skin="nob">
-							<colgroup>
-								<col width="10">
-								<col class="hidden-xs" width="650">							
-								<col width="150">
-							</colgroup>
-							<thead>
-								<tr>	
-									<th> </th>
-									<th>问题</th>
-									<th>操作</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<th> </th>																		
-									<td>花儿为什么这样红</td>
-									<td><a href="#">查看回答</a></td>
-								</tr>			
-							</tbody>
-						</table>
-						<div class="page-wrap">
-							<ul class="pagination">
-								<li class="disabled"><span>«</span></li>
-								<li class="active"><span>1</span></li>
-								<li>
-									<a href="#">2</a>
-								</li>
-								<li>
-									<a href="#">»</a>
-								</li>
-							</ul>
-						</div>
+					<span class="btn">日期范围</span>&nbsp;
+					<input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin" class="form-control">
+					<span class="btn"><i class="fa fa-calendar"></i>-</span>
+					<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" id="datemax" class="form-control">
+					<span class="btn"><i class="fa fa-calendar"></i></span>
+					<input type="text" id="input1-group2" name="input1-group2" placeholder="请输入关键字" class="form-control">&nbsp;
+					<div class="input-group-btn">
+						<button class="btn btn-primary"><i class="fa fa-search"></i> 搜索</button>
 					</div>
-					</div>
-			<script type="text/javascript" src="lib/My97DatePicker/WdatePicker.js"></script>
-			<script src="./static/admin/layui/layui.js" type="text/javascript" charset="utf-8"></script>
-		<script src="./static/admin/js/common.js" type="text/javascript" charset="utf-8"></script>
-	</body>
+				</div>
+			</div>
+		</div><br />
+		<div class="card-body">
+			<center>
+				<div style="width: 98%;padding-top: 1px">
+					<!--以下为两个必须div元素-->
+					<div id="table"></div>
+					<div id="pageBar"></div>
+				</div>
+		</div>
+		</center>
+	</div>
+</div>
+<!-- .content -->
+<div class="clearfix"></div>
+
+<script type="text/javascript" src="lib/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="lib/layer/2.1/layer.js"></script>
+<script type="text/javascript" src="static/h-ui/js/H-ui.js"></script>
+<script type="text/javascript" src="static/h-ui.admin/js/H-ui.admin.js"></script>
+<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<script language="Javascript" src="js/layui.js"></script>
+<script language="Javascript" src="js/nicePage.js"></script>
+<script type="text/javascript">
+	function admin_add(title, url, w, h) {
+		layer_show(title, url, w, h);
+	}
+
+	//标准json格式 目前只支持[{a:b,c:d},{a:b,c:d}]此种格式
+	var json = [{
+		"id": "1",
+		"name": "Tom",
+		"age": "12",
+		"button":"我要回答"
+	}, {
+		"id": "21",
+		"name": "Joy",
+		"age": "13",
+		"button":"我要回答"
+	}];
+
+	//nameList与widthList的数组长度要一致
+	var nameList = ['问题', '发布时间', '描述','操作',] //table的列名
+	var widthList = [50, 100, 650,100] //table每列的宽度
+
+	/**
+	 * 初始化设置nicepage组件    v1.0
+	 *-------------------------------------------------------------
+	 * 进行数据组装,与layui交互进行元素渲染
+	 *-------------------------------------------------------------
+	 * @param    {string}  table     table的div id
+	 * @param    {string}  bar     底部分页的div id
+	 * @param    {int}  limit     每页默认行数
+	 * @param    {string}  color     底部分页的颜色
+	 * @param    {array}  layout     底部分页的布局,具体可参考layui api
+	 *
+	 * @date     2018-10-19
+	 * @author   duzhen wechat：wenxuejn
+	 */
+	$(function() {
+		nicePage.setCfg({
+			table: 'table',
+			bar: 'pageBar',
+			limit: 20,
+			color: '#1E9FFF',
+			layout: ['count', 'prev', 'page', 'next', 'limit', 'skip']
+		});
+	}); //初始化完成
+</script>
+</body>
+
 </html>

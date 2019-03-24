@@ -18,7 +18,7 @@ import java.util.List;
  **/
 public interface ArticleDao extends JpaRepository<Article,String>, JpaSpecificationExecutor<Article> {
 
-    //根据医生id查询公告
+    //根据医生id查询文章
     @Query(nativeQuery = true,value = "select * from Article where person_id = ?;")
     public List<Article> findByDoctorId(String psersonId);
 
@@ -29,5 +29,18 @@ public interface ArticleDao extends JpaRepository<Article,String>, JpaSpecificat
     //根据某一个时间值，查询该时间当前时间的文章
     @Query(nativeQuery = true,value = "select * from Article where time >= ?;")
     public List<Article> findByGtTime(Date startDate);
+
+    //根据文章标题查询文章
+    @Query(nativeQuery = true,value = "select * from Article where topic like ?;")
+    public List<Article> findByTopic(String topic);
+
+
+//    @Query(nativeQuery = true,value = "select count(id) from article where person_Id = ?;")
+    public int countByPersonId(String personId);//对某个医生下的所有文章计数
+
+    @Query(nativeQuery = true,value = "select * from article where person_Id = ?;")
+    public List<Article> findByPersonId(String persionId);
+
+
 
 }

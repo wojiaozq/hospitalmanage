@@ -1,59 +1,97 @@
 <!doctype html>
 <html class="no-js" lang="">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<title>评价</title>
-		<link rel="stylesheet" href="assets/css/normalize.css">
-		<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-		<link rel="stylesheet" href="assets/css/font-awesome.min.css">
-		<link rel="stylesheet" href="assets/css/themify-icons.css">
-		<link rel="stylesheet" href="assets/css/pe-icon-7-filled.css">
-		<link rel="stylesheet" href="assets/css/flag-icon.min.css">
-		<link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
-		<link rel="stylesheet" href="assets/css/style.css">
-		<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
-	<style>
-		.di {
-				background: 8ef6f5
-			}
-	</style>
-	</head>
-	<body>
-		
-	
-			<div class="content">
-				
-					<div class="row">						
-						<div class="col-lg-6">
-							<div class="card">
-								
-								<div class="card-body card-block">
-									
-									<form action="#" method="post"  class="form-horizontal">
-										<div class="col col-md-12"><label for="textarea-input" class=" form-control-label">请输入您的评价</label></div>
-										<div class="row form-group">
-											
-											<div class="col-12 col-md-12"><textarea name="textarea-input" id="textarea-input" rows="9" placeholder="请注意评价内容不得超过200字" class="form-control"></textarea></div>
-										</div>
-										<center>
-										<button id="payment-button" type="reset" class="btn btn-lg btn-info "><span id="payment-button-amount">清空</span></button>&nbsp;&nbsp;&nbsp;
-										<button id="payment-button" type="submit" class="btn btn-lg btn-info "><span id="payment-button-amount">评价</span></button>	</center>										
-								</div>
-							</div>
-						</div>
-						</div>
-						
-						<div class="clearfix"></div>
-					</div>
-		
-		
-					<script src="assets/js/vendor/jquery-2.1.4.min.js"></script>
-					<script src="assets/js/popper.min.js"></script>
-					<script src="assets/js/bootstrap.min.js"></script>
-					<script src="assets/js/jquery.matchHeight.min.js"></script>
-					<script src="assets/js/main.js"></script>
 
-	</body>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Ela Admin - HTML5 Admin Template</title>
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/style.css">
+	<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+	<script src="js/star.js"></script>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		h3 {
+			text-align: center;
+			margin-top: 100px;
+		}
+
+		body {
+			background: #e2e9f1;
+		}
+
+		li {
+			list-style: none;
+		}
+
+		.rating {
+			width: 240px;
+			height: 48px;
+			margin: 20px auto;
+		}
+
+		.rating-item {
+			float: left;
+			width: 47px;
+			height: 47px;
+			background: url(images/icon.png) no-repeat;
+			cursor: pointer;
+		}
+	</style>
+</head>
+
+<body>
+<div class="content">
+	<div class="row">
+		<div class="col-lg-6">
+			<div class="card">
+				<div class="card-body card-block">
+					<form action="#" method="post" class="form-horizontal">
+						<div class="row form-group">
+							<div class="col col-md-2"><br />
+								<label style="font-size: 20px;"><b>请打分：</b></label></div>
+							<div class="col-md-5">
+								<ul id="rating" class="rating">
+									<li class="rating-item" title="很不好"></li>
+									<li class="rating-item" title="不好"></li>
+									<li class="rating-item" title="一般"></li>
+									<li class="rating-item" title="好"></li>
+									<li class="rating-item" title="很好"></li>
+								</ul>
+							</div></div>
+						<div class="row form-group">
+							<div class="col col-md-2"><label style="font-size: 20px;"><b>内容：</b></label></div>
+							<div class="col-12 col-md-9"><textarea name="textarea-input" id="textarea-input" rows="9" placeholder="请注意内容不得超过200字" class="form-control"></textarea></div>
+						</div>
+						<center>
+							<button id="payment-button" type="reset" class="btn btn-lg btn-info "><span id="payment-button-amount">重置</span></button>&nbsp;&nbsp;&nbsp;
+							<button id="payment-button" class="btn btn-lg btn-info "><span id="payment-button-amount">确定</span></button> </center>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+</div>
+<script>
+	//调用方法
+	//点击后可再选
+	$('#rating').star({
+		mode: 'LightEntire', //整颗星
+		num: 2,
+	});
+	//点击后禁止再可选
+	$('#rating2').star({
+		mode: 'LightHalf', //半颗星
+		num: 2.5
+	});
+	$('#rating2').on('chosen', function() {
+		$('#rating').star('unbindEvent');
+	})
+</script>
+</body>
 
 </html>

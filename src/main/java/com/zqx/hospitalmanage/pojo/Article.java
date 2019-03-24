@@ -25,7 +25,7 @@ public class Article implements Serializable {
   private String content;
 
   @Column(name = "time")
-  private java.util.Date time;
+  private Date time;
 
   @Column(name = "person_Id")
   private String personId;
