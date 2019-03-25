@@ -1,11 +1,10 @@
 package com.zqx.hospitalmanage.service.impl;
 
+import com.zqx.hospitalmanage.dao.AdministrativeDao;
 import com.zqx.hospitalmanage.dao.DoctorDao;
 import com.zqx.hospitalmanage.dao.DoctorRoleDao;
 import com.zqx.hospitalmanage.dao.RoleDao;
-import com.zqx.hospitalmanage.pojo.Doctor;
-import com.zqx.hospitalmanage.pojo.DoctorRole;
-import com.zqx.hospitalmanage.pojo.Page;
+import com.zqx.hospitalmanage.pojo.*;
 import com.zqx.hospitalmanage.service.DoctorService;
 import com.zqx.hospitalmanage.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -33,6 +33,8 @@ public class DoctorServiceImpl implements DoctorService {
 	private DoctorRoleDao doctorRoleDao;
 	@Autowired
 	private RoleDao roleDao;
+	@Autowired
+	private AdministrativeDao administrativeDao;
 
 	//登录验证
 	public Doctor login(String username,String password){
@@ -138,12 +140,24 @@ public class DoctorServiceImpl implements DoctorService {
 			doctor.setPassword("123456");//为医生设置默认密码123456
 		}
 		doctor.setStatus("在职");
+		String administrativeName = administrativeDao.findById(doctor.getAdministrativeId()).get().getName();
+		doctor.setAdministrativeName(administrativeName);
 		doctorDao.save(doctor);
 		doctorRoleDao.save(d);//分配医生角色
 	}
 	@Transactional
 	public void update(Doctor doctor) {
-		doctorDao.save(doctor);
+        String administrativeId = doctor.getAdministrativeId();
+        Administrative administrative = administrativeDao.findById(administrativeId).get();
+        doctor.setAdministrativeName(administrative.getName());
+//        doctorRoleDao.findById()
+        DoctorRole byDoctorId = doctorRoleDao.findByDoctorId(doctor.getId());
+        String roleId = byDoctorId.getRoleId();
+        Role role = roleDao.findById(roleId).get();
+        List<Role> l = new ArrayList<>();
+        l.add(role);
+        doctor.setRole(l);
+        doctorDao.save(doctor);
 	}
 	@Transactional
 	public void delete(String id) {

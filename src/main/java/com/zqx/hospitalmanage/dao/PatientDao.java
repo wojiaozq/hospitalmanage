@@ -12,4 +12,5 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
  * @create: 2019-03-24 11:55:24
  **/
 public interface PatientDao  extends JpaRepository<Patient,String>, JpaSpecificationExecutor<Patient> {
+    /**/
 }

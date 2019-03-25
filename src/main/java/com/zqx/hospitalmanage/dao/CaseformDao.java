@@ -12,4 +12,5 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
  * @create: 2019-03-24 11:52:29
  **/
 public interface CaseformDao extends JpaRepository<Caseform,String >, JpaSpecificationExecutor<Caseform> {
+    /**/
 }

@@ -3,89 +3,91 @@
 	<head>
 		<meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="static/h-ui/css/H-ui.min.css" />
-		<title>添加医生</title>
+		<title>修改医生</title>
 	</head>
 	<body>
 		
 			<form class="form form-horizontal" id="form-article-add">
+				<input type="text" hidden="hidden" th:value="${d.id}"  id="id" name="id">
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>医生姓名：</label>
 					<div class="formControls col-sm-3">
-						<input type="text" class="input-text" placeholder="" id="name" name="name">
+						<input type="text" th:value="${d.name}" class="input-text" placeholder="" id="name" name="name">
 					</div>
 					<label class="form-label col-xs-1 col-sm-2"><span class="c-red">*</span>性别：</label>
 					<div class="formControls col-xs-2 col-sm-3">
-						<input type="text" class="input-text"  placeholder="" id="sex" name="sex">
+						<input type="text" th:value="${d.sex}" class="input-text"  placeholder="" id="sex" name="sex">
 					</div>
 				</div>
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>出生年月：</label>
 					<div class="formControls col-sm-3">
-						<input type="text" class="input-text" value="" placeholder="" id="birthday" name="birthday">
+						<input type="text" class="input-text" th:value="${#dates.format(d.birthday, 'yyyy/MM/dd')}" placeholder="" id="birthday" name="birthday">
 					</div>
 					<label class="form-label col-xs-1 col-sm-2"><span class="c-red">*</span>年龄：</label>
 					<div class="formControls col-xs-2 col-sm-3">
-						<input type="text" class="input-text" value="" placeholder="" id="age" name="age">
+						<input type="text" class="input-text" th:value="${d.age}" placeholder="" id="age" name="age">
 					</div>
 				</div>
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>入职时间：</label>
 					<div class="formControls col-sm-3">
-						<input type="text" class="input-text" value="" placeholder="" id="entryTime" name="entryTime">
+						<input type="text" class="input-text" th:value="${#dates.format(d.entryTime, 'yyyy/MM/dd')}"  placeholder="" id="entryTime" name="entryTime">
 					</div>
 					<label class="form-label col-xs-1 col-sm-2"><span class="c-red">*</span>职称：</label>
 					<div class="formControls col-xs-2 col-sm-3">
-						<input type="text" class="input-text" value="" placeholder="" id="job" name="job">
+						<input type="text" class="input-text" th:value="${d.job}" placeholder="" id="job" name="job">
 					</div>
 				</div>
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>所属科室：</label>
 					<div class="formControls col-sm-3">
-						<span class="select-box">
-				<select id="administrativeId" name="administrativeId" class="select" >
-					<option>请选择</option>
+						<span class="select-box"  >
+				<select id="administrativeId"  name="administrativeId" class="select" >
+					<!--<option>请选择</option>-->
+					<option th:value="${administrativeId}" th:text="${d.administrativeName}"></option>
 				</select>
 				</span>
 					</div>
 					<label class="form-label col-sm-2"><span class="c-red">*</span>擅长项目：</label>
 					<div class="formControls col-xs-2 col-sm-3">
-						<input type="text" class="input-text" value="" placeholder="" id="goodProject" name="goodProject">
+						<input type="text" class="input-text" th:value="${d.goodProject}" placeholder="" id="goodProject" name="goodProject">
 					</div>
 				</div>
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>联系方式：</label>
 					<div class="formControls col-sm-3">
-						<input type="text" class="input-text" value="" placeholder="" id="tel" name="tel">
+						<input type="text" class="input-text" th:value="${d.tel}" placeholder="" id="tel" name="tel">
 					</div>
 					<label class="form-label col-xs-1 col-sm-2"><span class="c-red">*</span>家庭住址：</label>
 					<div class="formControls col-xs-2 col-sm-3">
-						<input type="text" class="input-text" value="" placeholder="" id="address" name="address">
+						<input type="text" class="input-text" th:value="${d.address}" placeholder="" id="address" name="address">
 					</div>
 				</div>
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>身份证号：</label>
 					<div class="formControls col-sm-3">
-						<input type="text" class="input-text" value="" placeholder="" id="username" name="username">
+						<input type="text" class="input-text"  th:value="${d.username}"  readonly="readonly" placeholder="" id="username" name="username">
 					</div>
 					<label class="form-label col-xs-1 col-sm-2"><span class="c-red">*</span>登录密码：</label>
 					<div class="formControls col-xs-2 col-sm-3">
-						<input type="text" class="input-text" value="" placeholder="" id="password" name="password">
+						<input type="password" class="input-text"  th:value="${d.password}" placeholder="" id="password" name="password">
 					</div>
 				</div>
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>毕业学校：</label>
 					<div class="formControls col-sm-3">
-						<input type="text" class="input-text" value="" placeholder="" id="graduationSchool" name="graduationSchool">
+						<input type="text" class="input-text"  th:value="${d.graduationSchool}" placeholder="" id="graduationSchool" name="graduationSchool">
 					</div>
 					<label class="form-label col-xs-1 col-sm-2"><span class="c-red">*</span>学历：</label>
 					<div class="formControls col-xs-2 col-sm-3">
-						<input type="text" class="input-text" value="" placeholder="" id="education" name="education">
+						<input type="text" class="input-text"  th:value="${d.education}" placeholder="" id="education" name="education">
 					</div>
 				</div>
 				<div class="row cl">
 					<div class="formControls col-sm-3"></div>
 					<div class="formControls col-sm-2">
-					<button  id="save" class="btn btn-primary radius" type="button">保存</button>
+					<button  id="save" class="btn btn-primary radius" type="button">修改</button>
 					</div>
 					<div class="formControls col-xs-2 col-sm-2">
 					<button  class="btn btn-default radius" type="reset">&nbsp;&nbsp;清空&nbsp;&nbsp;</button>
@@ -100,6 +102,11 @@
 	</body>
 	<script>
         $(document).ready(function(){
+            // $.get("doctor/findById",function (data,state) {
+            //
+			//
+            // })
+
             $.get("administrative/getAll",function(data,status){
                  // alert("Data: " + data + "\nStatus: " + status);
            		 // <option value="0">全部科室</option>
@@ -113,14 +120,12 @@
             });
             $('#save').click(function () {
                 var data = getData(); //eval('('+getData()+')');
-
-
-				$.post('doctor/save',data,function (data,status) {
+				$.post('doctor/update',data,function (data,status) {
 					if(data=="success"){
                         // layer.msg("添加成功");
                         //关闭动作的关键代码
                         //假设这是iframe页
-                        layer.alert('添加成功',function () {
+                        layer.alert('修改成功',function () {
                             window.parent.location.reload();
                             var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
                             parent.layer.close(index); //再执行关闭
@@ -132,7 +137,8 @@
             });
             function getData() {
                  var data = "";// = '{';
-                data += "username="+ $('#username').val()+'&';
+                 data += "username="+ $('#username').val()+'&';
+                data += "id="+ $('#id').val()+'&';
                 data += "name="+ $('#name').val()+'&';
                 data += "job="+ $('#job').val()+'&';
                 data += "entryTime="+ $('#entryTime').val()+'&';
@@ -144,7 +150,6 @@
                 data += "goodProject="+ $('#goodProject').val()+'&';
                 data += "tel="+ $('#tel').val()+'&';
                 data += "address="+ $('#address').val()+'&';
-                data += "education="+ $('#education').val()+'&';
                 data += "password="+ $('#password').val();
                 // data += '}';
                 return data;

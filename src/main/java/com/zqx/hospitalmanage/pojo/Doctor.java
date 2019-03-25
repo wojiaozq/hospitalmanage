@@ -43,6 +43,9 @@ public class Doctor implements Serializable {
     @Column(name="administrative_Id")
     private String administrativeId;
 
+    @Column(name="administrative_Name")
+    private String administrativeName;
+
     @Column(name="good_Project")
     private String goodProject;
 
@@ -64,11 +67,19 @@ public class Doctor implements Serializable {
     @Column(name="education")
     private String education;
 
-//    @Transient
+    //    @Transient
     @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name = "doctor_role",joinColumns = @JoinColumn(name = "doctor_id"),
-        inverseJoinColumns = @JoinColumn(name = "role_id"))
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> role;
+
+    public String getAdministrativeName() {
+        return administrativeName;
+    }
+
+    public void setAdministrativeName(String administrativeName) {
+        this.administrativeName = administrativeName;
+    }
 
     public String getUsername() {
         return username;
@@ -87,107 +98,107 @@ public class Doctor implements Serializable {
     }
 
     public String getId() {
-      return id;
+        return id;
     }
 
     public void setId(String id) {
-      this.id = id;
+        this.id = id;
     }
 
     public String getName() {
-      return name;
+        return name;
     }
 
     public void setName(String name) {
-      this.name = name;
+        this.name = name;
     }
 
     public String getJob() {
-      return job;
+        return job;
     }
 
     public void setJob(String job) {
-      this.job = job;
+        this.job = job;
     }
 
     public Date getEntryTime() {
-      return entryTime;
+        return entryTime;
     }
 
     public void setEntryTime(Date entryTime) {
-      this.entryTime = entryTime;
+        this.entryTime = entryTime;
     }
 
     public Integer getAge() {
-      return age;
+        return age;
     }
 
     public void setAge(Integer age) {
-      this.age = age;
+        this.age = age;
     }
 
     public String getSex() {
-      return sex;
+        return sex;
     }
 
     public void setSex(String sex) {
-      this.sex = sex;
+        this.sex = sex;
     }
 
     public Date getBirthday() {
-      return birthday;
+        return birthday;
     }
 
     public void setBirthday(Date birthday) {
-      this.birthday = birthday;
+        this.birthday = birthday;
     }
 
     public Integer getPatientNum() {
-      return patientNum;
+        return patientNum;
     }
 
     public void setPatientNum(Integer patientNum) {
-      this.patientNum = patientNum;
+        this.patientNum = patientNum;
     }
 
     public String getGraduationSchool() {
-      return graduationSchool;
+        return graduationSchool;
     }
 
     public void setGraduationSchool(String graduationSchool) {
-      this.graduationSchool = graduationSchool;
+        this.graduationSchool = graduationSchool;
     }
 
     public String getAdministrativeId() {
-      return administrativeId;
+        return administrativeId;
     }
 
     public void setAdministrativeId(String administrativeId) {
-      this.administrativeId = administrativeId;
+        this.administrativeId = administrativeId;
     }
 
     public String getGoodProject() {
-      return goodProject;
+        return goodProject;
     }
 
     public void setGoodProject(String goodProject) {
-      this.goodProject = goodProject;
+        this.goodProject = goodProject;
     }
 
     public String getTel() {
-      return tel;
+        return tel;
     }
 
     public void setTel(String tel) {
-      this.tel = tel;
+        this.tel = tel;
     }
 
     public String getAddress() {
-      return address;
+        return address;
     }
 
     public void setAddress(String address) {
-      this.address = address;
+        this.address = address;
     }
 
     public String getStatus() {
@@ -199,19 +210,19 @@ public class Doctor implements Serializable {
     }
 
     public String getPassword() {
-      return password;
+        return password;
     }
 
     public void setPassword(String password) {
-      this.password = password;
+        this.password = password;
     }
 
     public String getPhotoUrl() {
-      return photoUrl;
+        return photoUrl;
     }
 
     public void setPhotoUrl(String photoUrl) {
-      this.photoUrl = photoUrl;
+        this.photoUrl = photoUrl;
     }
 
     public String getEducation() {

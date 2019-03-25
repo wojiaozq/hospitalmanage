@@ -32,8 +32,9 @@
                         </div>
                         <div class="row form-group">
                             <div class="col col-md-2"><label for="textarea-input" class=" form-control-label">内容</label></div>
-                            <div class="col-12 col-md-9"><textarea  rows="9" class="form-control" th:value="${anuouview.content}" readonly="true"></textarea></div>
+                            <div class="col-12 col-md-9"><textarea  rows="9" class="form-control" th:text="${anuouview.content}" readonly="true"></textarea></div>
                         </div>
+                        <center><a  href="Announcement_management.html" class="btn btn-lg btn-info "><span>返回</span></button>&nbsp;&nbsp;&nbsp;</a></center>
                     </form>
                 </div>
             </div>
@@ -43,7 +44,5 @@
 </div>
 <script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="lib/layer/2.1/layer.js"></script>
-
 </body>
-
 </html>

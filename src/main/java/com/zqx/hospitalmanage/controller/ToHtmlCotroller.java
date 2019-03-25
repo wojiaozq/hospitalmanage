@@ -98,4 +98,11 @@ public class ToHtmlCotroller {
         return page;
     }
 
+    @RequestMapping("findannoubyid")
+    public String selectallannoubyid(Model model,String id){
+        Announcement announcement=this.announcementService.findById(id);
+        model.addAttribute("anuouview",announcement);
+        return "/Announcementdetils.html";
+    }
+
 }

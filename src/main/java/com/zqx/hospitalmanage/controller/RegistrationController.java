@@ -1,0 +1,33 @@
+package com.zqx.hospitalmanage.controller;
+
+import com.zqx.hospitalmanage.pojo.Doctor;
+import com.zqx.hospitalmanage.pojo.Registration;
+import com.zqx.hospitalmanage.service.RegistrationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpSession;
+import java.util.List;
+
+/**
+ * @version 1.0
+ * @program: hospitalmanage.RegistrationController
+ * @description:
+ * @author: wangshu
+ * @create: 2019-03-24 16:37:07
+ **/
+@Controller
+@RequestMapping("registration")
+public class RegistrationController {
+
+    @Autowired
+    private RegistrationService registrationService;
+
+    @RequestMapping("doctor/get")
+    public List<Registration> get(HttpSession session){
+        Doctor user = (Doctor) session.getAttribute("user");
+        String id = user.getId();
+        return registrationService.getByDoctorId(id);
+    }
+}

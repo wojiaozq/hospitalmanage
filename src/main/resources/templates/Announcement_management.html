@@ -56,8 +56,8 @@
 			<td th:text="${annou.topic}"></td>
 			<td th:text="${annou.content}"></td>
 			<td>
-				<a href="javascript:;" th:onclick='admin_add("查看详细信息", findannoubyid?id=${annou.id},"800","450")' ><i class="fa fa-pencil" style="color: blue" title="查看详细信息"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<a title="删除" th:href="@{/Announcement/deleannoubyid(id=${annou.id})}"><i class="fa fa-trash-o" style="color: red"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a title="查看详细信息" th:href="@{/findannoubyid(id=${annou.id})}" ><i class="fa fa-file-text"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a title="删除" th:href="@{/Announcement/deleannoubyid(id=${annou.id})}"><i class="fa fa-trash-o"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>
 		</tr>
 		</tbody>
@@ -94,7 +94,18 @@
 		layer_show(title, url, w, h);
 	}
 
+	function click_num(id) {
+		$.ajax({
+			type:"get",
+			dataType:"text",
+			data:{"id":id},
+			url:'Announcement/findannoubyid',
 
+			success:function(){
+				alert("123456");
+			},
+		})
+	}
 </script>
 </body>
 
