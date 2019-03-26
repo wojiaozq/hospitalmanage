@@ -97,4 +97,16 @@ public class Article implements Serializable {
     this.administrativeId = administrativeId;
   }
 
+  @Override
+  public String toString() {
+    return "Article{" +
+            "id='" + id + '\'' +
+            ", topic='" + topic + '\'' +
+            ", content='" + content + '\'' +
+            ", time=" + time +
+            ", personId='" + personId + '\'' +
+            ", personName='" + personName + '\'' +
+            ", administrativeId='" + administrativeId + '\'' +
+            '}';
+  }
 }

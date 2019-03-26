@@ -5,13 +5,11 @@ import com.zqx.hospitalmanage.pojo.Doctor;
 import com.zqx.hospitalmanage.service.AnnouncementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.Date;
-import java.util.List;
 
 @Controller
 @RequestMapping("Announcement")
@@ -32,11 +30,10 @@ public class AnnouncementController {
         return "success";
     }
 
-
-
     @RequestMapping("deleannoubyid")
     public String DeleteannouById(String id){
         this.announcementService.delete(id);
         return "redirect:/Announcement_management.html";
     }
+
 }

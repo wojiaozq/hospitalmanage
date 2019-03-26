@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="static/h-ui/css/H-ui.min.css" />
+    <title>添加病人信息</title>
+    <style>
+        .order {
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+        }
+
+        .order .line {
+            display: inline-block;
+            width: 180px;
+            border-top: 2px solid #00B5F9;
+        }
+
+        .order .txt {
+            color: #686868;
+            vertical-align: middle;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+
+<form class="form form-horizontal" id="form-article-add" method="get" action="/Patient/updateByid">
+    <div class="order">
+        <span class="line"></span>
+        <span class="txt">病人基本信息</span>
+        <span class="line"></span>
+    </div>
+
+    <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>患者姓名：</label>
+        <div class="formControls col-sm-3">
+            <input type="text" class="input-text" th:value="${pat.name}"  id="name" name="name">
+        </div>
+        <label class="form-label col-xs-1 col-sm-2"><span class="c-red">*</span>性别：</label>
+        <div class="formControls col-xs-2 col-sm-3">
+            <input type="text" class="input-text" th:value="${pat.sex}"  id="sex" name="sex">
+        </div>
+    </div>
+    <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>家庭住址：</label>
+        <div class="formControls col-sm-3">
+            <input type="text" class="input-text" th:value="${pat.address}"  id="address" name="address">
+        </div>
+        <label class="form-label col-xs-1 col-sm-2"><span class="c-red">*</span>年龄：</label>
+        <div class="formControls col-xs-2 col-sm-3">
+            <input type="text" class="input-text" th:value="${pat.age}" id="age" name="age">
+        </div>
+    </div>
+    <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>身份证号：</label>
+        <div class="formControls col-sm-3">
+            <input type="text" class="input-text" th:value="${pat.identification}"  id="identification" name="identification">
+        </div>
+        <label class="form-label col-xs-1 col-sm-2"><span class="c-red">*</span>登录密码：</label>
+        <div class="formControls col-xs-2 col-sm-3">
+            <input type="password" class="input-text" th:value="${pat.password}"  id="password" name="password">
+        </div>
+    </div>
+    <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>电话号码：</label>
+        <div class="formControls col-sm-3">
+            <input type="text" class="input-text" th:value="${pat.tel}"  id="tel" name="tel">
+        </div>
+    </div>
+    <div class="order">
+        <span class="line"></span>
+        <span class="txt">病人病历信息</span>
+        <span class="line"></span>
+    </div>
+    <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>主诉：</label>
+        <div class="formControls col-sm-3">
+            <input type="text" class="input-text"  id="mainSuit" name="mainSuit">
+        </div>
+        <label class="form-label col-xs-1 col-sm-2"><span class="c-red">*</span>入院时间：</label>
+        <div class="formControls col-xs-2 col-sm-3">
+            <input type="text" class="input-text" th:value="${#dates.format(case.time, 'yyyy/MM/dd')}"  id="time" name="time">
+        </div>
+    </div>
+    <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>现病史：</label>
+        <div class="formControls col-sm-3">
+            <input type="text" class="input-text" th:value="${case.presentIllness}"  id="presentIllness" name="presentIllness">
+        </div>
+        <label class="form-label col-xs-1 col-sm-2"><span class="c-red">*</span>既往史：</label>
+        <div class="formControls col-xs-2 col-sm-3">
+            <input type="text" class="input-text" th:value="${case.previousHistory}" id="previousHistory" name="previousHistory">
+        </div>
+    </div>
+    <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>检查结果：</label>
+        <div class="formControls col-sm-3">
+            <input type="text" class="input-text" th:value="${case.result}" id="result" name="result">
+        </div>
+        <label class="form-label col-xs-1 col-sm-2"><span class="c-red">*</span>诊断：</label>
+        <div class="formControls col-xs-2 col-sm-3">
+            <input type="text" class="input-text" th:value="${case.diagnosisInfo}"  id="diagnosisInfo" name="diagnosisInfo">
+        </div>
+    </div>
+    <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>治疗手段：</label>
+        <div class="formControls col-sm-3">
+            <input type="text" class="input-text" th:value="${case.cureMeans}"  id="cureMeans" name="cureMeans">
+        </div>
+        <label class="form-label col-xs-1 col-sm-2"><span class="c-red">*</span>过敏史：</label>
+        <div class="formControls col-xs-2 col-sm-3">
+            <input type="text" class="input-text" th:value="${case.allergy}"  id="allergy" name="allergy">
+            <input type="text"hidden class="input-text" th:value="${case.patientId}" name="patientId">
+        </div>
+    </div>
+
+    <div class="row cl">
+        <div class="formControls col-sm-3"></div>
+        <div class="formControls col-sm-2">
+            <button type="submit" id="update" class="btn btn-primary radius">确认修改</button>
+        </div>
+        <div class="formControls col-xs-2 col-sm-2">
+            <a class="btn btn-default radius" href="Patient_management.html">返回</a>
+        </div>
+    </div>
+</form>
+</center>
+<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="lib/layer/2.1/layer.js"></script>
+<script type="text/javascript" src="static/h-ui/js/H-ui.js"></script>
+</body>
+</html>

@@ -63,6 +63,10 @@ public interface DoctorDao extends JpaRepository<Doctor,String >, JpaSpecificati
     @Modifying
     @Query(nativeQuery = true,value = "update doctor set password = ? where id =?;")
     public void updatePassword(String password, String id);
+
+    @Modifying
+    @Query(nativeQuery = true,value = "update doctor set status = ? where id =?;")
+    public void updateStatus(String status, String id);
     
     
 }

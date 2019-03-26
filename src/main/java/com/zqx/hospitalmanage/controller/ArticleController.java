@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * @version 1.0
@@ -34,8 +35,14 @@ public class ArticleController {
         article.setAdministrativeId(administrativeId);
         article.setPersonId(userId);
         article.setPersonName(name);
-      //  articleService.save(article);
+        articleService.save(article);
         return "success";
+    }
+
+    @RequestMapping("get")
+    @ResponseBody
+    public List<Article> getArticleAll(String doctorId){
+        return articleService.findallByDoctorID(doctorId);
     }
 
 

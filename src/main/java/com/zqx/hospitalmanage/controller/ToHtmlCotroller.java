@@ -2,13 +2,8 @@ package com.zqx.hospitalmanage.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.zqx.hospitalmanage.pojo.Announcement;
-import com.zqx.hospitalmanage.pojo.Doctor;
-import com.zqx.hospitalmanage.pojo.Menu;
-import com.zqx.hospitalmanage.pojo.Role;
-import com.zqx.hospitalmanage.service.AnnouncementService;
-import com.zqx.hospitalmanage.service.DoctorService;
-import com.zqx.hospitalmanage.service.MenuService;
+import com.zqx.hospitalmanage.pojo.*;
+import com.zqx.hospitalmanage.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,6 +31,10 @@ public class ToHtmlCotroller {
     private DoctorService doctorService;
     @Autowired
     private AnnouncementService announcementService;
+    @Autowired
+    private PatientService patientService;
+    @Autowired
+    private CaseformService caseformService;
 
     @RequestMapping("myindex1")
     public String index(HttpSession session){
@@ -77,13 +76,20 @@ public class ToHtmlCotroller {
     }
 
     @RequestMapping("Doctor_management.html")
-    public String  getAllDoctor(Model model){
+    public String  getAllDoctor(Model model,HttpSession session){
         model.addAttribute("list",doctorService.findAll());
         return "Doctor_management.html";
     }
 
+    @RequestMapping("Patient_management.html")
+    public String  getAllpatient(Model model,HttpSession session){
+        List<Patient> list = patientService.findAllpatient();
+        model.addAttribute("puser",list);
+        return "Patient_management.html";
+    }
+
     @RequestMapping("Announcement_management.html")
-    public String  getAllannou(Model model){
+    public String  getAllannou(Model model,HttpSession session){
         List<Announcement> list = announcementService.findAll();
         model.addAttribute("annou",list);
         return "Announcement_management.html";
@@ -103,6 +109,15 @@ public class ToHtmlCotroller {
         Announcement announcement=this.announcementService.findById(id);
         model.addAttribute("anuouview",announcement);
         return "/Announcementdetils.html";
+    }
+    @RequestMapping("selPatientbyid")
+    public String selectpatientById(String id,Model model){
+        Patient patient=this.patientService.selepatient(id);
+        model.addAttribute("pat",patient);
+        Caseform caseform=this.caseformService.findbypid(id);
+        model.addAttribute("case",caseform);
+        System.out.println(caseform.getMainSuit());
+        return "/update_patient.html";
     }
 
 }

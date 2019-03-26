@@ -6,6 +6,7 @@ import com.zqx.hospitalmanage.service.CaseformService;
 import com.zqx.hospitalmanage.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 @Service
@@ -18,20 +19,28 @@ public class CaseformServiceImpl implements CaseformService {
         this.caseformDao.save(caseform);
 
     }
-
+    @Transactional
     @Override
     public void delcaseform(String id) {
-
+        this.caseformDao.delBypidcaseform(id);
     }
 
     @Override
-    public void selecaseform(String id) {
+    public Caseform findbypid(String id) {
+        return this.caseformDao.selBypidcaseform(id);
+    }
 
+    @Override
+    public Caseform selecaseform(String id) {
+
+        return null;
     }
 
     @Override
     public void updatecaseform(Caseform caseform) {
-
+            Caseform caseform1=this.caseformDao.selBypidcaseform(caseform.getPatientId());
+            caseform.setId(caseform1.getId());
+            this.caseformDao.save(caseform);
     }
 
     @Override

@@ -15,7 +15,7 @@ import java.util.List;
  * @version 1.0
  * @program: hospitalmanage.RegistrationServiceImpl
  * @description:
- * @author: wangshu
+ * @author:
  * @create: 2019-03-24 13:23:30
  **/
 @Service

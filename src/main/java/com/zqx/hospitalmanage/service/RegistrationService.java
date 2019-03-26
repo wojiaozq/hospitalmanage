@@ -10,7 +10,7 @@ import java.util.List;
  * @version 1.0
  * @program: hospitalmanage.RegistrationService
  * @description:
- * @author: wangshu
+ * @author:
  * @create: 2019-03-24 13:23:19
  **/
 public interface RegistrationService {

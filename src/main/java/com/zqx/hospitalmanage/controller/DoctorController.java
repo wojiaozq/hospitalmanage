@@ -5,6 +5,7 @@ import com.zqx.hospitalmanage.pojo.Page;
 import com.zqx.hospitalmanage.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -32,6 +33,14 @@ public class DoctorController {
         doctorService.add(doctor);
         return "success";
     }
+    //添加一名医生--修改
+    @RequestMapping("update")
+    @ResponseBody
+    public String updateDoctor( Doctor doctor){
+//        System.out.println(doctor);
+        doctorService.update(doctor);
+        return "success";
+    }
 
     //检查用户名是否可用
     @RequestMapping("checkUsername")
@@ -44,12 +53,7 @@ public class DoctorController {
         }
     }
 
-    //根据主键查找医生
-    @RequestMapping("findById")
-    @ResponseBody
-    public Doctor findOneById(String id){
-        return doctorService.findOneById(id);
-    }
+
 
     //根据姓名查找医生
     @RequestMapping("FindByName")
@@ -76,5 +80,15 @@ public class DoctorController {
     public List<Doctor> findAll(){
         return doctorService.findAll();
     }
+
+
+    //删除一名医生
+    @RequestMapping("delete")
+    @ResponseBody
+    public String  delete(String id){
+        doctorService.updateStatus(id);
+        return "success";
+    }
+
 
 }

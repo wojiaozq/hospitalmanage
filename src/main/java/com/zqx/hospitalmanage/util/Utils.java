@@ -41,12 +41,11 @@ public class Utils {
      * @throws
      * @since 1.0
      * @description:  分页，公式如下
-     * page.getNum()/(page.getSize()+0.0)==0?page.getNum()/page.getSize():page.getNum()/page.getSize()+1
+     * page.getNum()%page.getSize()==0?page.getNum()/page.getSize():page.getNum()/page.getSize()+1
      */
     public static int pageTotal(int num,int size){
-        return num/(size+0.0)==0?num/size:num/size+1;
+        return num%size==0?num/size:num/size+1;
     }
-
 
     public static Date stringParseDate(String str) throws ParseException {
         String s = "yyyy-MM-dd";
@@ -75,6 +74,4 @@ public class Utils {
             return false;
         }
     }
-
-
 }

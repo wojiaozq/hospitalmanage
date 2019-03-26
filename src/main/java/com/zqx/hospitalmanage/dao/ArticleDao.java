@@ -41,6 +41,7 @@ public interface ArticleDao extends JpaRepository<Article,String>, JpaSpecificat
     @Query(nativeQuery = true,value = "select * from article where person_Id = ?;")
     public List<Article> findByPersonId(String persionId);
 
-
+    @Query(nativeQuery = true,value = "select * from article where person_id = ? order by time desc ")
+    public List<Article> findAllOrederByTimer(String doctorId);
 
 }

@@ -9,7 +9,7 @@ import java.util.List;
  * @version 1.0
  * @program: hospitalmanage.DoctorServiceImpl
  * @description:
- * @author: wangshu
+ * @author:
  * @create: 2019-03-19 13:17:55
  **/
 public interface DoctorService {
@@ -23,7 +23,7 @@ public interface DoctorService {
 
     public List<Doctor> findAll() ;
 
-    public List<Doctor> findByNameAndStartAndEnd(String name,String start,String end);
+    public List<Doctor> findByNameAndStartAndEnd(String name, String start, String end);
     public List<Doctor> findByStartAndEnd(String start, String end);
 
     public Doctor findOneById(String id);
@@ -34,5 +34,7 @@ public interface DoctorService {
 
     public void delete(String id);
 
-    public void updatePassword(String nowPassword,String id);
+    public void updatePassword(String nowPassword, String id);
+
+    public void updateStatus(String id);
 }

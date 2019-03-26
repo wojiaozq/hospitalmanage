@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<title>Ela Admin - HTML5 Admin Template</title>
+		<title>病人管理</title>
 		<meta name="description" content="Ela Admin - HTML5 Admin Template">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -49,24 +49,23 @@
 								<th>性别</th>
 								<th>年龄</th>
 								<th>联系电话</th>
-								<th>家庭住址</th>
-								<th>上次就诊日期</th>
+								<th>住址</th>
 								<th>操作</th>
 							</tr>
 						</thead>
 						<tbody>
-
-							<tr>
-								<td>Michael Bruce</td>
-								<td>Javascript Developer</td>
-								<td>Singapore</td>
-								<td>$183,000</td>
-								<td>Michael Bruce</td>
-								<td>Javascript Developer</td>
-								<td>Singapore</td>
+							<tr th:each="pa:${puser}">
+								<td th:text="${pa.name}"></td>
+								<td th:text="${pa.identification}"></td>
+								<td th:text="${pa.sex}"></td>
+								<td th:text="${pa.age}"></td>
+								<td th:text="${pa.tel}"></td>
+								<td th:text="${pa.address}"></td>
+								<!--<td th:text="${pa.id}"></td>-->
 								<td>
-									<a title="查看详细信息"><i class="fa fa-share-square"></i></a>									
-								</td>
+									<a title="查看详细信息" th:href="@{/selPatientbyid(id=${pa.id})}"><i class="fa fa-share-square"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a title="删除" th:href="@{/Patient/delPatientbyid(id=${pa.id})}"><i class="fa fa-trash-o"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                </td>
 							</tr>
 						</tbody>
 					</table>

@@ -14,6 +14,16 @@ public class Evlauate {
   @Column(name = "case_id")
   private String caseId;
 
+  @Column(name = "timer")
+  private Date timer;//发布时间
+
+  public Date getTimer() {
+    return timer;
+  }
+
+  public void setTimer(Date timer) {
+    this.timer = timer;
+  }
 
   public String getId() {
     return id;

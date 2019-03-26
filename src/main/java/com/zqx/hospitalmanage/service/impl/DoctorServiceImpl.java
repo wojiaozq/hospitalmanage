@@ -151,12 +151,13 @@ public class DoctorServiceImpl implements DoctorService {
         Administrative administrative = administrativeDao.findById(administrativeId).get();
         doctor.setAdministrativeName(administrative.getName());
 //        doctorRoleDao.findById()
-        DoctorRole byDoctorId = doctorRoleDao.findByDoctorId(doctor.getId());
+        /*DoctorRole byDoctorId = doctorRoleDao.findByDoctorId(doctor.getId());
         String roleId = byDoctorId.getRoleId();
         Role role = roleDao.findById(roleId).get();
         List<Role> l = new ArrayList<>();
         l.add(role);
-        doctor.setRole(l);
+        doctor.setRole(l);*/
+        doctor.setStatus("在职");
         doctorDao.save(doctor);
 	}
 	@Transactional
@@ -168,6 +169,12 @@ public class DoctorServiceImpl implements DoctorService {
 	@Transactional
 	public void updatePassword(String nowPassword, String id) {
 		doctorDao.updatePassword(nowPassword,id);
+	}
+
+	@Override
+	@Transactional
+	public void updateStatus(String id) {
+		doctorDao.updateStatus("离职",id);
 	}
 
 }
