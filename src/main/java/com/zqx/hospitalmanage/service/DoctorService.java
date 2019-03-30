@@ -37,4 +37,5 @@ public interface DoctorService {
     public void updatePassword(String nowPassword, String id);
 
     public void updateStatus(String id);
+    public void updateStatus2(String id);
 }

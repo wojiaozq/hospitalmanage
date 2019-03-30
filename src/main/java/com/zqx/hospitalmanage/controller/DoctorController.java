@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
+import javax.xml.ws.http.HTTPBinding;
 import java.util.List;
 
 /**
@@ -33,12 +35,26 @@ public class DoctorController {
         doctorService.add(doctor);
         return "success";
     }
-    //添加一名医生--修改
+    //一名医生--修改
     @RequestMapping("update")
     @ResponseBody
-    public String updateDoctor( Doctor doctor){
+    public String updateDoctor(Doctor doctor){
 //        System.out.println(doctor);
         doctorService.update(doctor);
+        return "success";
+    }
+
+    //NowUpdate
+    @RequestMapping("NowUpdate")
+    @ResponseBody
+    public String nowUpdateDoctor(Doctor doctor, HttpSession session){
+        Doctor user = (Doctor) session.getAttribute("user");
+        user.setTel(doctor.getTel());
+        user.setAddress(doctor.getAddress());
+        user.setName(doctor.getName());
+        user.setBirthday(doctor.getBirthday());
+        user.setAge(doctor.getAge());
+        doctorService.update(user);
         return "success";
     }
 

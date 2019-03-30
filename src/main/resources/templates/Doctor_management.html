@@ -64,7 +64,7 @@
 								<td th:text="${u.status}"> </td>
 								<td th:text="${u.tel}"></td>
 								<td>
-									<button class="look" title="查看详细信息并编辑"><i class="fa fa-pencil" style="color: blue"></i></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<button class="look"  onclick='look(this)' title="查看详细信息并编辑"><i class="fa fa-pencil" style="color: blue"></i></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									<button title="删除" onclick='del(this)' class='del' ><i class="fa fa-trash-o" style="color: red"></i></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								</td>
 							</tr>
@@ -75,7 +75,7 @@
 		</div>
 		<!-- .content -->
 		<div class="clearfix"></div>
-		<script src="assets/js/lib/data-table/datatables.min.js"></script><!--分页用的js-->
+		<script src="assets/js/lib/data-table/datatables.min.js"></script>
 		<script src="assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
 		<script src="assets/js/lib/data-table/dataTables.buttons.min.js"></script>
 		<script src="assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
@@ -114,7 +114,7 @@
                            str += "<td >"+data[i].administrativeName+"</td>"
                            str += "<td >"+data[i].status+"</td>"
                            str += "<td >"+data[i].tel+"</td>";
-                           str += "<td> <button class='look' title=\"查看详细信息并编辑\"><i class=\"fa fa-pencil\" style=\"color: blue\"></i></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
+                           str += "<td> <button class='look' onclick='look(this)' title=\"查看详细信息并编辑\"><i class=\"fa fa-pencil\" style=\"color: blue\"></i></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
                                "                        <button class='del' onclick='del(this)' title=\"删除\"><i class=\"fa fa-trash-o\" style=\"color: red\"></i></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" +
                                "                        </td>" +
                                "                        </tr>";
@@ -123,41 +123,50 @@
                        $("#table").html(str);
                    });
 				});
-
-                $('.del').click(function () {
-                    var $a = $(this);
-                    var tr = $a.parent().parent();//获取当前行
-                    var d = tr.find('td').eq(0).text();
-                    console.log(tr.find('td').eq(0).text());
-                    layer.alert("确定删除",function () {
-                        $.get("doctor/delete?id="+d,function (data,state) {
-                            if(data=="success"){
-                                tr.remove();
-                                layer.alert("删除成功");
-                            }
-                        });
-                    })
-                })
-
-				$('button.look').click(function () {
-                    var $a = $(this);
-                    var tr = $a.parent().parent();//获取当前行
-                    var d = tr.find('td').eq(0).text();
-                    layer_show('查看详细信息','doctorfindById?id='+d,'800','450');
-
-                })
-
-
             });
+            function look(btn) {
+                $(function () {
+                    var $a = $(btn);
+                    var tr = $a.parent().parent();//获取当前行
+                    var d = tr.find('td').eq(0).text();
+                    layer_show('查看详细信息', 'doctorfindById?id=' + d, '800', '450');
+                })
 
+			}
+
+            function del(btn) {
+                $(function () {
+					// alert(10);
+                    var $a = $(btn);
+                    // alert($a);
+                    var tr = $a.parent().parent();//获取当前行
+                    var d = tr.find('td').eq(0).text();
+                    var sts = tr.find('td').eq(6).text();
+                    // alert(tr.find('td').eq(0).text());
+                    if(sts == "在职"){
+                        layer.alert("确定删除",function () {
+                            $.get("doctor/delete?id="+d,function (data,state) {
+                                if(data=="success"){
+                                    tr.find('td').eq(6).text('离职');
+                                    layer.alert("删除成功");
+                                }
+                            });
+                        });
+                    }else{
+                        layer.alert("确定添加",function () {
+                            $.get("doctor/delete?id="+d,function (data,state) {
+                                if(data=="success"){
+                                    tr.find('td').eq(6).text('在职');
+                                    layer.alert("添加成功");
+                                }
+                            });
+                        });
+					}
+                })
+            }
 		</script>
 	<!--<script>
-		function del(btn) {
-		    var tr = btn.parentNode.parentNode;
-		    var td = tr.firstChild;
-		    console.log(td);
-		    console.log(td.innerText);
-        }
+
 
 	</script>-->
 	</body>

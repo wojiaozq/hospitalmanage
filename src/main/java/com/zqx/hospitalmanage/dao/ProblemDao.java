@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
  * @version 1.0
  * @program: hospitalmanage.ProblemDao
  * @description: 问题
- * @author: wangshu
+ * @author:
  * @create: 2019-03-24 11:56:06
  **/
 public interface ProblemDao  extends JpaRepository<Problem,String>, JpaSpecificationExecutor<Problem> {

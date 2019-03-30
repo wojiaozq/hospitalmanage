@@ -102,20 +102,18 @@
 	</body>
 	<script>
         $(document).ready(function(){
-            // $.get("doctor/findById",function (data,state) {
-            //
-			//
-            // })
+
 
             $.get("administrative/getAll",function(data,status){
                  // alert("Data: " + data + "\nStatus: " + status);
            		 // <option value="0">全部科室</option>
 
-				var str = "<option >请选择</option>";
+				// var str = "<option >请选择</option>";
+				var str = "";
                  for (var i=0;i<data.length;++i){
                      str +="<option value=\""+data[i].id+"\">"+data[i].name+"</option>";
 				 }
-				$('#administrativeId').html(str);
+				$('#administrativeId').append(str);
 
             });
             $('#save').click(function () {
@@ -150,6 +148,7 @@
                 data += "goodProject="+ $('#goodProject').val()+'&';
                 data += "tel="+ $('#tel').val()+'&';
                 data += "address="+ $('#address').val()+'&';
+                data += "education="+ $('#education').val()+'&';
                 data += "password="+ $('#password').val();
                 // data += '}';
                 return data;

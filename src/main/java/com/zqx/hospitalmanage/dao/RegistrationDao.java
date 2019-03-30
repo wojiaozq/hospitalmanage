@@ -13,7 +13,7 @@ import java.util.List;
  * @version 1.0
  * @program: hospitalmanage.RegistrationDao
  * @description:
- * @author: wangshu
+ * @author:
  * @create: 2019-03-24 11:57:08
  **/
 public interface RegistrationDao extends JpaRepository<Registration,String>, JpaSpecificationExecutor<Registration> {

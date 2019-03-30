@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html class="no-js" lang="">
 
@@ -5,6 +6,8 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Ela Admin - HTML5 Admin Template</title>
+	<meta name="description" content="Ela Admin - HTML5 Admin Template">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/normalize.css">
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
 	<link rel="stylesheet" href="assets/css/font-awesome.min.css">
@@ -12,99 +15,70 @@
 	<link rel="stylesheet" href="assets/css/pe-icon-7-filled.css">
 	<link rel="stylesheet" href="assets/css/flag-icon.min.css">
 	<link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
+	<link rel="stylesheet" href="assets/css/lib/datatable/dataTables.bootstrap.min.css">
 	<link rel="stylesheet" href="assets/css/style.css">
-	<link href="css/layui.css" type="text/css" rel="stylesheet">
 </head>
-
 <body>
 <div class="col-lg-12">
 	<div class="card">
 		<div class="card-body card-block">
 			<div class="col col-md-9">
-				<div class="input-group">
-					<div class="col col-md-3">
-						<a href="javascript:;" onclick="admin_add('发表文章','Add_doctor.html','800','450')" class="btn btn-primary"><i class="fa fa-plus"></i> 发表文章</a>
-					</div>
-					<span class="btn">日期范围</span>&nbsp;
-					<input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin" class="form-control">
-					<span class="btn"><i class="fa fa-calendar"></i>-</span>
-					<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" id="datemax" class="form-control">
-					<span class="btn"><i class="fa fa-calendar"></i></span>
-					<input type="text" id="input1-group2" name="input1-group2" placeholder="请输入科室" class="form-control">&nbsp;
-					<div class="input-group-btn">
-						<button class="btn btn-primary"><i class="fa fa-search"></i> 搜索</button>
-					</div>
+				<div class="col col-md-3">
+					<a href="javascript:;" onclick="admin_add('发表文章','Add_doctor.html','800','450')" class="btn btn-primary"><i class="fa fa-plus"></i> 发表文章</a>
 				</div>
 			</div>
 		</div><br />
 		<div class="card-body">
-			<center>
-				<div style="width: 98%;padding-top: 1px">
-					<!--以下为两个必须div元素-->
-					<div id="table"></div>
-					<div id="pageBar"></div>
-				</div>
+			<table id="bootstrap-data-table" class="table table-striped table-bordered">
+				<thead>
+				<tr>
+					<td hidden="hidden"></td>
+					<th>标题</th>
+					<th>发布时间</th>
+					<th>作者</th>
+					<th>操作</th>
+				</tr>
+				</thead>
+				<tbody id="table">
+				<tr th:each="l : ${list}">
+					<td th:text="${l.id}" hidden="hidden"></td>
+					<td th:text="${l.topic}"></td>
+					<td th:text="${#dates.format(l.time, 'yyyy-MM-dd')}"></td>
+					<td th:text="${aname}"></td>
+					<td>
+						<button class="look" title="查看详细信息并编辑"><i class="fa fa-pencil" style="color: blue"></i></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<button title="删除" onclick='del(this)' class='del' ><i class="fa fa-trash-o" style="color: red"></i></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					</td>
+				</tr>
+				</tbody>
+			</table>
 		</div>
-		</center>
 	</div>
 </div>
 <!-- .content -->
 <div class="clearfix"></div>
-
+<script src="assets/js/lib/data-table/datatables.min.js"></script>
+<script src="assets/js/lib/data-table/dataTables.bootstrap.min.js"></script>
+<script src="assets/js/lib/data-table/dataTables.buttons.min.js"></script>
+<script src="assets/js/lib/data-table/buttons.bootstrap.min.js"></script>
+<script src="assets/js/lib/data-table/jszip.min.js"></script>
+<script src="assets/js/lib/data-table/vfs_fonts.js"></script>
+<script src="assets/js/lib/data-table/buttons.html5.min.js"></script>
+<script src="assets/js/lib/data-table/buttons.print.min.js"></script>
+<script src="assets/js/lib/data-table/buttons.colVis.min.js"></script>
+<script src="assets/js/init/datatables-init.js"></script>
 <script type="text/javascript" src="lib/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="lib/layer/2.1/layer.js"></script>
 <script type="text/javascript" src="static/h-ui/js/H-ui.js"></script>
 <script type="text/javascript" src="static/h-ui.admin/js/H-ui.admin.js"></script>
-<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
-<script language="Javascript" src="js/layui.js"></script>
-<script language="Javascript" src="js/nicePage.js"></script>
 <script type="text/javascript">
-	function admin_add(title, url, w, h) {
-		layer_show(title, url, w, h);
-	}
+    function admin_add(title, url, w, h) {
+        layer_show(title, url, w, h);
+    }
 
-	//标准json格式 目前只支持[{a:b,c:d},{a:b,c:d}]此种格式
-	var json = [{
-		"id": "1",
-		"name": "Tom",
-		"age": "12",
-		"button":"查看详细信息"
-	}, {
-		"id": "21",
-		"name": "Joy",
-		"age": "13",
-		"button":"查看详细信息"
-	}];
-
-	//nameList与widthList的数组长度要一致
-	var nameList = ['标题', '发布时间', '作者姓名','操作',] //table的列名
-	var widthList = [350, 350, 350,350] //table每列的宽度
-
-	/**
-	 * 初始化设置nicepage组件    v1.0
-	 *-------------------------------------------------------------
-	 * 进行数据组装,与layui交互进行元素渲染
-	 *-------------------------------------------------------------
-	 * @param    {string}  table     table的div id
-	 * @param    {string}  bar     底部分页的div id
-	 * @param    {int}  limit     每页默认行数
-	 * @param    {string}  color     底部分页的颜色
-	 * @param    {array}  layout     底部分页的布局,具体可参考layui api
-	 *
-	 * @date     2018-10-19
-	 * @author   duzhen wechat：wenxuejn
-	 */
-	$(function() {
-		nicePage.setCfg({
-			table: 'table',
-			bar: 'pageBar',
-			limit: 20,
-			color: '#1E9FFF',
-			layout: ['count', 'prev', 'page', 'next', 'limit', 'skip']
-		});
-	}); //初始化完成
 </script>
+
 </body>
 
 </html>

@@ -12,10 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * 服务层
@@ -75,6 +72,13 @@ public class DoctorServiceImpl implements DoctorService {
 
 	public List<Doctor> findAll() {
 		List<Doctor> all = doctorDao.findAll();
+        Iterator<Doctor> it = all.iterator();
+        while (it.hasNext()){
+            Doctor next = it.next();
+            if(next.getName().equals("root")){
+                it.remove();
+            }
+        }
 		Collections.reverse(all);
 		return all;
 	}
@@ -121,9 +125,7 @@ public class DoctorServiceImpl implements DoctorService {
 			}
 			return list;
 		}
-//		return null;
 	}
-
 
 	public Doctor findOneById(String id) {
 		return doctorDao.findById(id).get();
@@ -150,13 +152,16 @@ public class DoctorServiceImpl implements DoctorService {
         String administrativeId = doctor.getAdministrativeId();
         Administrative administrative = administrativeDao.findById(administrativeId).get();
         doctor.setAdministrativeName(administrative.getName());
-//        doctorRoleDao.findById()
-        /*DoctorRole byDoctorId = doctorRoleDao.findByDoctorId(doctor.getId());
-        String roleId = byDoctorId.getRoleId();
-        Role role = roleDao.findById(roleId).get();
-        List<Role> l = new ArrayList<>();
-        l.add(role);
-        doctor.setRole(l);*/
+
+		Role role = roleDao.findByName("医生");
+
+		DoctorRole dr = new DoctorRole();
+        dr.setId(Utils.getUUID());
+        dr.setDoctorId(doctor.getId());
+        dr.setRoleId(role.getId());
+
+        doctorRoleDao.save(dr);
+
         doctor.setStatus("在职");
         doctorDao.save(doctor);
 	}
@@ -174,7 +179,17 @@ public class DoctorServiceImpl implements DoctorService {
 	@Override
 	@Transactional
 	public void updateStatus(String id) {
-		doctorDao.updateStatus("离职",id);
+        String status = doctorDao.findById(id).get().getStatus();
+        if(status == null ||status.equals("") || status.equals("离职")){
+            doctorDao.updateStatus("在职",id);
+        }else {
+            doctorDao.updateStatus("离职",id);
+        }
 	}
+    @Override
+    @Transactional
+    public void updateStatus2(String id) {
+        doctorDao.updateStatus("在职",id);
+    }
 
 }

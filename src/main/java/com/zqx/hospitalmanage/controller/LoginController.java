@@ -36,7 +36,7 @@ public class LoginController {
         Doctor doctor = doctorService.login(username, password);
         if(doctor!=null){
             session.setAttribute("user",doctor);
-            return "succes";
+            return "success";
         }
         return "用户名或密码错误";
     }

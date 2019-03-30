@@ -2,6 +2,7 @@ package com.zqx.hospitalmanage.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.sun.xml.internal.ws.resources.HttpserverMessages;
 import com.zqx.hospitalmanage.pojo.*;
 import com.zqx.hospitalmanage.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,8 @@ public class ToHtmlCotroller {
     private PatientService patientService;
     @Autowired
     private CaseformService caseformService;
+    @Autowired
+    private ArticleService articleService;
 
     @RequestMapping("myindex1")
     public String index(HttpSession session){
@@ -119,5 +122,34 @@ public class ToHtmlCotroller {
         System.out.println(caseform.getMainSuit());
         return "/update_patient.html";
     }
+
+    //根据主键查找医生
+    @RequestMapping("doctorfindById")
+    public String findOneById(String id, Model model){
+        Doctor one = doctorService.findOneById(id);
+        model.addAttribute("d",one);
+        return "get_doctor.html";
+    }
+    @RequestMapping("Latest_articles.html")
+    public String findLimitN(HttpSession session, Model model){
+        Doctor user = (Doctor) session.getAttribute("user");
+        List<Article> limit5 = articleService.findLimit5(user.getId());
+        if(limit5==null){
+            return "Latest_articles.html";
+        }
+        model.addAttribute("list",limit5);
+        model.addAttribute("aname",user.getName());
+        return "Latest_articles.html";
+    }
+
+    @RequestMapping("Article_record.html")
+    public String findArticleAll(HttpSession session,Model model){
+        Doctor user = (Doctor) session.getAttribute("user");
+        List<Article> articles = articleService.findallByDoctorID(user.getId());
+        model.addAttribute("list",articles);
+        model.addAttribute("aname",user.getName());
+        return "Article_record.html";
+    }
+
 
 }

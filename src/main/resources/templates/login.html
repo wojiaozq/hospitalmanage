@@ -64,7 +64,7 @@
 					// alert($('#username').val()+','+$('#password').val());
 					var jsonVal = {'username':$('#username').val(),'password':$('#password').val()};
                     $.post("loginDc",jsonVal,function(result){
-                        if(result == "succes"){
+                        if(result == "success"){
                             window.location.href = 'myindex';
                         }else{
                             // layer.alert(result, {

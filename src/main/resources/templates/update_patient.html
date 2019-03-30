@@ -79,7 +79,7 @@
     <div class="row cl">
         <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>主诉：</label>
         <div class="formControls col-sm-3">
-            <input type="text" class="input-text"  id="mainSuit" name="mainSuit">
+            <input type="text" class="input-text" th:value="${case.mainSuit}" id="mainSuit" name="mainSuit">
         </div>
         <label class="form-label col-xs-1 col-sm-2"><span class="c-red">*</span>入院时间：</label>
         <div class="formControls col-xs-2 col-sm-3">

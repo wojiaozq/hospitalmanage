@@ -28,7 +28,7 @@
 
 	<body>
 
-		<form class="form form-horizontal" id="form-article-add">
+		<form class="form form-horizontal" id="form-patient-add">
 			<div class="order">
 				<span class="line"></span>
 				<span class="txt">病人基本信息</span>
@@ -121,7 +121,7 @@
 			<div class="row cl">
 				<div class="formControls col-sm-3"></div>
 				<div class="formControls col-sm-2">
-					<button id="save" class="btn btn-primary radius">保存</button>
+					<button id="save" class="btn btn-primary radius" type="button">保存</button>
 				</div>
 				<div class="formControls col-xs-2 col-sm-2">
 					<button  class="btn btn-default radius" type="reset">&nbsp;&nbsp;重置&nbsp;&nbsp;</button>
@@ -138,9 +138,12 @@
 	$(document).ready(function(){
 
 		$('#save').click(function () {
-			var data = getData(); //eval('('+getData()+')');
-			$.post('Patient/save',data,function (data,status) {
+			var data1 = getData(); //eval('('+getData()+')');
+			$.post('Patient/save',data1,function (data,status) {
+				// alert(data);
+				// alert(status);
 				if(data=="success"){
+
 					layer.alert('添加成功',function () {
 						window.parent.location.reload();
 						var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引

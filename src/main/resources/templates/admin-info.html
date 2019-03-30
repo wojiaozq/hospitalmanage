@@ -17,11 +17,11 @@
 		  </ul>
 		  <div class="layui-tab-content">
 		    <div class="layui-tab-item layui-show">
-		    	<form class="layui-form"  style="width: 90%;padding-top: 20px;">
+		    	<div class="layui-form"  style="width: 90%;padding-top: 20px;">
 				  <div class="layui-form-item">
 				    <label class="layui-form-label">ID：</label>
 				    <div class="layui-input-block">
-				      <input type="text" name="id" disabled autocomplete="off" class="layui-input layui-disabled" value="1">
+				      <input type="text" name="id" disabled autocomplete="off" class="layui-input layui-disabled" value="">
 				    </div>
 				  </div>
 				  <div class="layui-form-item">
@@ -30,33 +30,51 @@
 				      <input type="text" name="username" disabled autocomplete="off" class="layui-input layui-disabled" value="admin">
 				    </div>
 				  </div>
-				   <div class="layui-form-item">
-				    <label class="layui-form-label">姓名：</label>
-				    <div class="layui-input-block">
-				      <input type="text" name="name" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="未知">
-				    </div>
-				  </div>
+
+
+				<div id="root">
+					<div class="layui-form-item">
+					<label class="layui-form-label">姓名：</label>
+					<div class="layui-input-block">
+						<input type="text" name="name" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="未知">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">电话：</label>
+					<div class="layui-input-block">
+						<input type="text" name="tel" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="未知">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">年龄：</label>
+					<div class="layui-input-block">
+						<input type="text" name="age" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="未知">
+					</div>
+				</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">地址：</label>
+						<div class="layui-input-block">
+							<input type="text" name="address" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="未知">
+						</div>
+					</div>
+
+				<div class="layui-form-item">
+					<label class="layui-form-label">出生年月：</label>
+					<div class="layui-input-block">
+						<input type="text" name="birthday" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="未知">
+					</div>
+				</div>
 				  <div class="layui-form-item">
-				    <label class="layui-form-label">邮箱：</label>
 				    <div class="layui-input-block">
-				      <input type="text" name="email" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="5303588521@qq.com">
+				      <button class="layui-btn layui-btn-normal" id="commit" lay-filter="adminInfo">立即提交</button>
 				    </div>
 				  </div>
-				  <div class="layui-form-item layui-form-text">
-				    <label class="layui-form-label">备注：</label>
-				    <div class="layui-input-block">
-				      <textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
-				    </div>
-				  </div>
-				  <div class="layui-form-item">
-				    <div class="layui-input-block">
-				      <button class="layui-btn layui-btn-normal" lay-filter="adminInfo">立即提交</button>
-				    </div>
-				  </div>
+				</div>
+			</div>
 				</form>
 		    </div>
 		    <div class="layui-tab-item">
-		    	<form class="layui-form" v style="width: 90%;padding-top: 20px;">
+		    	<!--<form class="layui-form" v style="width: 90%;padding-top: 20px;">-->
 				  <div class="layui-form-item">
 				    <label class="layui-form-label">用户名：</label>
 				    <div class="layui-input-block">
@@ -86,7 +104,7 @@
 				      <button class="layui-btn layui-btn-normal" id="updatePwd" lay-filter="adminPassword">立即提交</button>
 				    </div>
 				  </div>
-				</form>
+				<!--</form>-->
 		    </div>
 		  </div>
 		</div>
@@ -96,7 +114,7 @@
 		layui.use(['form','element'], function(){
 		  var form = layui.form();
 		  var element = layui.element();
-		  form.render();
+		  // form.render();
 		  //监听信息提交
 		  // form.on('submit(adminInfo)', function(data){
 		  //   layer.msg(JSON.stringify(data.field));
@@ -114,17 +132,53 @@
 	<script>
         $(document).ready(function(){
             $.get("getUserInfo",function (data) {
-               //获取用户的所有信息
-				$("input[name='username']").val(data.username);
+                if(data.username=="root"){
+                    $("#root").html("");
+				}
+                $("input[name='id']").val(data.id);
+                $("input[name='username']").val(data.username);
                 $("input[name='name']").val(data.name);
+               //获取用户的所有信息
+				if(data.username!="root"){
+                    var s = data.birthday;
+                    var str = s.substr(0,10);
+                    $("input[name='birthday']").val(str);
+                    $("input[name='address']").val(data.address);
+                    $("input[name='tel']").val(data.tel);
+                    $("input[name='age']").val(data.age);
+				}
             })
+            $("#commit").click(function () {
+                var name = $("input[name='name']").val();
+                var birthday = $("input[name='birthday']").val();
 
+                birthday = birthday.replace("-","/").replace("-","/");
+                var address =  $("input[name='address']").val();
+                var tel =  $("input[name='tel']").val();
+                var age =  $("input[name='age']").val();
+                $.get("doctor/NowUpdate?name="+name+"&birthday="+birthday+"&address="
+					+address+"&tel="+tel+"&age="+age,function (data) {
+					if(data=="success"){
+					    alert("修改成功");
+					}else{
+                        alert("修改失败");
+					}
+                })
+            });
 			$("#updatePwd").click(function (){
 			    var a = $("input[name='password3']").val();
                 var a1 = $("input[name='password1']").val();
+                var a2 = $("input[name='password2']").val();
+                if(a != a2){
+                    alert("两次输入的密码不一致");
+                    return;
+				}
                 $.post("updatePwd","pwd="+a1+"&password="+a,function (data) {
 					if(data == "success"){
-                        alert("success");
+                        alert("修改成功");
+                        $("input[name='password3']").val("");
+                        $("input[name='password2']").val("");
+                        $("input[name='password1']").val("");
 					}else{
 					    alert(data);
 					}

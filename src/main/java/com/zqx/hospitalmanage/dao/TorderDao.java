@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
  * @version 1.0
  * @program: hospitalmanage.TorderDao
  * @description:  订单
- * @author: wangshu
+ * @author:
  * @create: 2019-03-24 12:02:17
  **/
 public interface TorderDao extends JpaRepository<Torder,String>, JpaSpecificationExecutor<Torder> {

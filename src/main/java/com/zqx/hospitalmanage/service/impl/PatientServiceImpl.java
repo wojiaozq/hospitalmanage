@@ -18,10 +18,9 @@ public class PatientServiceImpl implements PatientService {
     /*@Autowired
     private CaseformDao caseformDao;*/
 
-   String uid=Utils.getUUID();
-
     @Override
     public void addpatient(Patient patient, Caseform caseform) {
+        String uid=Utils.getUUID();
         patient.setId(uid);
         caseform.setPatientId(uid);
         this.patientDao.save(patient);

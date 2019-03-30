@@ -1,8 +1,10 @@
 package com.zqx.hospitalmanage.pojo;
 
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.io.Serializable;
 
 @Entity
@@ -17,7 +19,16 @@ public class Patient {
   private String tel;
   private String address;
   private String password;
+  @Transient
+  private String administrativeName;//科室名
 
+  public String getAdministrativeName() {
+    return administrativeName;
+  }
+
+  public void setAdministrativeName(String administrativeName) {
+    this.administrativeName = administrativeName;
+  }
 
   public String getId() {
     return id;
