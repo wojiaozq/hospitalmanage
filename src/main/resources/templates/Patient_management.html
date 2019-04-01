@@ -23,20 +23,22 @@
 		<div class="col-lg-12">
 			<div class="card">
 				<div class="card-body card-block">
+					<form action="select" method="get">
 					<div class="col col-md-9">
 						<div class="input-group">
 							<div class="col col-md-3">
 								<a href="javascript:;" onclick="admin_add('添加病人','add_patient.html','800','620')" class="btn btn-primary"><i class="fa fa-plus-circle"></i> 添加病人</a>
 							</div>
-							<span class="btn">日期范围</span>&nbsp;
+							<!--<span class="btn">日期范围</span>&nbsp;
 							<input type="text" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin" class="form-control">
 							<span class="btn"><i class="fa fa-calendar"></i>-</span>
 							<input type="text" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" id="datemax" class="form-control">
-							<span class="btn"><i class="fa fa-calendar"></i></span>
-							<input type="text" id="input1-group2" name="input1-group2" placeholder="请输入患者姓名" class="form-control">&nbsp;
+							<span class="btn"><i class="fa fa-calendar"></i></span>-->
+
+							<input type="text" id="name" name="name" placeholder="请输入患者姓名" class="form-control">&nbsp;
 							<div class="input-group-btn">
-								<button class="btn btn-primary"><i class="fa fa-search"></i> 搜索</button>
-							</div>
+								<button class="btn btn-primary" type="submit"><i class="fa fa-search"></i> 搜索</button>
+							</div></form>
 						</div>
 					</div>
 				</div><br />
@@ -91,7 +93,22 @@
 			function admin_add(title, url, w, h) {
 				layer_show(title, url, w, h);
 			}
+
+			/*$(document).ready(function(){
+				$('#select').click(function () {
+					var data1 = getData(); //eval('('+getData()+')');
+					$.post('/selpaByName',data1,function (data,status) {
+					})
+				});
+
+				function getData() {
+					var data = "";
+					data += "name="+ $('#pname').val();
+					return data;
+				}
+			});*/
 		</script>
+
 	</body>
 
 </html>

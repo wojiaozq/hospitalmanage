@@ -48,4 +48,10 @@ public class PatientServiceImpl implements PatientService {
         return this.patientDao.findAll();
     }
 
+    @Override
+    public List<Patient> selectPabyName(String name) {
+        String name1="%"+name+"%";
+        return this.patientDao.findByName(name1);
+    }
+
 }

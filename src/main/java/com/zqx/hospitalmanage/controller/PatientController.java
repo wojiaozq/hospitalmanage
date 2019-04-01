@@ -7,10 +7,12 @@ import com.zqx.hospitalmanage.service.CaseformService;
 import com.zqx.hospitalmanage.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequestMapping("Patient")
@@ -30,12 +32,14 @@ public class PatientController {
         this.caseformService.addcaseform(caseform);
         return "success";
     }
+
     @RequestMapping("delPatientbyid")
     public String delpatient(String id){
         this.caseformService.delcaseform(id);
         this.patientService.delpatient(id);
         return "redirect:/Patient_management.html";
     }
+
     @RequestMapping("updateByid")
     public String uppatient(Patient patient, Caseform caseform){
         patient.setId(caseform.getPatientId());
@@ -43,6 +47,7 @@ public class PatientController {
         this.caseformService.updatecaseform(caseform);
         return "redirect:/Patient_management.html";
     }
+
 
 
 }

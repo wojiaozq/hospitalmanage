@@ -1,8 +1,10 @@
 package com.zqx.hospitalmanage.controller;
 
 import com.zqx.hospitalmanage.pojo.Doctor;
+import com.zqx.hospitalmanage.pojo.Log;
 import com.zqx.hospitalmanage.pojo.Page;
 import com.zqx.hospitalmanage.service.DoctorService;
+import com.zqx.hospitalmanage.service.LogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,13 +28,20 @@ public class DoctorController {
 
     @Autowired
     private DoctorService doctorService;
+    @Autowired
+    private LogService logService;
 
     //添加一名医生--注册
     @RequestMapping("save")
     @ResponseBody
-    public String addDoctor( Doctor doctor){
-        System.out.println(doctor);
+    public String addDoctor(Doctor doctor, Log log,HttpSession session){
+        Doctor doctor1=(Doctor)session.getAttribute("user");
+        String peratorname=doctor1.getName();
+        log.setPeratorname(peratorname);
+        log.setContent("添加一名医生");
+       // System.out.println(doctor);
         doctorService.add(doctor);
+        logService.addlog(log);
         return "success";
     }
     //一名医生--修改
@@ -101,8 +110,13 @@ public class DoctorController {
     //删除一名医生
     @RequestMapping("delete")
     @ResponseBody
-    public String  delete(String id){
+    public String  delete(String id,Log log){
+
         doctorService.updateStatus(id);
+        logService.addlog(log);
+       // log.setPeratorname();
+       /* log.setContent("删除一名医生");
+        logService.addlog(log);*/
         return "success";
     }
 

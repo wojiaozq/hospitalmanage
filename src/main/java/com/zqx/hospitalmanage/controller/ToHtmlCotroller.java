@@ -38,6 +38,8 @@ public class ToHtmlCotroller {
     private CaseformService caseformService;
     @Autowired
     private ArticleService articleService;
+    @Autowired
+    private LogService logService;
 
     @RequestMapping("myindex1")
     public String index(HttpSession session){
@@ -83,16 +85,26 @@ public class ToHtmlCotroller {
         model.addAttribute("list",doctorService.findAll());
         return "Doctor_management.html";
     }
-
+    //默认查找所有病人信息
     @RequestMapping("Patient_management.html")
-    public String  getAllpatient(Model model,HttpSession session){
+    public String  getAllpatient(Model model){
         List<Patient> list = patientService.findAllpatient();
         model.addAttribute("puser",list);
         return "Patient_management.html";
     }
+    //根据姓名查找病人
+    @RequestMapping("select")
+//    @ResponseBody
+    public String selectPatientByName(String name,Model model){
+        System.out.println("+++++++++++++++++");
+        List<Patient> list1=patientService.selectPabyName(name);
+        model.addAttribute("puser",list1);
+
+        return "Patient_management.html";
+    }
 
     @RequestMapping("Announcement_management.html")
-    public String  getAllannou(Model model,HttpSession session){
+    public String  getAllannou(Model model){
         List<Announcement> list = announcementService.findAll();
         model.addAttribute("annou",list);
         return "Announcement_management.html";
@@ -113,13 +125,13 @@ public class ToHtmlCotroller {
         model.addAttribute("anuouview",announcement);
         return "/Announcementdetils.html";
     }
+    //根据id查找病人和医生
     @RequestMapping("selPatientbyid")
     public String selectpatientById(String id,Model model){
         Patient patient=this.patientService.selepatient(id);
         model.addAttribute("pat",patient);
         Caseform caseform=this.caseformService.findbypid(id);
         model.addAttribute("case",caseform);
-        System.out.println(caseform.getMainSuit());
         return "/update_patient.html";
     }
 
@@ -130,6 +142,7 @@ public class ToHtmlCotroller {
         model.addAttribute("d",one);
         return "get_doctor.html";
     }
+
     @RequestMapping("Latest_articles.html")
     public String findLimitN(HttpSession session, Model model){
         Doctor user = (Doctor) session.getAttribute("user");
@@ -149,6 +162,14 @@ public class ToHtmlCotroller {
         model.addAttribute("list",articles);
         model.addAttribute("aname",user.getName());
         return "Article_record.html";
+    }
+
+    /*查找所有日志记录*/
+    @RequestMapping("log.html")
+    public String findallLog(Model model){
+     List<Log> list=  logService.findallLog();
+     model.addAttribute("log",list);
+        return "log.html";
     }
 
 

@@ -11,4 +11,5 @@ public interface PatientService {
         public Patient selepatient(String id);
         public void updatepatient(Patient patient);
         public List<Patient> findAllpatient();
+        public List<Patient> selectPabyName(String name);
 }
