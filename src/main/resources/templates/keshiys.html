@@ -16,6 +16,7 @@
 		<link rel="stylesheet" href="css/secondary.css" type="text/css" />
 		<script language="javascript" type="text/javascript" src="js/KunyiHTML5.min.js"></script>
 		<script language="javascript" type="text/javascript" src="js/Kunyilibrary.js"></script>
+
 	</head>
 	<body>
 		<script language="javascript" type="text/javascript" src="js/Kunyi.Init.js"></script>
@@ -100,8 +101,8 @@
 			<div class="partRight ">
 				<div class="title01 ">专家介绍</div>
 				<div class="Expert ">
-					<ul>
-						<li>
+					<ul id="lia">
+						<li >
 							<a href="ys.html " target="_blank "><img src="uploadfiles/thumb/201603221527067.png " class="load " width="120 " height="162 " title="医生 " alt="医生 "></a>
 							<a href="ys.html " target="_blank " title="医生 " class="ATitle ">医生</a>
 							<h4>主任医师，科主任</h4>
@@ -235,5 +236,38 @@
 		<script language="javascript " type="text/javascript " src="js/Kunyi.Common.js "></script>
 		<script language="javascript " type="text/javascript " src="js/Kunyi.Secondary.js "></script>
 	</body>
+	<script src="lib/jquery.1.9.1/jquery.min.js"></script>
+	<script>
+		$(function () {
+			$.get("doctor/allStatus",function(data){
+			    console.log(data);
+			    /**
+				 * <li>
+                 <a href="ys.html " target="_blank "><img src="uploadfiles/thumb/201603221527067.png " class="load " width="120 " height="162 " title="医生 " alt="医生 "></a>
+                 <a href="ys.html " target="_blank " title="医生 " class="ATitle ">医生</a>
+                 <h4>主任医师，科主任</h4>
+                 <p>医院标题呼吸内科科主任……</p>
+                 <div>
+                 <a class="coffee " target="_blank " href="ys.html ">详细</a>
+                 <a class="green " href="# " target="_blank ">预约</a>
+                 </div>
+                 </li>*/
+			    var str = "";
+			    for(var i = 0;i<data.length;++i){
+			        str += "<li>";
+			        str += "<a href=\"ys.html \" target=\"_blank \"><img src=\"uploadfiles/thumb/201603221527067.png \" class=\"load \" width=\"120 \" height=\"162 \" title=\""+data[i].name+"\" alt=\"医生 \"></a>";
+			        str += '<a href="ys.html " target="_blank " title="'+data[i].name+' " class="ATitle ">'+data[i].name+'</a>';
+			        str += '<h4>'+data[i].administrativeName+','+data[i].job+'</h4>';
+			        str += '<p>'+data[i].job+'</p>';
+			        str += '<span hidden>'+data[i].id+'</span>';
+			        str += '<div> <a class="coffee " target="_blank " href="ys.html?id=' ;
+					str += data[i].id+' ">详细</a> <a class="green " href="# " target="_blank ">预约</a> </div> </li>';
+				}
 
+			    $("#lia").html(str);
+
+			});
+        });
+
+	</script>
 </html>

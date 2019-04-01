@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.xml.crypto.Data;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -35,6 +37,20 @@ public class DutyRosterServiceImpl implements DutyRosterService {
         }
         List<DutyRoster> list =  Arrays.asList(ds);
         dutyRosterDao.saveAll(list);
+    }
+
+    @Override
+    public List<DutyRoster> findOneByDoctorId(String id) {
+        List<DutyRoster> list = dutyRosterDao.findAllByDoctorId(id);
+        long time = new Date().getTime();
+        List<DutyRoster> l = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            if(time - list.get(i).getStartTime().getTime() >= 0
+                    && time - list.get(i).getStartTime().getTime() <= 14*24*60*60*1000 ){
+                l.add(list.get(i));
+            }
+        }
+        return l;
     }
 
 

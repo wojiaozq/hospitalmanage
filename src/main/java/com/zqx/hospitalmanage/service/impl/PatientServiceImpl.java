@@ -54,4 +54,10 @@ public class PatientServiceImpl implements PatientService {
         return this.patientDao.findByName(name1);
     }
 
+    @Override
+    public void addonepatient(Patient patient) {
+        patient.setId(Utils.getUUID());
+        this.patientDao.save(patient);
+    }
+
 }

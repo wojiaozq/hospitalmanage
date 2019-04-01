@@ -1,8 +1,6 @@
 package com.zqx.hospitalmanage.controller;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.sun.xml.internal.ws.resources.HttpserverMessages;
 import com.zqx.hospitalmanage.pojo.*;
 import com.zqx.hospitalmanage.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.jws.WebParam;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -40,6 +37,11 @@ public class ToHtmlCotroller {
     private ArticleService articleService;
     @Autowired
     private LogService logService;
+    @Autowired
+    private AdministrativeService administrativeService;
+
+    @Autowired
+    private DutyRosterService dutyRosterService;
 
     @RequestMapping("myindex1")
     public String index(HttpSession session){
@@ -96,7 +98,6 @@ public class ToHtmlCotroller {
     @RequestMapping("select")
 //    @ResponseBody
     public String selectPatientByName(String name,Model model){
-        System.out.println("+++++++++++++++++");
         List<Patient> list1=patientService.selectPabyName(name);
         model.addAttribute("puser",list1);
 
@@ -112,6 +113,10 @@ public class ToHtmlCotroller {
 
     @RequestMapping("{page}")
     public String toPage(@PathVariable("page") String page, HttpSession session){
+        if(page.equals("index")||page.equals("index.html")||page.equals("keshi.html")||page.equals("keshimx.html")||page.equals("keshiys.html")||page.equals("plogin.html")||page.equals("preg.html")){
+            return page;
+        }
+
         Object user = session.getAttribute("user");
         if(user==null){
             return "您还未登录，请登录";//===>页面
@@ -171,6 +176,22 @@ public class ToHtmlCotroller {
      model.addAttribute("log",list);
         return "log.html";
     }
+    @RequestMapping("ys.html")
+    public String findDoctor(String id,Model model){
+        Doctor doctor = doctorService.findOneById(id);
+        List<DutyRoster> ds = dutyRosterService.findOneByDoctorId(id);
+        model.addAttribute("doctor",doctor);
+        if(ds != null) {
+            model.addAttribute("ds", ds.get(0));
+        }
+        return "ys.html";
+    }
 
+    @RequestMapping("keshimx.html")
+    public String seeAdministrative(String id, Model model){
+        Administrative one = administrativeService.findOne(id);
+        model.addAttribute("ad",one);
+        return "keshimx.html";
+    }
 
 }

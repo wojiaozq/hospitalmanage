@@ -192,4 +192,16 @@ public class DoctorServiceImpl implements DoctorService {
         doctorDao.updateStatus("在职",id);
     }
 
+	public int countAllByStatus(){
+		return doctorDao.countAllByStatus("在职");
+	}
+	//查询所有在职的医生
+	public List<Doctor> findAllStats() {
+		return doctorDao.findAllByStatus("在职");
+	}
+
+	public List<Doctor> findAllByAdministrative(String AdministrativeId){
+		return doctorDao.findByAdministrativeId(AdministrativeId);
+	}
+
 }

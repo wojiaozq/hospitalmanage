@@ -71,15 +71,15 @@
 			<div class="bread ">您所在的位置<span><a href="index.html ">首页</a><a href="# ">就诊指南</a> > <a href="# ">科室导航</a> > <a href="# ">呼吸内科</a> > 医生</span></div>
 			<div class="doctorLeft ">
 				<img src="/uploadfiles/thumb/2013102215334198.jpg " id="DThumb " class="DThumb " width="112 " height="150 " alt="医生 " />
-				<h3 id="H3Name ">医生</h3>
-				<h4 id="H4Position ">主任医师，科主任</h4>
+				<h3 id="H3Name" th:text="${doctor.name}"></h3><h3 id="id" hidden th:text="${doctor.id}"></h3>
+				<h4 id="H4Position" th:text="${doctor.job}"></h4>
 				<a href="javascript:;" onclick="admin_add(' ','geren.html','800','500')">预约</a>
 			</div>
 			<div class="doctorRight ">
 				<div class='import import1'></div>
 				<div class="title01 ">
 					<h3>所在科室：</h3>
-					<h1>呼吸内科</h1><span><a href="# " title="呼吸内科 ">进入科室</a></span></div>
+					<h1 th:text="${doctor.administrativeName}"></h1><span><a href="# " th:title="${doctor.administrativeName}">进入科室</a></span></div>
 				<div class="clear "></div>
 				<div id="DIVContent " class="article intro ">
 					<p style="text-align:left; ">
@@ -93,7 +93,7 @@
 						<br />
 					</p>
 				</div>
-				<div id="DIVOnDutyInfo " class="visitDate ">
+				<div id="DIVOnDutyInfo" class="visitDate ">
 					<div class="title ">他的评价<em>Visits Time</em></div>
 					<div class="visitList ">
 						
@@ -110,7 +110,7 @@
 					</table>
 					</div>
 				</div>
-				<div id="DIVOnDutyInfo " class="visitDate ">
+				<div id="DIVOnDutyInfo" class="visitDate ">
 					<div class="title ">出诊安排<em>Visits Time</em></div>
 					<div class="visitList ">
 						<div class="time "><span class="green ">出诊时间段 </span>
@@ -118,44 +118,61 @@
 						<table border="2" cellspacing="1">							
 							<tr>
 								<th>时间段</th>
-								<th style="width: 160px;">星期一</th>
-								<th style="width: 160px;">星期二</th>
-								<th style="width: 160px;">星期三</th>
-								<th style="width: 160px;">星期四</th>
-								<th style="width: 160px;">星期五</th>
-								<th style="width: 160px;">星期六</th>
-								<th style="width: 160px;">星期日</th>
+								<th style="width: 100px;">星期一</th>
+								<th style="width: 100px;">星期二</th>
+								<th style="width: 100px;">星期三</th>
+								<th style="width: 100px;">星期四</th>
+								<th style="width: 100px;">星期五</th>
+								<th style="width: 100px;">星期六</th>
+								<th style="width: 100px;">星期日</th>
 							</tr>
 							<tr>
-								<td style="text-align: center; width: 160px;">上午</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
+								<td style="text-align: center; width: 100px;">上午</td>
+								<td>
+									<span style="width: 80px;height: 10px" th:if="${#strings.contains(ds.day01,'上午')}">预约</span>
+								</td>
+								<td>
+									<span style="width: 80px;height: 10px" th:if="${#strings.contains(ds.day02,'上午')}">预约</span>
+								</td>
+								<td>
+									<span style="width: 80px;height: 10px" th:if="${#strings.contains(ds.day03,'上午')}">预约</span>
+								</td>
+								<td>
+									<span style="width: 80px;height: 10px"  th:if="${#strings.contains(ds.day04,'上午')}">预约</span>
+								</td>
+								<td>
+									<span style="width: 80px;height: 10px" th:if="${#strings.contains(ds.day05,'上午')}">预约</span>
+								</td>
+								<td>
+									<span style="width: 80px;height: 10px" th:if="${#strings.contains(ds.day06,'上午')}">预约</span>
+								</td>
+								<td>
+									<span style="width: 80px;height: 10px" th:if="${#strings.contains(ds.day07,'上午')}">预约</span>
+								</td>
 							</tr>
 							<tr>
 								<td style="text-align: center;">下午</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							</tr>
-							<tr>
-								<td style="text-align: center;">晚上</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
+								<td>
+									<span style="width: 80px;height: 10px"  th:if="${#strings.contains(ds.day01,'下午')}">预约</span>
+								</td>
+								<td>
+									<span style="width: 80px;height: 10px"  th:if="${#strings.contains(ds.day02,'下午')}">预约</span>
+								</td>
+								<td>
+									<span style="width: 80px;height: 10px"  th:if="${#strings.contains(ds.day03,'下午')}">预约</span>
+								</td>
+								<td>
+									<span style="width: 80px;height: 10px"  th:if="${#strings.contains(ds.day04,'下午')}">预约</span>
+								</td>
+								<td>
+									<span style="width: 80px;height: 10px"  th:if="${#strings.contains(ds.day05,'下午')}">预约</span>
+								</td>
+								<td>
+									<span style="width: 80px;height: 10px"  th:if="${#strings.contains(ds.day06,'下午')}">预约</span>
+								</td>
+								<td>
+									<span style="width: 80px;height: 10px"  th:if="${#strings.contains(ds.day07,'下午')}">预约</span>
+								</td>
 							</tr>
 							<tr>
 								<td colspan="9" align="middle">如遇到特殊情况，请咨询相关工作人员</td>

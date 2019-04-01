@@ -69,4 +69,14 @@ public class LoginController {
         }
 
     }
+    @RequestMapping("plogin")
+    @ResponseBody
+    public String plogin(String identification,String password){
+        if(identification!=null&&password!=null){
+            if(identification.equals("identification")&&password.equals("password")){
+                return "success";
+            }
+        }
+              return "success";
+    }
 }

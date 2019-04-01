@@ -14,7 +14,7 @@ import java.util.List;
  * @version 1.0
  * @program: hospitalmanage.RegistrationController
  * @description:
- * @author: wangshu
+ * @author:
  * @create: 2019-03-24 16:37:07
  **/
 @Controller

@@ -38,4 +38,9 @@ public interface DoctorService {
 
     public void updateStatus(String id);
     public void updateStatus2(String id);
+
+    public int countAllByStatus();
+    public List<Doctor> findAllStats();
+
+    public List<Doctor> findAllByAdministrative(String AdministrativeId);
 }

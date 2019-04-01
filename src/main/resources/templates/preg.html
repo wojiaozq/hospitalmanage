@@ -1,0 +1,60 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>注册</title>
+		<link rel="stylesheet" href="css/style.css">
+		<script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
+		<script type="text/javascript" src="js/easyform.js"></script>
+	</head>
+	<body>
+		<br/><br/><br/><br/><br/><br/>
+		<div class="form-div">
+			<form id="reg-form" action="Patient/pregpa" method="post">
+				<table>
+					<tr>
+						<td>姓名</td>
+						<td><input type="text" name="name"></td>
+					</tr>
+					<tr>
+						<td>身份证号</td>
+						<td><input type="text" name="identification"> </td>
+					</tr>
+					<tr>
+						<td>性别</td>
+						<td><input type="text" name="sex"></td>
+					</tr>
+					<tr>
+						<td>年龄</td>
+						<td><input type="text" name="age"></td>
+					</tr>
+					<tr>
+						<td>联系电话</td>
+						<td><input  type="text" name="tel">
+						</td>
+					</tr>
+					<tr>
+						<td>密码</td>
+						<td><input type="password" name="password" ></td>
+					</tr>
+					<tr>
+						<td>家庭住址</td>
+						<td><input type="text" name="address"></td>
+					</tr>													
+				</table>
+				<div class="buttons">
+					<input value="注 册" type="submit" style="margin-right:20px; margin-top:20px;">
+					<a href="plogin.html" style="margin-right:45px; margin-top:20px;">已有账号，我要登录</a>
+				</div>
+				<br class="clear">
+			</form>
+		</div>
+		<!--<script type="text/javascript">
+			$(document).ready(function() {
+				$("#formid").ajaxForm(function(data){
+					alert("返回的值是" + data);
+				});
+			});
+		</script>-->
+	</body>
+
+</html>

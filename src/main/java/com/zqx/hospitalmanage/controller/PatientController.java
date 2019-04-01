@@ -48,6 +48,10 @@ public class PatientController {
         return "redirect:/Patient_management.html";
     }
 
-
+    @RequestMapping("pregpa")
+    public String regpatient(Patient patient){
+        this.patientService.addonepatient(patient);
+        return "redirect:/plogin.html";
+    }
 
 }

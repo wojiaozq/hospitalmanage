@@ -52,7 +52,7 @@ public interface DoctorDao extends JpaRepository<Doctor,String >, JpaSpecificati
     public List<Doctor> findLikeNameAndStartAndEnd(String name, Date startDate, Date endDate);//姓名+两个时间
 
     @Query(nativeQuery = true,value = "select * from doctor where administrative_id = ?;")
-    public List<Doctor> findByAdministrativeId(String administrativeId);
+    public List<Doctor> findByAdministrativeId(String administrativeId);//根据科室id查询医生
 
 //    @Query(nativeQuery = true,value = "select count(id) from doctor;")
 //    public int count();
@@ -67,6 +67,10 @@ public interface DoctorDao extends JpaRepository<Doctor,String >, JpaSpecificati
     @Modifying
     @Query(nativeQuery = true,value = "update doctor set status = ? where id =?;")
     public void updateStatus(String status, String id);
-    
+
+    public int countAllByStatus(String status);
+
+    @Query(nativeQuery = true,value = "select * from doctor where status = ?;")
+    public List<Doctor> findAllByStatus(String status);
     
 }

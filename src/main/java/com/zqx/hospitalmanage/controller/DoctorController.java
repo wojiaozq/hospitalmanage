@@ -120,5 +120,22 @@ public class DoctorController {
         return "success";
     }
 
+    @RequestMapping("countAll")
+    @ResponseBody
+    public String  count(){
+        return doctorService.countAllByStatus()+"";
+    }
+
+    @RequestMapping("allStatus")
+    @ResponseBody
+    public List<Doctor> allStatus(){
+        return doctorService.findAllStats();
+    }
+
+    @RequestMapping("admini")
+    @ResponseBody
+    public List<Doctor> findByAdministrativeId(String aId){
+        return doctorService.findAllByAdministrative(aId);
+    }
 
 }
