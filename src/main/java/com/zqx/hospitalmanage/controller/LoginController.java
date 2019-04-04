@@ -2,7 +2,9 @@ package com.zqx.hospitalmanage.controller;
 
 import com.sun.codemodel.internal.util.UnicodeEscapeWriter;
 import com.zqx.hospitalmanage.pojo.Doctor;
+import com.zqx.hospitalmanage.pojo.Patient;
 import com.zqx.hospitalmanage.service.DoctorService;
+import com.zqx.hospitalmanage.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +26,8 @@ public class LoginController {
 
     @Autowired
     private DoctorService doctorService;
+    @Autowired
+    private PatientService patientService;
 //
     @RequestMapping("tologin")
     public String toLogin(){
@@ -47,6 +51,7 @@ public class LoginController {
         Doctor user = (Doctor) session.getAttribute("user");
         return user.getName();
     }
+
     @RequestMapping("getUserInfo")
     @ResponseBody
     public Doctor getUserInfo(HttpSession session){
@@ -69,14 +74,16 @@ public class LoginController {
         }
 
     }
-    @RequestMapping("plogin")
-    @ResponseBody
-    public String plogin(String identification,String password){
-        if(identification!=null&&password!=null){
-            if(identification.equals("identification")&&password.equals("password")){
-                return "success";
-            }
+
+    @RequestMapping("toplogin")
+    public String setplogin(String identification,String password,HttpSession session){
+        Patient patient=patientService.findPlogin(identification,password);
+        if(patient!=null){
+            session.setAttribute("puser",patient);
         }
-              return "success";
+        if (patient.getIdentification().equals(identification)&&patient.getPassword().equals(password)){
+            return "index.html";
+        }
+        return "账号或密码错误";
     }
 }

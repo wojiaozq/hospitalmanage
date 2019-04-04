@@ -19,6 +19,7 @@ public interface DutyRosterDao extends JpaRepository<DutyRoster,String>, JpaSpec
     @Query(nativeQuery = true,value = "select * from duty_roster where doctor_id = ?;")
     public List<DutyRoster> findAllByDoctorId(String doctorId);
 
-
+    @Query(nativeQuery = true,value = "select * from duty_roster where start_time = (select max(start_time) from duty_roster);")
+    public List<DutyRoster> findAllByMaxStartTime();
 
 }

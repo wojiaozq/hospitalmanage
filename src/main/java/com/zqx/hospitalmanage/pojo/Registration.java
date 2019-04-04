@@ -13,14 +13,8 @@ public class Registration {
   @Id
   private String id;
 
-  @Column(name = "administrative_Id")
-  private String administrativeId;
-
   @Column(name = "administrative_Name")
   private String administrativeName;
-
-  @Column(name = "doctor_Id")
-  private String doctorId;
 
   @Column(name = "doctor_Name")
   private String doctorName;
@@ -31,12 +25,12 @@ public class Registration {
   @Column(name = "patient_Name")
   private String patientName;
 
-  @Column(name = "booking_Period")
-  private Date bookingPeriod;
+  @Column(name = "doctor_id")
+  private String doctorid;
 
-  private long no;
-  private long status;
-
+  private String Identification;
+  private String timedetails;
+  private String cost;
 
   public String getId() {
     return id;
@@ -46,16 +40,6 @@ public class Registration {
     this.id = id;
   }
 
-
-  public String getAdministrativeId() {
-    return administrativeId;
-  }
-
-  public void setAdministrativeId(String administrativeId) {
-    this.administrativeId = administrativeId;
-  }
-
-
   public String getAdministrativeName() {
     return administrativeName;
   }
@@ -63,16 +47,6 @@ public class Registration {
   public void setAdministrativeName(String administrativeName) {
     this.administrativeName = administrativeName;
   }
-
-
-  public String getDoctorId() {
-    return doctorId;
-  }
-
-  public void setDoctorId(String doctorId) {
-    this.doctorId = doctorId;
-  }
-
 
   public String getDoctorName() {
     return doctorName;
@@ -82,7 +56,6 @@ public class Registration {
     this.doctorName = doctorName;
   }
 
-
   public String getPatientId() {
     return patientId;
   }
@@ -91,40 +64,42 @@ public class Registration {
     this.patientId = patientId;
   }
 
-
   public String getPatientName() {
     return patientName;
+  }
+  public String getDoctorid() {
+    return doctorid;
+  }
+
+  public void setDoctorid(String doctorid) {
+    this.doctorid = doctorid;
   }
 
   public void setPatientName(String patientName) {
     this.patientName = patientName;
   }
 
-
-  public Date getBookingPeriod() {
-    return bookingPeriod;
+  public String getIdentification() {
+    return Identification;
   }
 
-  public void setBookingPeriod(Date bookingPeriod) {
-    this.bookingPeriod = bookingPeriod;
+  public void setIdentification(String identification) {
+    Identification = identification;
   }
 
-
-  public long getNo() {
-    return no;
+  public String getTimedetails() {
+    return timedetails;
   }
 
-  public void setNo(long no) {
-    this.no = no;
+  public void setTimedetails(String timedetails) {
+    this.timedetails = timedetails;
   }
 
-
-  public long getStatus() {
-    return status;
+  public String getCost() {
+    return cost;
   }
 
-  public void setStatus(long status) {
-    this.status = status;
+  public void setCost(String cost) {
+    this.cost = cost;
   }
-
 }

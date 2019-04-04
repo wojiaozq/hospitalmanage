@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,6 +35,12 @@ public class AnnouncementServiceImpl implements AnnouncementService {
     public List<Announcement> findAll(){
 
         return announcementDao.findAll();
+    }
+
+    @Override
+    public List<Announcement> findannBytime(Date date) {
+
+        return this.announcementDao.findByGtReleaseTime(date);
     }
 
     public Page<Announcement> findByPage(int now,int size){

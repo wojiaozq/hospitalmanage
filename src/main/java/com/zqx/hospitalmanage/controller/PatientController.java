@@ -7,12 +7,10 @@ import com.zqx.hospitalmanage.service.CaseformService;
 import com.zqx.hospitalmanage.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 @Controller
 @RequestMapping("Patient")
@@ -52,6 +50,14 @@ public class PatientController {
     public String regpatient(Patient patient){
         this.patientService.addonepatient(patient);
         return "redirect:/plogin.html";
+    }
+
+    @RequestMapping("uppatientmyself")
+    public String updatepatient(Patient patient,HttpSession session){
+        Patient patient1=(Patient) session.getAttribute("puser");
+        patient.setId(patient1.getId());
+        this.patientService.updatepatient(patient);
+        return "redirect:/geren.html";
     }
 
 }

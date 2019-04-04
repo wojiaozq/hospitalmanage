@@ -17,4 +17,5 @@ public interface DutyRosterService {
 
    List<DutyRoster> findOneByDoctorId(String id);
 
+   public List<DutyRoster> findOneByStartTime();
 }

@@ -24,7 +24,17 @@ public class RegistrationServiceImpl implements RegistrationService {
     @Autowired
     private RegistrationDao registrationDao;
 
-    @Override//查询某一医生下的所有挂号信息
+    @Override
+    public void addRegistration(Registration registration) {
+        this.registrationDao.save(registration);
+    }
+
+    @Override
+    public List<Registration> findallRegis() {
+        return this.registrationDao.findAll();
+    }
+
+    /*@Override//查询某一医生下的所有挂号信息
     public List<Registration> getByDoctorId(String doctorId) {
         return registrationDao.findByDoctorId(doctorId);
     }
@@ -40,12 +50,10 @@ public class RegistrationServiceImpl implements RegistrationService {
         registrationDao.updateStatus(0,id);
     }
 
-    //病人挂号
-    @Transactional
-    public void addRegistration(Registration registration){
-        registration.setStatus(1);//状态设置为1，表示为开始
-        registration.setId(Utils.getUUID());//设置主键
-    }
+    @Override
+    public void addRegistration(Registration registration) {
+
+    }*/
 
 
 }

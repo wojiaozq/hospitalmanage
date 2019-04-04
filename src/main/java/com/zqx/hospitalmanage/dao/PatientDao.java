@@ -18,4 +18,8 @@ public interface PatientDao  extends JpaRepository<Patient,String>, JpaSpecifica
 
     @Query(nativeQuery = true,value = "select * from Patient where name like ?;")
     public List<Patient> findByName(String name);
+
+    @Query(nativeQuery = true,value = "select * from Patient where identification = ? and password = ?")
+    public Patient findByUsnameAndPassword(String identification, String password);
+
 }

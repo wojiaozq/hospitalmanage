@@ -1,6 +1,5 @@
 package com.zqx.hospitalmanage.service.impl;
 
-import com.zqx.hospitalmanage.dao.CaseformDao;
 import com.zqx.hospitalmanage.dao.PatientDao;
 import com.zqx.hospitalmanage.pojo.Caseform;
 import com.zqx.hospitalmanage.pojo.Patient;
@@ -9,7 +8,6 @@ import com.zqx.hospitalmanage.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.Id;
 import java.util.List;
 @Service
 public class PatientServiceImpl implements PatientService {
@@ -58,6 +56,16 @@ public class PatientServiceImpl implements PatientService {
     public void addonepatient(Patient patient) {
         patient.setId(Utils.getUUID());
         this.patientDao.save(patient);
+    }
+
+    @Override
+    public Patient findPlogin(String identification, String password) {
+        return  this.patientDao.findByUsnameAndPassword(identification,password);
+    }
+
+    @Override
+    public Patient findpatientByid(String id) {
+        return this.patientDao.findById(id).get();
     }
 
 }

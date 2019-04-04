@@ -44,7 +44,6 @@ public class AdministrativeServiceImpl implements AdministrativeService {
 	}
 	@Transactional
 	public void deleteList(String[] ids) {
-
 	}
 
 }

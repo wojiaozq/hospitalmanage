@@ -13,4 +13,7 @@ public interface PatientService {
         public List<Patient> findAllpatient();
         public List<Patient> selectPabyName(String name);
         public void addonepatient(Patient patient);
+        public Patient findPlogin(String identification,String password);
+        public Patient findpatientByid(String id);
+
 }

@@ -15,13 +15,14 @@ import java.util.List;
  **/
 public interface RegistrationService {
 
-    public List<Registration> getByDoctorId(String doctorId) ;
+    /*public List<Registration> getByDoctorId(String doctorId) ;
 
     public List<Registration> getByPatientName(String PatientName) ;
 
-    public void overRegistration(String id);
+    public void overRegistration(String id);*/
 
     public void addRegistration(Registration registration);
+    public List<Registration>findallRegis();
 
 
 

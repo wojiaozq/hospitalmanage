@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 /**
  * @version 1.0
  * @program: hospitalmanage.DutyRosterContoller
@@ -30,6 +32,12 @@ public class DutyRosterContoller {
 //        }
         dutyRosterService.saveAll(dutyRosters);
         return "success";
+    }
+
+    @ResponseBody
+    @RequestMapping("maxStartTime")
+    public List<DutyRoster> findOneByStartTime(){
+        return dutyRosterService.findOneByStartTime();
     }
 
 

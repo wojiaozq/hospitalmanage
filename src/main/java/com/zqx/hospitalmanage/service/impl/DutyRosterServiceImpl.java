@@ -31,11 +31,20 @@ public class DutyRosterServiceImpl implements DutyRosterService {
     @Transactional
     public void saveAll(DutyRoster[] ds) {
         Date date = new Date();
+        List<DutyRoster> list = new ArrayList<>();
         for (DutyRoster d : ds) {
-            d.setId(Utils.getUUID());
-            d.setOperationTime(date);
+            if(Utils.stringIsNull(d.getDay01())&&Utils.stringIsNull(d.getDay02())&&Utils.stringIsNull(d.getDay03())
+                    &&Utils.stringIsNull(d.getDay04())&&Utils.stringIsNull(d.getDay05())&&Utils.stringIsNull(d.getDay06())
+                    &&Utils.stringIsNull(d.getDay07())&&Utils.stringIsNull(d.getDay08())&&Utils.stringIsNull(d.getDay09())
+                    &&Utils.stringIsNull(d.getDay10())&&Utils.stringIsNull(d.getDay11())&&Utils.stringIsNull(d.getDay12())
+                    &&Utils.stringIsNull(d.getDay13())&&Utils.stringIsNull(d.getDay14())){//如果排班时，没有给该医生安排任何班次，丢弃该数据
+                continue;
+            }else {
+                d.setId(Utils.getUUID());
+                d.setOperationTime(date);
+                list.add(d);
+            }
         }
-        List<DutyRoster> list =  Arrays.asList(ds);
         dutyRosterDao.saveAll(list);
     }
 
@@ -53,5 +62,8 @@ public class DutyRosterServiceImpl implements DutyRosterService {
         return l;
     }
 
-
+    public List<DutyRoster> findOneByStartTime(){
+        return dutyRosterDao.findAllByMaxStartTime();
+//        return duty;
+    }
 }

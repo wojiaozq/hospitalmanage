@@ -21,13 +21,12 @@ import java.util.List;
 @RequestMapping("registration")
 public class RegistrationController {
 
-    @Autowired
+   @Autowired
     private RegistrationService registrationService;
 
-    @RequestMapping("doctor/get")
-    public List<Registration> get(HttpSession session){
-        Doctor user = (Doctor) session.getAttribute("user");
-        String id = user.getId();
-        return registrationService.getByDoctorId(id);
+    @RequestMapping("addguahao")
+    public String addregis(Registration registration){
+        registrationService.addRegistration(registration);
+       return "redirect:/geren.html";
     }
 }

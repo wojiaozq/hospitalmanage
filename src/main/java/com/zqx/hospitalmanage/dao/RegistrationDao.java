@@ -17,7 +17,7 @@ import java.util.List;
  * @create: 2019-03-24 11:57:08
  **/
 public interface RegistrationDao extends JpaRepository<Registration,String>, JpaSpecificationExecutor<Registration> {
-    //根据医生主键查询，该医生下的挂号信息
+   /* //根据医生主键查询，该医生下的挂号信息
     @Query(nativeQuery = true,value = "select * from registration where doctor_id = ?;")
     public List<Registration> findByDoctorId(String id);
     //根据患者姓名查询挂号信息
@@ -29,7 +29,7 @@ public interface RegistrationDao extends JpaRepository<Registration,String>, Jpa
     public void updateStatus(int status, String id);
 
     //查询在某一时间后的预约记录计数
-    public int countByBookingPeriodAfter(Date date);
+    public int countByBookingPeriodAfter(Date date);*/
 
 
 }
