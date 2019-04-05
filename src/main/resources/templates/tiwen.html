@@ -46,13 +46,13 @@
 							<a href="index.html" class="PAMenu">首页</a>
 						</li>
 						<li class="PMenu"><img src="images/ico_014.png" class="animated" width="15" height="8" />
-							<a href="#" id="Nav_AMenu0" class="PAMenu" title="院系公告">院系公告</a>
+							<a href="notice.html" id="Nav_AMenu0" class="PAMenu" title="院系公告">院系公告</a>
 						</li>
 						<li class="PMenu"><img src="images/ico_014.png" class="animated" width="15" height="8" />
-							<a href="luntan.html" id="Nav_AMenu1" class="PAMenu" title="交流论坛">交流论坛</a>
+							<a href="news.html"  class="PAMenu" title="交流论坛">交流论坛</a>
 						</li>
 						<li class="PMenu"><img src="images/ico_014.png" class="animated" width="15" height="8" />
-							<a href="geren.html" id="Nav_AMenu1" class="PAMenu" title="个人中心">个人中心</a>
+							<a href="geren.html"  class="PAMenu" title="个人中心">个人中心</a>
 						</li>
 					</ul>
 				</div>
@@ -73,14 +73,14 @@
 									<div class="row cl">
 										<label class="form-label col-xs-4 col-sm-2">问题：</label>
 										<div class="formControls col-sm-8">
-											<input type="text" class="input-text" value="" id="" name="">
+											<input type="text" class="input-text" id="head" />
 										</div>
 										
 									</div>
 									<div class="row cl">
 										<label class="form-label col-xs-4 col-sm-2">问题描述：</label>
 										<div class="formControls col-xs-4 col-sm-8">
-											<textarea rows="10" cols="123"></textarea>
+											<textarea rows="10" cols="123" id="context"></textarea>
 										</div>
 									
 									</div>
@@ -88,7 +88,8 @@
 								</form>
 						
 							<div class="listBtn">
-								<a href="newslist.html" target="_blank">确认</a>
+								<!--- newslist.html -->
+								<a href="javascript:;" id="commit" target="_blank">确认</a>
 							</div>
 							<div class="clear"></div>
 						</li>
@@ -101,4 +102,22 @@
 		<script language="javascript" type="text/javascript" src="js/Kunyi.News.js"></script>
 	
 	</body>
+
+	<!--<script src="js/jquery.min.js"></script>-->
+	<script>
+        $(function () {
+
+            $("#commit").click(function () {
+                var head = $("#head").val();
+                var context = $("#context").val();
+                $.get("problem/add?head="+head+'&context='+context,function(data){
+                    if(data == 'success'){
+                        alert('提问成功');
+                    }else{
+                        alert('提问失败');
+                    }
+                });
+            });
+        });
+	</script>
 </html>

@@ -21,14 +21,6 @@
 			<div class="topHidden"></div>
 			<div class="toolBase">
 				<div class="BaseMark">
-					<ul>
-						<li>
-							<a href="Office-71.html">登录/注册</a>
-						</li>
-						<li>
-							<a href="History.html">网上院史馆</a>
-						</li>
-					</ul>
 				</div>
 			</div>
 			<div class="BaseMark logoBase">
@@ -64,17 +56,17 @@
 							<a href="#" id="Nav_AMenu0" class="PAMenu" title="院系公告">院系公告</a>
 						</li>
 						<li class="PMenu"><img src="images/ico_014.png" class="animated" width="15" height="8" />
-							<a href="luntan.html" id="Nav_AMenu1" class="PAMenu" title="交流论坛">交流论坛</a>
+							<a href="luntan.html"  class="PAMenu" title="交流论坛">交流论坛</a>
 						</li>
 						<li class="PMenu"><img src="images/ico_014.png" class="animated" width="15" height="8" />
-							<a href="geren.html" id="Nav_AMenu1" class="PAMenu" title="个人中心">个人中心</a>
+							<a href="geren.html"  class="PAMenu" title="个人中心">个人中心</a>
 						</li>
 					</ul>
 				</div>
 			</div>
 		</nav>
 		<section class="BaseMark">
-			<div class="bread"><span><a href="index.html"></a><a href="news.html"></a></span></div>
+			<div class="bread"><span><a href="index.html"></a><a href="notice.html"></a></span></div>
 			<div class="baseLeft">
 				<div class="title title05_19">订单支付</div>
 			</div>
@@ -85,56 +77,58 @@
 					<ul>
 						<li>
 							<div class="headLines">
-								<form class="form form-horizontal" id="form-article-add">
+								<form class="form form-horizontal" action="registration/addguahao" method="post">
 									<div class="row cl">
-										<label class="form-label col-xs-4 col-sm-2">订单编号：</label>
+										<label class="form-label col-xs-4 col-sm-2">挂号单编号：</label>
 										<div class="formControls col-sm-3">
-											<input type="text" class="input-text" value="" style="border: none;" id="" name="" readonly="true">
+											<input type="text" class="input-text" th:value="${myreg.id}" style="border: none;" name="id" readonly="true">
 										</div>
 										<label class="form-label col-xs-1 col-sm-2">预约时间：</label>
 										<div class="formControls col-xs-2 col-sm-3">
-											<input type="text" class="input-text" value=""  id="" name="" style="border: none;" readonly="true">
+											<input type="text" class="input-text" th:value="${myreg.timedetails}"   name="timedetails" style="border: none;" readonly="true">
 										</div>
 									</div>
 									<div class="row cl">
 										<label class="form-label col-xs-4 col-sm-2">姓名：</label>
 										<div class="formControls col-sm-3">
-											<input type="text" class="input-text" value="" style="border: none;" id="" name="" readonly="true">
+											<input type="text" class="input-text" th:value="${myreg.patientName}" style="border: none;"  name="patientName" readonly="true">
 										</div>
 										<label class="form-label col-xs-1 col-sm-2">身份证号：</label>
 										<div class="formControls col-xs-2 col-sm-3">
-											<input type="text" class="input-text" value=""  id="" name="" style="border: none;" readonly="true">
+											<input type="text" class="input-text" th:value="${myreg.identification}"  name="identification" style="border: none;" readonly="true">
 										</div>
 									</div>
 									<div class="row cl">
 										<label class="form-label col-xs-4 col-sm-2">医生姓名：</label>
 										<div class="formControls col-sm-3">
-											<input type="text" class="input-text" value="" id="" name="" style="border: none;" readonly="true">
+											<input type="text" class="input-text" th:value="${myreg.doctorName}"  name="doctorName" style="border: none;" readonly="true">
 										</div>
 										<label class="form-label col-xs-1 col-sm-2">科室：</label>
 										<div class="formControls col-xs-2 col-sm-3">
-											<input type="text" class="input-text" value="" id="" name="" style="border: none;" readonly="true">
+											<input type="text" class="input-text" th:value="${myreg.administrativeName}" name="administrativeName" style="border: none;" readonly="true">
 										</div>
 									</div>
 									<div class="row cl">
 										<label class="form-label col-xs-4 col-sm-2">诊疗费：</label>
 										<div class="formControls col-sm-3">
-											<input type="text" class="input-text" value="" id="" name="" style="border: none;" readonly="true">
+											<input type="text" class="input-text" value="无"  readonly="true" style="border: none;">
 										</div>
 										<label class="form-label col-xs-1 col-sm-2">挂号费用：</label>
 										<div class="formControls col-xs-2 col-sm-3">
-											<input type="text" class="input-text" value="" id="" name="" style="border: none;" readonly="true">
+											<input type="text" class="input-text" th:value="${myreg.cost}" style="border: none;" readonly="true" name="cost">
+											<input type="text" class="input-text" th:value="${myreg.doctorid}" style="border: none;"  name="doctorid" hidden>
+											<input type="text" class="input-text" th:value="${myreg.patientId}" style="border: none;"  name="patientId" hidden>
 										</div>
+                                        <button type="submit" style="width: 120px;background: #4fc5c4; color: #fff;" > 确认支付</button>
 									</div>
 									<div class="row cl">
 										<label class="form-label col-xs-4 col-sm-2"><b>病人注意</b></label><br />
-										<span>1：本挂号单号当日有效，请按上午下午时间段有序就诊，欠费永久记录电脑，在窗口付费补收</span>
+										<span>1：本挂号单号当日有效，请按上午下午时间段有序就诊，欠费永久记录电脑，在窗口付费补收</span><br/>
+
 									</div>
 								</form>
 							</div>
-							<div class="listBtn">
-								<a href="#" target="_blank">确认</a>
-							</div>
+
 							<div class="clear"></div>
 						</li>
 					</ul>
@@ -146,12 +140,6 @@
 		<script language="javascript" type="text/javascript" src="js/Kunyi.Common.js"></script>
 		<script language="javascript" type="text/javascript" src="js/Kunyi.Secondary.js"></script>
 		<script language="javascript" type="text/javascript" src="js/Kunyi.News.js"></script>
-		<script>
-    	
-    	function promptDialog(){
-    		var name = prompt("请输入评价：")
-			
-    	}
-    </script>
+
 	</body>
 </html>

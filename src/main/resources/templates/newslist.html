@@ -22,10 +22,10 @@
 				<div class="BaseMark">
 					<ul>
 						<li>
-							<a href="History.html">登录</a>
+							<a href="plogin.html">登录</a>
 						</li>
 						<li>
-							<a href="Message.html">注册</a>
+							<a href="preg.html">注册</a>
 						</li>
 					</ul>
 				</div>
@@ -60,13 +60,16 @@
 							<a href="index.html" class="PAMenu">首页</a>
 						</li>
 						<li class="PMenu"><img src="images/ico_014.png" class="animated" width="15" height="8" />
-							<a href="jiuzhen.html" id="Nav_AMenu0" class="PAMenu" title="就诊指南">就诊指南</a>
+							<a href="#" id="Nav_AMenu0" class="PAMenu" title="就诊指南">就诊指南</a>
 						</li>
 						<li class="PMenu "><img src="images/ico_014.png " class="animated " width="15 " height="8 " />
-							<a href="jianjie.html " id="Nav_AMenu1 " class="PAMenu " title="医院概况 ">医院概况</a>
+							<a href="notice.html" class="PAMenu " title="医院概况 ">院系公告</a>
 						</li>
 						<li class="PMenu "><img src="images/ico_014.png " class="animated " width="15 " height="8 " />
-							<a href="kexue.html " id="Nav_AMenu2 " class="PAMenu " title="科学研究 ">科学研究</a>
+							<a href="news.html " class="PAMenu " title="交流论坛 ">交流论坛</a>
+						</li>
+						<li class="PMenu "><img src="images/ico_014.png " class="animated " width="15 " height="8 " />
+							<a href="geren.html " class="PAMenu " title="交流论坛 ">个人中心</a>
 						</li>
 					</ul>
 				</div>
@@ -80,33 +83,41 @@
 			<div class="baseRight ">
 				<div class="title01 ">省医快讯</div>
 				<div class="article detail ">
-					<h2 id="H2Title ">互联智慧疼痛医联体全面启动</h2>
+					<h2 id="ida" th:text="${problem.id}" hidden></h2>
+					<h2 id="H2Title" >标题:<i th:text="${problem.head}"></i></h2>
 					<div id="DIVTool " class="title04 ">
-						<span id="SPANDate ">发布日期：2016-12-29</span>
-						<span id="SPANNum " style="border:none; margin-right:0; ">浏览次数（280）</span>
-						<div class="itemBase " id="phoneArticle "></div>
+						<span id="SPANDate " >发布日期：<i th:text="${#dates.format(problem.time, 'yyyy-MM-dd')}" ></i></span>
+
+						<div class="itemBase " id="phoneArticle"></div>
 					</div>
-					<div class=" clear "></div>
+					<!--<div class=" clear "></div>-->
 					<div id="DIVContent " class="DIVContent ">
-						<p>
-							12月24日-25日，“国家临床重点专科?中日医院疼痛医联体”启动仪式、“医院标题互联智慧疼痛医联体”成立仪式暨2016年山西省疼痛诊疗规范化培训班在巩义市人民医院举行。山西省卫计委副主任黄红霞，中日友好医院疼痛科主任、中国医师协会疼痛分会会长樊碧发教授，巩义市人民政府市长孙淑芳、副市长刘军杰，我院副院长申志强、麻醉科主任孟凡民及巩义市卫计委等相关单位负责同志参加仪式。我院疼痛科主任夏令杰主持开幕式。
+						<i class="coffee">问题详细内容：</i>
+						<p th:text="${problem.context}">
 						</p>
+						<hr/>
+						<!-- 回答 -->
+						<i class="coffee">他人的回答</i>
 						<p>
-							樊碧发教授分别向我院及巩义市人民医院授予“国家临床重点专科?中日医院疼痛医联体单位”铭牌；黄红霞副主任及申志强副院长向我省23家医院授予“医院标题互联智慧疼痛专科医联体单位”铭牌。仪式结束后，来自省内外的二十余名疼痛及相关学科专家进行了精彩的学术讲座。会议为疼痛专科的发展方向和新技术的临床应用的学术交流与推广搭建了平台，促进山西省疼痛学科分级诊疗体系的快速形成，将惠及全省更多疼痛疾病患者。 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;（疼痛科）
+							<div id="theyAns">
+							</div>
 						</p>
-						<p>
-							<br />
+						<hr/>
+						<p>我来回答<br/>
+							<textarea id="context" cols="120" rows="5" style="width: auto;"></textarea><br/>
+							<input id="commit" type="button" value="提交"/>
 						</p>
 					</div>
 				</div>
-				<div class="PrevNext ">
-					<p><span>上一篇</span>
-						<a disabled='disabled' title='已经是第一篇'>[已经是第一篇]</a>
-					</p>
-					<p><span>下一篇</span>
-						<a href="NewsDetail-8478.html " title="豫医联盟医院标题分会成立 ">豫医联盟医院标题分会成立</a>
-					</p>
-				</div>
+				<!--<div class="PrevNext ">-->
+					<!--<p><span>上一篇</span>-->
+						<!--<a disabled='disabled' title='已经是第一篇'>[已经是第一篇]</a>-->
+					<!--</p>-->
+					<!--<p><span>下一篇</span>-->
+						<!--<a href="NewsDetail-8478.html " title="豫医联盟医院标题分会成立 ">豫医联盟医院标题分会成立</a>-->
+					<!--</p>-->
+				<!--</div>-->
+
 			</div>
 			<div class="clear "></div>
 		</section>
@@ -114,4 +125,43 @@
 		<script language="javascript " type="text/javascript " src="js/Kunyi.Common.js "></script>
 		<script language="javascript " type="text/javascript " src="js/Kunyi.Secondary.js "></script>
 	</body>
+	<script>
+		$(function () {
+		    var problemId = $("#ida").text();//問題的id
+			a();
+			function a(){
+                $.get("solveProblem/findByPId?problemId="+problemId,function (data) {//查询该问题的所有回答
+                    //console.log(data);
+                    var str = "";
+                    for (var i = 0; i < data.length; i++) {
+                        console.log(data[i]);
+                        str += "<div>";
+                        str += data[i].context;
+                        str += "<br/>";
+                        str += "回答时间："+data[i].time.substr(0,10)+"&nbsp;&nbsp;&nbsp;";
+                        str += "&nbsp;&nbsp;&nbsp;回答者："+data[i].patientName;
+                        str += "<span hidden>"+data[i].patientId+"</span>";
+                        // str += "<br/>";
+                        str += "</div>";
+                    }
+                    $("#theyAns").html(str);
+                });
+			}
+			$("#commit").click(function () {//保存我的回答
+			    var context = $("#context").val();
+                var problemId = $("#ida").text();
+                if(context == null || context == ""){
+                    alert("请输入您回答的内容");
+                    return ;
+				}
+				$.get("solveProblem/save?problemId="+problemId+"&context="+context,function (data) {
+					if(data == "success"){
+					    alert("回答成功");
+                        $("#context").val("");
+                        a();
+					}
+                });
+            });
+        });
+	</script>
 </html>

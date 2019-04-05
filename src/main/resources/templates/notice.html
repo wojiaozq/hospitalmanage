@@ -28,6 +28,7 @@
 							<a href="preg.html">注册</a>
 						</li>
 					</ul>
+
 				</div>
 			</div>
 			<div class="BaseMark logoBase">
@@ -63,23 +64,23 @@
 							<a href="#" id="Nav_AMenu0" class="PAMenu" title="院系公告">院系公告</a>
 						</li>
 						<li class="PMenu"><img src="images/ico_014.png" class="animated" width="15" height="8" />
-							<a href="luntan.html" class="PAMenu" title="交流论坛">交流论坛</a>
+							<a href="news.html"  class="PAMenu" title="交流论坛">交流论坛</a>
 						</li>
 						<li class="PMenu"><img src="images/ico_014.png" class="animated" width="15" height="8" />
-							<a href="geren.html"  class="PAMenu" title="个人中心">个人中心</a>
+							<a href="geren.html" class="PAMenu" title="个人中心">个人中心</a>
 						</li>
 					</ul>
 				</div>
 			</div>
 		</nav>
 		<section class="BaseMark">
-			<div class="bread">您所在的位置<span><a href="index.html">首页</a>><a href="news.html">新闻动态</a> > 省医快讯</span></div>
+			<div class="bread">您所在的位置<span><a href="index.html">首页</a>><a href="notice.html">新闻动态</a> > 省医快讯</span></div>
 			<div class="baseLeft">
 				<div class="title title05_19">新闻动态</div>
 				<div class="newsMenu">
 					<ul>						
 						<li>
-							<a href="news.html" title="最新公告"><em>最新公告</em></a>
+							<a href="notice.html" title="最新公告"><em>最新公告</em></a>
 						</li>
 					</ul>
 				</div>
@@ -87,42 +88,34 @@
 			<div class="baseRight">
 				<div class="title01">省医快讯</div>
 				<div class="title02">
-					<a href="news.html?D=1" id="DateAscOrDesc" class="current">发布时间排序</a>
-					<a href="news.html?H=1" id="HitAscOrDesc">阅览次数排序</a>
+					<a href="notice.html?D=1" id="DateAscOrDesc" class="current">发布时间排序</a>
+					<a href="notice.html?H=1" id="HitAscOrDesc">阅览次数排序</a>
 				</div>
 				<div class="clear"></div>
 				<div class="newList">
-					<ul id="ulP">
+					<ul>
 						<li>
 							<div class="headLines">
-								<a href="newslist.html" title="互联智慧疼痛医联体全面启动" target="_blank" class="title">互联智慧疼痛医联体全面启动</a>
-								<p>12月24日-25日，“国家临床重点专科?中日医院疼痛医联体”启动仪式、“医院标题互联智慧疼痛医联体”成立仪式暨疼痛诊疗规范化培训班在巩义市人民医院举行。</p>
-							</div>
-							<div class="date">
-								<h3>发布时间</h3>
-								<h4>2016/12/29</h4>
-								<p>阅览次数<span>280</span></p>
-							</div>
-							<div class="listBtn">
-								<a href="newslist.html" title="互联智慧疼痛医联体全面启动" target="_blank">进入</a>
+
+								<table >
+									<thead>
+									<tr>
+										<th >发布人</th>
+										<th >发时间</th>
+
+									</tr >
+									</thead>
+									<tbody>
+									<tr th:each="an : ${annt}">
+										<td th:text="${an.topic}"></td>
+										<td th:text="${an.releaseTime}"></td>
+									</tr>
+									</tbody>
+								</table>
 							</div>
 							<div class="clear"></div>
 						</li>
-						<li>
-							<div class="headLines">
-								<a href="newslist.html" title="互联智慧疼痛医联体全面启动" target="_blank" class="title">互联智慧疼痛医联体全面启动</a>
-								<p>12月24日-25日，“国家临床重点专科?中日医院疼痛医联体”启动仪式、“医院标题互联智慧疼痛医联体”成立仪式暨疼痛诊疗规范化培训班在巩义市人民医院举行。</p>
-							</div>
-							<div class="date">
-								<h3>发布时间</h3>
-								<h4>2016/12/29</h4>
-								<p>阅览次数<span>280</span></p>
-							</div>
-							<div class="listBtn">
-								<a href="newslist.html" title="互联智慧疼痛医联体全面启动" target="_blank">进入</a>
-							</div>
-							<div class="clear"></div>
-						</li>
+
 					</ul>
 				</div>
 				<div class="clear"></div>
@@ -170,44 +163,4 @@
 		<script language="javascript" type="text/javascript" src="js/Kunyi.Secondary.js"></script>
 		<script language="javascript" type="text/javascript" src="js/Kunyi.News.js"></script>
 	</body>
-	<script>
-		$(function () {
-			$.get("problem/all",function (data) {
-			    var str = "";
-			    /***
-                 <li>
-                 <div class="headLines">
-                 <a href="newslist.html" title="互联智慧疼痛医联体全面启动" target="_blank" class="title">互联智慧疼痛医联体全面启动</a>
-                 <p>12月24日-25日，“国家临床重点专科?中日医院疼痛医联体”启动仪式、“医院标题互联智慧疼痛医联体”成立仪式暨疼痛诊疗规范化培训班在巩义市人民医院举行。</p>
-                 </div>
-                 <div class="date">
-                 <h3>发布时间</h3>
-                 <h4>2016/12/29</h4>
-                 <p>阅览次数<span>280</span></p>
-                 </div>
-                 <div class="listBtn">
-                 <a href="newslist.html" title="互联智慧疼痛医联体全面启动" target="_blank">进入</a>
-                 </div>
-                 <div class="clear"></div>
-                 </li>
-				 */
-                for (var i = 0; i < data.length; i++) {
-					str += "<li><div class=\"headLines\">";
-					str += ' <a href="newslist.html" title="'+data[i].head+'" target="_blank" class="title">'+data[i].head+'</a>';
-					str += ' <p>'+data[i].context+'</p>';
-					str += '</div><div class="date"> <h3>发布时间</h3>';
-					str += ' <h4>'+data[i].time.substr(0,10)+'</h4>';
-					str += ' </div>';
-					str += '<div class="listBtn"><a href="newslist.html?id='+data[i].id+'" title="'+data[i].head+'" target="_blank">进入</a>\n' +
-                        '                 </div>' +
-                        '                 <div class="clear"></div>' +
-                        '                 </li>';
-                }
-			    $("#ulP").html(str);
-
-            })
-        })
-
-	</script>
-
 </html>

@@ -52,7 +52,7 @@
 		<tbody>
 		<tr th:each="annou : ${annou}">
 			<td th:text="${annou.personName}"></td>
-			<td th:text="${annou.releaseTime}"></td>
+			<td th:text="${#dates.format(annou.releaseTime,'yyyy/MM/dd')}"></td>
 			<td th:text="${annou.topic}"></td>
 			<td th:text="${annou.content}"></td>
 			<td>

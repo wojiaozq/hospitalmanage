@@ -4,7 +4,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
 		<meta name="renderer" content="webkit" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<title>省医快讯 - 新闻动态 - 医院标题</title>
+		<title>个人中心</title>
 		<meta name="robots" content="All" />
 		<noscript><meta http-equiv="refresh" content="0; url=/noscript.htm" /></noscript>
 		<link rel="icon" href="favicon.ico" type="image/x-icon" />
@@ -21,19 +21,7 @@
 			<div class="topHidden"></div>
 			<div class="toolBase">
 				<div class="BaseMark">
-					<ul>
-						<li>
-							<a href="Office-71.html">登录/注册</a>
-						</li>
-						<li>
-							<a href="History.html">网上院史馆</a>
-						</li>
-						
-					</ul>
-					<div class="language">选择语言</div>
-					<div class="langBtn animated"><i class="flag"></i>中文<i class="downBtn"></i>
-						<a href="javasript:;"><img src="images/ico_003.png" class="animated" width="13" height="13" />English</a>
-					</div>
+
 				</div>
 			</div>
 			<div class="BaseMark logoBase">
@@ -66,27 +54,27 @@
 							<a href="index.html" class="PAMenu">首页</a>
 						</li>
 						<li class="PMenu"><img src="images/ico_014.png" class="animated" width="15" height="8" />
-							<a href="#" id="Nav_AMenu0" class="PAMenu" title="院系公告">院系公告</a>
+							<a href="notice.html" id="Nav_AMenu0" class="PAMenu" title="院系公告">院系公告</a>
 						</li>
 						<li class="PMenu"><img src="images/ico_014.png" class="animated" width="15" height="8" />
-							<a href="luntan.html" id="Nav_AMenu1" class="PAMenu" title="交流论坛">交流论坛</a>
+							<a href="news.html"  class="PAMenu" title="交流论坛">交流论坛</a>
 						</li>
 						<li class="PMenu"><img src="images/ico_014.png" class="animated" width="15" height="8" />
-							<a href="geren.html" id="Nav_AMenu1" class="PAMenu" title="个人中心">个人中心</a>
+							<a href="geren.html"  class="PAMenu" title="个人中心">个人中心</a>
 						</li>
 					</ul>
 				</div>
 			</div>
 		</nav>
 		<section class="BaseMark">
-			<div class="bread">您所在的位置<span><a href="index.html">首页</a>><a href="news.html">新闻动态</a> > 省医快讯</span></div>
+			<div class="bread">您所在的位置<span><a href="index.html">首页</a>><a href="notice.html">新闻动态</a> > 省医快讯</span></div>
 			<div class="baseLeft">
 				<div class="title title05_19">个人中心</div>
 				
 				<div class="newsMenu">
 					<ul>						
 						<li>
-							<a href="#" title="我要提问"><em>我要提问</em></a>
+							<a href="tiwen.html" title="我要提问"><em>我要提问</em></a>
 						</li>
 					</ul>
 				</div>
@@ -102,38 +90,41 @@
 									<div class="row cl">
 										<label class="form-label col-xs-4 col-sm-2">姓名：</label>
 										<div class="formControls col-sm-3">
-											<input type="text" class="input-text" value="" style="border: none;" id="" name="" readonly="true">
+											<input type="text" class="input-text" th:value="${pt.name}" style="border: none;"  name="" readonly="true">
 										</div>
-										<label class="form-label col-xs-1 col-sm-2">身份证号：</label>
+										<label class="form-label col-xs-1 col-sm-2">账号：</label>
 										<div class="formControls col-xs-2 col-sm-3">
-											<input type="text" class="input-text" value=""  id="" name="" style="border: none;" readonly="true">
+											<input type="text" class="input-text" th:value="${pt.identification}"   name="" style="border: none;" readonly="true">
 										</div>
 									</div>
 									<div class="row cl">
 										<label class="form-label col-xs-4 col-sm-2">密码：</label>
 										<div class="formControls col-sm-3">
-											<input type="text" class="input-text" value="" id="" name="" style="border: none;" readonly="true">
+											<input type="password" class="input-text" th:value="${pt.password}"  name="" style="border: none;" readonly="true">
 										</div>
 										<label class="form-label col-xs-1 col-sm-2">手机号：</label>
 										<div class="formControls col-xs-2 col-sm-3">
-											<input type="text" class="input-text" value="" id="" name="" style="border: none;" readonly="true">
+											<input type="text" class="input-text" th:value="${pt.tel}"  name="" style="border: none;" readonly="true">
 										</div>
 									</div>
 									<div class="row cl">
-										<label class="form-label col-xs-4 col-sm-2">家庭住址：</label>
+										<label class="form-label col-xs-2 col-sm-2">住址：</label>
 										<div class="formControls col-sm-3">
-											<input type="text" class="input-text" value=""  id="" name="" style="border: none;" readonly="true">
+											<input type="text" class="input-text" th:value="${pt.address}"   name="" style="border: none;" readonly="true">
 										</div>
-										<label class="form-label col-xs-1 col-sm-2">登录密码：</label>
 										<div class="formControls col-xs-2 col-sm-3">
-											<input type="password" class="input-text" value="" id="" name="" style="border: none;" readonly="true">
+											<input type="text" class="input-text" th:value="${pt.id}"  name="" style="border: none;" hidden>
 										</div>
 									</div>
 								</form>
 							</div>
 							<div class="listBtn">
-								<a href="newslist.html" target="_blank">修改个人信息</a>
+								<a href="update_pamyself.html" target="_blank">修改密码</a>
+								<a href="update_pamyself.html" target="_blank">修改个人信息</a>
 							</div>
+							<div class="listBtn">
+							</div>
+
 							<div class="clear"></div>
 						</li>
 					</ul>
@@ -154,10 +145,10 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td>Mark</td>
-											<td>Otto</td>
-											<td>@mdo</td>
+										<tr th:each=" res : ${re}">
+											<td th:text="${res.timedetails}"></td>
+											<td th:text="${res.administrativeName}"></td>
+											<td th:text="${res.doctorName}"></td>
 										</tr>
 									</tbody>
 								</table>
@@ -265,6 +256,53 @@
 		<script language="javascript" type="text/javascript" src="js/Kunyi.Common.js"></script>
 		<script language="javascript" type="text/javascript" src="js/Kunyi.Secondary.js"></script>
 		<script language="javascript" type="text/javascript" src="js/Kunyi.News.js"></script>
-	
+
+		<script src="lib/jquery.1.9.1/jquery.min.js"></script>
+		<script>
+			$(function () {
+				$.get("doctor/allStatus",function(data){
+
+
+					var str = "";
+					for(var i = 0;i<data.length;++i){
+						str += "<li>";
+						str += "<a href=\"ys.html \" target=\"_blank \"><img src=\"uploadfiles/thumb/201603221527067.png \" class=\"load \" width=\"120 \" height=\"162 \" title=\""+data[i].name+"\" alt=\"医生 \"></a>";
+						str += '<a href="ys.html " target="_blank " title="'+data[i].name+' " class="ATitle ">'+data[i].name+'</a>';
+						str += '<h4>'+data[i].administrativeName+','+data[i].job+'</h4>';
+						str += '<p>'+data[i].job+'</p>';
+						str += '<span hidden>'+data[i].id+'</span>';
+						str += '<div> <a class="coffee " target="_blank " href="ys.html?id=' ;
+						str += data[i].id+' ">详细</a> <a class="green " href="# " target="_blank ">预约</a> </div> </li>';
+					}
+
+					$("#lia").html(str);
+
+				});
+
+				$.get("problem/findByP",function(data){
+					if(data == null ||data == ""){
+						return "";
+					}else{
+						var str = "";
+						for(var i = 0;i<data.length;++i){
+							str += "<li>";
+							str += "<div class=\"headLines\">";
+							str += "<a href=\"newslist.html?id=\"'+data[i].id+' title=\""+data[i].head+"\" target=\"_blank\" class=\"title\">"+data[i].head+"</a>";
+							str += '<p>'+data[i].context+'</p>';
+							str += '</div>';
+							str += ' <div class="date"> <h3>发布时间</h3>  <h4>'+data[i].time.substr(0,10)+'</h4>      </div>';
+							str += ' <div class="listBtn">' +
+									'                     <a href="newslist.html?id='+data[i].id+'" title="'+data[i].head+'" target="_blank">进入</a>' +
+									'                     <a href="newslist.html?id='+data[i].id+'" title="'+data[i].head+'" target="_blank">删除</a>' +
+									'                     </div>' +
+									'                     <div class="clear"></div>' +
+									'                     </li>';
+						}
+						$("#ulP").html(str);
+					}
+				})
+			});
+		</script>
+
 	</body>
 </html>
