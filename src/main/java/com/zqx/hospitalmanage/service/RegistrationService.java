@@ -4,6 +4,7 @@ import com.zqx.hospitalmanage.pojo.Registration;
 import com.zqx.hospitalmanage.util.Utils;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,14 +16,14 @@ import java.util.List;
  **/
 public interface RegistrationService {
 
-    /*public List<Registration> getByDoctorId(String doctorId) ;
-
+    /*
     public List<Registration> getByPatientName(String PatientName) ;
-
     public void overRegistration(String id);*/
 
     public void addRegistration(Registration registration);
     public List<Registration>findallRegis();
+    public List<Registration> findByDoctorId(String doctorId, Date date) ;
+    public String fincount(String doctorid);
 
 
 

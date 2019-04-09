@@ -76,7 +76,7 @@
 		<section class="BaseMark">
 			<div class="bread">您所在的位置<span><a href="index.html">首页</a>><a href="notice.html">新闻动态</a> > 省医快讯</span></div>
 			<div class="baseLeft">
-				<div class="title title05_19">新闻动态</div>
+				<div class="title title05_19">公告展示</div>
 				<div class="newsMenu">
 					<ul>						
 						<li>
@@ -86,10 +86,9 @@
 				</div>
 			</div>
 			<div class="baseRight">
-				<div class="title01">省医快讯</div>
+				<div class="title01">本院公告</div>
 				<div class="title02">
 					<a href="notice.html?D=1" id="DateAscOrDesc" class="current">发布时间排序</a>
-					<a href="notice.html?H=1" id="HitAscOrDesc">阅览次数排序</a>
 				</div>
 				<div class="clear"></div>
 				<div class="newList">
@@ -100,15 +99,16 @@
 								<table >
 									<thead>
 									<tr>
-										<th >发布人</th>
-										<th >发时间</th>
-
+										<th ></th>
+										<th ></th>
+										<th></th>
 									</tr >
 									</thead>
 									<tbody>
 									<tr th:each="an : ${annt}">
-										<td th:text="${an.topic}"></td>
-										<td th:text="${an.releaseTime}"></td>
+										<td th:text="${an.topic}" style="text-align: left; width: 800px;"></td>
+										<td th:text="${#dates.format(an.releaseTime,'yyyy/MM/dd')}" style="text-align: left; width: 500px;"></td>
+										<td style="text-align: left; width: 400px;"><a th:href="@{/findgonggaobyid(id=${an.id})}" >查看详细</a></td>
 									</tr>
 									</tbody>
 								</table>

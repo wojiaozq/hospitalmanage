@@ -9,21 +9,15 @@ import java.util.List;
 @Table(name = "evlauate")
 public class Evlauate {
   @Id
+  /*@Column(name = "Id", unique = true, nullable = false)
+  @GeneratedValue(strategy = GenerationType.AUTO)*/
   private String id;
   private String context;
-  @Column(name = "case_id")
-  private String caseId;
-
-  @Column(name = "timer")
-  private Date timer;//发布时间
-
-  public Date getTimer() {
-    return timer;
-  }
-
-  public void setTimer(Date timer) {
-    this.timer = timer;
-  }
+  private String Commentator;
+  private String timer;//发布时间
+  private String doctorid;
+  private String pid;
+  private String doctorname;
 
   public String getId() {
     return id;
@@ -33,7 +27,6 @@ public class Evlauate {
     this.id = id;
   }
 
-
   public String getContext() {
     return context;
   }
@@ -42,13 +35,43 @@ public class Evlauate {
     this.context = context;
   }
 
-
-  public String getCaseId() {
-    return caseId;
+  public String getCommentator() {
+    return Commentator;
   }
 
-  public void setCaseId(String caseId) {
-    this.caseId = caseId;
+  public void setCommentator(String commentator) {
+    Commentator = commentator;
   }
 
+  public String getTimer() {
+    return timer;
+  }
+
+  public void setTimer(String timer) {
+    this.timer = timer;
+  }
+
+  public String getDoctorid() {
+    return doctorid;
+  }
+
+  public void setDoctorid(String doctorid) {
+    this.doctorid = doctorid;
+  }
+
+  public String getPid() {
+    return pid;
+  }
+
+  public void setPid(String pid) {
+    this.pid = pid;
+  }
+
+  public String getDoctorname() {
+    return doctorname;
+  }
+
+  public void setDoctorname(String doctorname) {
+    this.doctorname = doctorname;
+  }
 }

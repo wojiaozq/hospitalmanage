@@ -17,19 +17,12 @@ import java.util.List;
  * @create: 2019-03-24 11:57:08
  **/
 public interface RegistrationDao extends JpaRepository<Registration,String>, JpaSpecificationExecutor<Registration> {
-   /* //根据医生主键查询，该医生下的挂号信息
-    @Query(nativeQuery = true,value = "select * from registration where doctor_id = ?;")
-    public List<Registration> findByDoctorId(String id);
-    //根据患者姓名查询挂号信息
-    @Query(nativeQuery = true,value = "select * from registration where doctor_name like ?;")
-    public List<Registration> findByPatientName(String name);
 
-    @Modifying
-    @Query(nativeQuery = true,value = "update registration set status = ? where id = ?;")
-    public void updateStatus(int status, String id);
+   @Query(nativeQuery = true,value = "select * from registration where doctor_id = ? and mytime>=? ;")
+   public List<Registration> findByDoctorId(String id,Date date);
 
-    //查询在某一时间后的预约记录计数
-    public int countByBookingPeriodAfter(Date date);*/
+   @Query(nativeQuery = true,value = "select count(*) from registration where doctor_id = ?")
+   public String findcountbyid(String doctorid);
 
 
 }

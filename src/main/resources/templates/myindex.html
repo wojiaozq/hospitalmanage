@@ -26,6 +26,7 @@
 						var main = document.getElementById("mainIframe").setAttribute("src", "welcome_doctor.html");
 					}
 				})
+
 			});
 			function  gotoFuc(value) {
 				var main = document.getElementById("mainIframe");
@@ -40,12 +41,6 @@
 				<div class="m-logo">
 				</div>
 				<ul id="treeMenu" class="layui-nav layui-nav-tree" lay-filter="leftNav">
-					<!--<li class="layui-nav-item">-->
-						<!--<a href="myindex.html" data-text="首页"><i class="iconfont">&#xe60e;</i>首页</a>-->
-					<!--</li>-->
-
-
-
 
 					<li class="layui-nav-item" th:each="m,var : ${menu}" th:if="${m.pid} == 0">
 
@@ -60,19 +55,6 @@
 						</dl>
 
 					</li>
-					<!--<li class="layui-nav-item">-->
-						<!--<a href="javascript:;" data-url="Patient_management.html" data-id='2' data-text="病人管理"><i class="iconfont">&#xe608;</i>病人管理</a>-->
-					<!--</li>-->
-					<!--<li class="layui-nav-item">-->
-						<!--<a href="javascript:;" data-url="Announcement_management.html" data-id='3' data-text="公告管理"><i class="iconfont">&#xe604;</i>公告管理</a>-->
-					<!--</li>-->
-					<!--<li class="layui-nav-item">-->
-						<!--<a href="javascript:;" data-url="Duty_schedule.html" data-id='4' data-text="值班安排"><i class="iconfont">&#xe60c;</i>值班安排</a>-->
-					<!--</li>-->
-					<!--<li class="layui-nav-item">-->
-						<!--<a href="javascript:;" data-url="log.html" data-id='5' data-text="系统日志"><i class="iconfont">&#xe600;</i>系统日志</a>-->
-					<!--</li>-->
-
 
 				</ul>
 			</div>
@@ -89,7 +71,7 @@
 					  <li class="layui-nav-item">
 					    <a href="javascript:;" id="myInfo" data-url="admin-info.html" data-id='16' data-text="个人信息"></a>
 					  </li>
-					  <li class="layui-nav-item"><a href="javascript:;">退出</a></li>
+					  <li class="layui-nav-item"><a th:href="@{/Cancellation}">退出</a></li>
 					</ul>
 				</div>
 				<!--主体内容-->
@@ -130,6 +112,7 @@
         $.get("getUser",function (data) {
             $("#myInfo").text(data);
         })
+
     });
 </script>
 

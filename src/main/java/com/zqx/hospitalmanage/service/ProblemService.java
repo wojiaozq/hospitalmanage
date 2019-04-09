@@ -19,4 +19,6 @@ public interface ProblemService {
     List<Problem> findAll();
     public Problem findOne(String id);
 
+    public void delprobleambyid(String id);
+
 }

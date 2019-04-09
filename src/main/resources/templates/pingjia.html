@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+    <meta name="renderer" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>省医快讯 - 新闻动态 - 医院标题</title>
+    <meta name="robots" content="All" />
+    <noscript><meta http-equiv="refresh" content="0; url=/noscript.htm" /></noscript>
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="css/normalize.css" type="text/css" />
+    <link rel="stylesheet" href="css/secondary.css" type="text/css" />
+    <script language="javascript" type="text/javascript" src="js/KunyiHTML5.min.js"></script>
+    <script language="javascript" type="text/javascript" src="js/Kunyilibrary.js"></script>
+    <link rel="stylesheet" href="css/H-ui.min.css" type="text/css" />
+</head>
+<body>
+<script language="javascript" type="text/javascript" src="js/Kunyi.Init.js"></script>
+<header>
+    <div class="topHidden"></div>
+    <div class="toolBase">
+        <div class="BaseMark">
+
+        </div>
+    </div>
+    <div class="BaseMark logoBase">
+        <a href="Index.html"><img src="images/logo.jpg" class="load" /></a>
+
+    </div>
+</header>
+<nav>
+    <div class="navBase">
+        <div class="quickMenuBase" data-type="0">
+            <div class="quickMenu03"><img src="images/ico_013.png" width="16" height="16" /> <em>快捷菜单</em></div>
+        </div>
+        <div class="nav Snav">
+            <ul>
+                <li class="PMenu">
+                    <a href="index.html" class="PAMenu">首页</a>
+                </li>
+                <li class="PMenu"><img src="images/ico_014.png" class="animated" width="15" height="8" />
+                    <a href="notice.html" id="Nav_AMenu0" class="PAMenu" title="院系公告">院系公告</a>
+                </li>
+                <li class="PMenu"><img src="images/ico_014.png" class="animated" width="15" height="8" />
+                    <a href="news.html"  class="PAMenu" title="交流论坛">交流论坛</a>
+                </li>
+                <li class="PMenu"><img src="images/ico_014.png" class="animated" width="15" height="8" />
+                    <a href="geren.html"  class="PAMenu" title="个人中心">个人中心</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<section class="BaseMark">
+    <div class="bread">您所在的位置<span><a href="index.html">首页</a>><a href="news.html">新闻动态</a> > 省医快讯</span></div>
+    <div class="baseLeft">
+        <div class="title title05_19">请填写问题</div>
+    </div>
+    <div class="baseRight">
+
+        <div class="newList">
+            <ul>
+                <li>
+
+                    <form class="form form-horizontal" action="updatepingjia" method="post">
+                        <div class="row cl">
+                            <label class="form-label col-xs-4 col-sm-2">评价：</label>
+                            <div class="formControls col-xs-4 col-sm-8">
+                                <textarea rows="10" cols="123" id="context" placeholder="请输入您的评价" name="context"></textarea>
+                                <select name="fangshi">
+                                    <option value="1">匿名评价</option>
+                                    <option value="2">实名评价</option>
+                                </select>
+
+                                <input type="text" hidden th:value="${evla.id}" name="id">
+                                <input type="text" hidden th:value="${evla.doctorid}" name="doctorid">
+                                <input type="text" hidden th:value="${evla.pid}" name="pid">
+                                <input type="text" hidden th:value="${evla.doctorname}" name="doctorname">
+                            </div>
+                        </div>
+                        <center>
+                    <div class="listBtn">
+                        <button type="submit" style="width: 120px;background: #4fc5c4; color: #fff;" > 确定评价</button>
+                    </div></center>
+                    </form>
+                    <div class="clear"></div>
+                </li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <script language="javascript" type="text/javascript" src="js/Kunyi.Common.js"></script>
+    <script language="javascript" type="text/javascript" src="js/Kunyi.Secondary.js"></script>
+    <script language="javascript" type="text/javascript" src="js/Kunyi.News.js"></script>
+
+</body>
+
+
+</html>

@@ -6,6 +6,7 @@ import com.zqx.hospitalmanage.service.ProblemService;
 import com.zqx.hospitalmanage.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -39,6 +40,11 @@ public class ProblemServiceImpl implements ProblemService {
     }
     public Problem findOne(String id){
         return problemDao.findById(id).get();
+    }
+
+    @Transactional
+    public void delprobleambyid(String id) {
+        this.problemDao.deleteById(id);
     }
 
 }

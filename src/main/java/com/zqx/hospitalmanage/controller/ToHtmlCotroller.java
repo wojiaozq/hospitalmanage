@@ -2,6 +2,7 @@ package com.zqx.hospitalmanage.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.zqx.hospitalmanage.pojo.*;
+import com.zqx.hospitalmanage.pojo.vo.PatientreVo;
 import com.zqx.hospitalmanage.service.*;
 import com.zqx.hospitalmanage.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,11 +51,17 @@ public class ToHtmlCotroller {
      private RegistrationService registrationService;
     @Autowired
     private ProblemService problemService;
+    @Autowired
+    private EvlauateService evlauateService;
+    @Autowired
+    private SolvePatientService solvePatientService;
 
+    //全局变量调用
     String thetime="";
     String dname="";
     String keshi="";
     String did="";
+    String newtime="";
 
     @RequestMapping("myindex1")
     public String index(HttpSession session){
@@ -128,7 +135,7 @@ public class ToHtmlCotroller {
     //页面跳转
     @RequestMapping("{page}")
     public String toPage(@PathVariable("page") String page, HttpSession session){
-        if(page.equals("index")||page.equals("index.html")||page.equals("keshi.html")||page.equals("keshimx.html")||page.equals("keshiys.html")||page.equals("notice.html")||page.equals("plogin.html")||page.equals("preg.html")||page.equals("luntan.html")||page.equals("news.html")){
+        if(page.equals("index")||page.equals("index.html")||page.equals("keshi.html")||page.equals("keshimx.html")||page.equals("keshiys.html")||page.equals("notice.html")||page.equals("plogin.html")||page.equals("preg.html")||page.equals("luntan.html")||page.equals("news.html")||page.equals("404.html")){
             return page;
         }
 
@@ -165,27 +172,6 @@ public class ToHtmlCotroller {
         return "get_doctor.html";
     }
 
-    //查看所有文章
-    @RequestMapping("Latest_articles.html")
-    public String findLimitN(HttpSession session, Model model){
-        Doctor user = (Doctor) session.getAttribute("user");
-        List<Article> limit5 = articleService.findLimit5(user.getId());
-        if(limit5==null){
-            return "Latest_articles.html";
-        }
-        model.addAttribute("list",limit5);
-        model.addAttribute("aname",user.getName());
-        return "Latest_articles.html";
-    }
-
-    @RequestMapping("Article_record.html")
-    public String findArticleAll(HttpSession session,Model model){
-        Doctor user = (Doctor) session.getAttribute("user");
-        List<Article> articles = articleService.findallByDoctorID(user.getId());
-        model.addAttribute("list",articles);
-        model.addAttribute("aname",user.getName());
-        return "Article_record.html";
-    }
 
     /*查找所有日志记录*/
     @RequestMapping("log.html")
@@ -194,14 +180,24 @@ public class ToHtmlCotroller {
      model.addAttribute("log",list);
         return "log.html";
     }
-
+    //传入id查找医生信息
     @RequestMapping("ys.html")
     public String findDoctor(String id,Model model){
         Doctor doctor = doctorService.findOneById(id);
         List<DutyRoster> ds = dutyRosterService.findOneByDoctorId(id);
+        List<Evlauate> list= evlauateService.findallbyid(id);
+        model.addAttribute("myev",list);
         model.addAttribute("doctor",doctor);
-        if(ds != null) {
+        if(ds != null && ds.size() != 0) {
             model.addAttribute("ds", ds.get(0));
+        }else{
+            DutyRoster dy = new DutyRoster();
+            dy.setId("");
+            dy.setOperationTime(new Date());
+            dy.setDay01(""); dy.setDay02(""); dy.setDay03(""); dy.setDay04(""); dy.setDay05(""); dy.setDay06("");
+            dy.setDay07(""); dy.setDay08(""); dy.setDay09(""); dy.setDay10(""); dy.setDay11(""); dy.setDay12("");
+            dy.setDay13(""); dy.setDay14("");
+            model.addAttribute("ds",dy);
         }
         return "ys.html";
     }
@@ -226,6 +222,8 @@ public class ToHtmlCotroller {
         patient.setPassword(password);
         Patient patient1=this.patientService.findPlogin(identification,password);
         List<Registration> list=this.registrationService.findallRegis();
+        List<Evlauate> list1=this.evlauateService.findallnull();
+        model.addAttribute("ev",list1);
         model.addAttribute("pt",patient1);
         model.addAttribute("re",list);
         return "geren.html";
@@ -239,6 +237,13 @@ public class ToHtmlCotroller {
             return "redirect:/plogin.html";//===>页面
         }
         return "tiwen.html";
+    }
+    //删除问题
+    @RequestMapping("deleteprogreambyid")
+    public String delbyid(String id){
+        this.solvePatientService.del(id);
+        this.problemService.delprobleambyid(id);
+        return "redirect:/geren.html";
     }
 
     @RequestMapping("update_pamyself.html")
@@ -256,12 +261,13 @@ public class ToHtmlCotroller {
         return "update_pamyself.html";
     }
 
-    //进入公告页面时展示所有公告,这里有bug给值注入不进去
-    @RequestMapping("notic.html")
-    public String findAnnbytime(Model model,Announcement announcement){
-        Date date=new Date();
-        System.out.println(date);
-        System.out.println("---------------------");
+    //进入公告页面时展示当天所有公告
+    @RequestMapping("notice.html")
+    public String findAnnbytime(Model model,Announcement announcement) throws ParseException {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String s = sdf.format(new Date());
+        Date date=sdf.parse(s);
         announcement.setReleaseTime(date);
         List<Announcement> list=announcementService.findannBytime(date);
         model.addAttribute("annt",list);
@@ -273,21 +279,21 @@ public class ToHtmlCotroller {
 
         return "plogin.html";
     }
-
+    //请求挂号
     @RequestMapping("a")
     @ResponseBody
     public String addguahao(HttpSession session,String doctorname,String administrativeName,String doctorid,String startTime,Integer hang,Integer lie) throws ParseException {
 
         Patient puser = (Patient)session.getAttribute("puser");
         if(puser==null){
-            return "redirect:/plogin.html";//===>页面
+            return "/plogin.html";//===>页面
         }
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date d = format.parse(startTime);
         Calendar now = Calendar.getInstance();
         now.setTime(d);
         now.set(Calendar.DATE,now.get(Calendar.DATE) + lie);
-        String newtime = format.format(now.getTime());
+        newtime = format.format(now.getTime());
         String sx=" ";
         String shangx=hang+"";
         if (shangx.equals("1")){
@@ -295,17 +301,17 @@ public class ToHtmlCotroller {
         }else {
           sx="下午";
         }
-
          this.thetime=newtime+sx;
          System.out.println(thetime);
          this.dname=doctorname;
          this.keshi=administrativeName;
          this.did=doctorid;
-        return "guahao.html";
+         return "guahao.html";
     }
 
+    //生成挂号单
     @RequestMapping("guahao.html")
-    public String toguo(Model model,Registration registration,HttpSession session){
+    public String toguo(Model model,Registration registration,HttpSession session) throws ParseException {
         Patient puser = (Patient)session.getAttribute("puser");
         registration.setId(Utils.getUUID());
         registration.setAdministrativeName(keshi);
@@ -315,12 +321,18 @@ public class ToHtmlCotroller {
         registration.setTimedetails(thetime);
         registration.setDoctorid(did);
         registration.setIdentification(puser.getIdentification());
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+       // newtime = sdf.format(new Date());
+        Date date=sdf.parse(newtime);
+        registration.setMytime(date);//字符串类型转日期类型
+
         registration.setCost("20元");
         model.addAttribute("myreg",registration);
-
         return "guahao.html";
     }
 
+    //查看问题
     @RequestMapping("newslist.html")
     public String newslist(String id,Model model){
         Problem one = problemService.findOne(id);
@@ -328,4 +340,113 @@ public class ToHtmlCotroller {
         return "newslist.html";
     }
 
+    //后台注销登录注销登录
+    @RequestMapping("Cancellation")
+    public String zhuxiao(HttpSession session){
+        session.removeAttribute("user");
+        return "tologin";
+    }
+    //前端注销登录
+    @RequestMapping("pCancellation")
+    public String dengchu(HttpSession session){
+        Patient puser = (Patient)session.getAttribute("puser");
+        if(puser!=null){
+            session.removeAttribute("puser");
+            return "redirect:/plogin.html";
+        }
+        return "index.html";
+    }
+
+    @RequestMapping("findpingjiabyid")
+    public String findbyidpingjia(String id,HttpSession session,Model model){
+        Patient puser = (Patient)session.getAttribute("puser");
+        if(puser==null){
+            return "redirect:/plogin.html";//===>页面
+        }
+        Evlauate evlauate=evlauateService.findbyid(id);
+        model.addAttribute("evla",evlauate);
+        return "pingjia.html";
+    }
+
+    @RequestMapping("updatepingjia")
+    public String updatepingjia(String id,String context,Evlauate evlauate,String fangshi,HttpSession session){
+        evlauate.setContext(context);
+        evlauate.setId(id);
+        Date t=new Date();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        evlauate.setTimer( df.format(t));
+        if (fangshi.equals("1")){
+            evlauate.setCommentator("匿名用户");
+        }else {
+            Patient puser = (Patient)session.getAttribute("puser");
+           evlauate.setCommentator(puser.getName());
+        }
+       this.evlauateService.update(evlauate);
+        return "redirect:/geren.html";
+    }
+
+    @RequestMapping("pingjia.html")
+    public String uppingjia(){
+        return "pingjia.html";
+    }
+
+    @RequestMapping("findgonggaobyid")
+    public String selgonggaobyid(String id,Model model){
+        Announcement announcement=announcementService.findById(id);
+        model.addAttribute("ance",announcement);
+        return "/noticeshow.html";
+    }
+
+    @RequestMapping("uppatientpwd")
+    @ResponseBody
+    public String uppssword(String pwd1,String pwd2,HttpSession session){
+        Patient puser = (Patient)session.getAttribute("puser");
+        if (pwd1.equals(pwd2)){
+            String id=puser.getId();
+            String password=pwd1;
+            patientService.uppwd(id,password);
+            return "success";
+        }
+        return "error";
+    }
+
+    //修改密码
+    @RequestMapping("updatepwd.html")
+    public String touppwd(){
+        return "updatepwd.html";
+    }
+
+    @RequestMapping("My_evaluation")
+    public String selallbydoctorid(HttpSession session,Model model){
+        Doctor user = (Doctor) session.getAttribute("user");
+        String doctorid=user.getId();
+        List<Evlauate> list=evlauateService.findallbyid(doctorid);
+        model.addAttribute("myevl",list);
+        return "My_evaluation.html";
+    }
+
+    @RequestMapping("findevbyid")
+    public String selevbyid(String id,Model model){
+       Evlauate evlauate = this.evlauateService.findbyid(id);
+        model.addAttribute("theev",evlauate);
+        return "/showevlauate.html";
+    }
+    //查询挂号记录
+    @RequestMapping("Article_record.html")
+    public String findguahao(HttpSession session,Model model){
+        Doctor user = (Doctor) session.getAttribute("user");
+        String doctorid=user.getId();
+        Date date=new Date();
+        List<Registration> mylist= registrationService.findByDoctorId(doctorid,date);//根据医生id查询今天以后所有挂号信息；
+        model.addAttribute("gua",mylist);
+        return "/Article_record.html";
+    }
+    //医生查看挂号病人信息
+    @RequestMapping("finddetils")
+    public String selpatient(String patientId,Model model){
+        String id=patientId;
+        Patient patient = patientService.findpatientByid(id);
+        model.addAttribute("mypat",patient);
+        return "/showpatient.html";
+    }
 }

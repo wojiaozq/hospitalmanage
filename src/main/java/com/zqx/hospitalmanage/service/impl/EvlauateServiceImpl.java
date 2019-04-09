@@ -26,29 +26,33 @@ public class EvlauateServiceImpl implements EvlauateService {
 
 
     @Override
-    public List<Evlauate> findByDoctorId(String doctorId) {
-        return evlauateDao.findByDoctorId(doctorId);
-    }
-
-    @Override
-    @Transactional
-    public void delete(String id) {
-        evlauateDao.deleteById(id);
-    }
-
-    @Override
-    @Transactional
     public void add(Evlauate evlauate) {
         evlauate.setId(Utils.getUUID());
-        evlauate.setTimer(new Date());
-        System.out.println("操作失败!!!!!!!!!!!!!!!!!!!!!!!!!!!执行caseId插入操作!!!!!");
+        this.evlauateDao.save(evlauate);
+    }
 
-        if(true)return;//修改后注释该行
+    @Override
+    public List<Evlauate> findallnull() {
+        return this.evlauateDao.findallnull();
+    }
+
+    @Override
+    public Evlauate findbyid(String id) {
+        return this.evlauateDao.findById(id).get();
+    }
+
+    @Override
+    public void update(Evlauate evlauate) {
         evlauateDao.save(evlauate);
     }
-    //评价统计数量
-    public int countEvlauateByDoctorId(String doctorId){
-        return evlauateDao.findByDoctorId(doctorId).size();
+
+    @Override
+    public List<Evlauate> findallbyid(String doctorid) {
+        return this.evlauateDao.findallbyid(doctorid);
     }
 
+    @Override
+    public int findcount(String doctorid) {
+        return this.evlauateDao.findcountbyid(doctorid);
+    }
 }

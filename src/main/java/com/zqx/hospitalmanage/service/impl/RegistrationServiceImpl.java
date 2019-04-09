@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.rmi.CORBA.Util;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,26 +35,14 @@ public class RegistrationServiceImpl implements RegistrationService {
         return this.registrationDao.findAll();
     }
 
-    /*@Override//查询某一医生下的所有挂号信息
-    public List<Registration> getByDoctorId(String doctorId) {
-        return registrationDao.findByDoctorId(doctorId);
-    }
-
-    @Override//查询某一患者的所有挂号信息
-    public List<Registration> getByPatientName(String PatientName) {
-        return registrationDao.findByPatientName('%'+PatientName+'%');
-    }
-
-    //完成挂号，状态该为0
-    @Transactional
-    public void overRegistration(String id){
-        registrationDao.updateStatus(0,id);
+    @Override
+    public List<Registration> findByDoctorId(String doctorId, Date date) {
+        return this.registrationDao.findByDoctorId(doctorId,date);
     }
 
     @Override
-    public void addRegistration(Registration registration) {
-
-    }*/
-
+    public String fincount(String doctorid) {
+        return this.registrationDao.findcountbyid(doctorid);
+    }
 
 }

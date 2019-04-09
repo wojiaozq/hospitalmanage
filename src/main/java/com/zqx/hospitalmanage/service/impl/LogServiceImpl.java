@@ -25,7 +25,9 @@ public class LogServiceImpl implements LogService {
     @Override
     public void addlog(Log log) {
         log.setId(Utils.getUUID());
-        log.setTime(new Date());
+        Date t=new Date();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+         log.setTime( df.format(t));
         this.logDao.save(log);
     }
 }

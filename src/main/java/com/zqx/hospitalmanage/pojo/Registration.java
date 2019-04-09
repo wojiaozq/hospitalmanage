@@ -31,6 +31,7 @@ public class Registration {
   private String Identification;
   private String timedetails;
   private String cost;
+  private Date mytime;
 
   public String getId() {
     return id;
@@ -67,16 +68,17 @@ public class Registration {
   public String getPatientName() {
     return patientName;
   }
+
+  public void setPatientName(String patientName) {
+    this.patientName = patientName;
+  }
+
   public String getDoctorid() {
     return doctorid;
   }
 
   public void setDoctorid(String doctorid) {
     this.doctorid = doctorid;
-  }
-
-  public void setPatientName(String patientName) {
-    this.patientName = patientName;
   }
 
   public String getIdentification() {
@@ -101,5 +103,13 @@ public class Registration {
 
   public void setCost(String cost) {
     this.cost = cost;
+  }
+
+  public Date getMytime() {
+    return mytime;
+  }
+
+  public void setMytime(Date mytime) {
+    this.mytime = mytime;
   }
 }

@@ -85,9 +85,11 @@
 				</ul>
 				<div class="clear "></div>
 			</div>
+			<!--2016072719380487.jpg-->
 			<div class="bannerLeft ">
-				<img src='images/pic_temp.jpg' alt='呼吸内科' /><span class='import1'></span>
+				<img src='uploadfiles/thumb/2016072719380487.jpg' alt='呼吸内科' /><span class='import1'></span>
 			</div>
+
 			<div class="bannerRight ">
 				<div class="righttitle ">
 					<h1 th:text="${ad.name}">呼吸内科</h1>
@@ -99,8 +101,8 @@
 					<a class="blue " href="keshi.html ">返回科室导航</a>
 				</div>
 				<div class="righttel ">
-					<h2 id="H2Tel "></h2>
-					<h3 th:text="${ad.tel}">本科室电话 Telephone Number</h3></div>
+					<h2 id="H2Tel ">本科室电话</h2>
+					<h3 th:text="${ad.tel}"> Telephone Number</h3></div>
 			</div>
 			<div class="clear "></div>
 		</section>
@@ -123,13 +125,13 @@
 				<div class="clear "></div>
 			</div>
 			<div class="introRight ">
-				<div class="left "><img src="images/ksjj-1.gif " width="72 " height="105 " />
+				<div class="left "><img src="uploadfiles/thumb/2016090608460312.png " width="72 " height="105 " />
 					<h3 th:text="${ad.name}"></h3>
 					<span hidden th:text="${ad.id}"></span>
 					<h4 th:text="${ad.type}">INTRODUCTION</h4></div>
 				<div class="right ">
 					<h1 id="H1Type">国家临床重点专科</h1>
-					<p id="PDescription">我科始建于上世纪70年代初，
+					<p id="PDescription" th:text="${ad.remaker}">我科始建于上世纪70年代初，
 						目前为卫生部国家重点专科建设项目单位，山西省重点学科、
 						“山西省呼吸内科医疗质量控制中心”、“山西省呼吸疾病诊疗中心”、
 						“山西省睡眠呼吸障碍诊疗中心”、山西省睡眠呼吸疾病网路中心、
@@ -210,12 +212,11 @@
 			    var str = "";
 				for(var i=0;i<data.length;++i){
 				    str += "<li>";
-				    str += '<a href="#" class="img "><img src="/uploadfiles/thumb/2013102215395834.jpg " alt="'+data[i].name+'" title="'+data[i].name+'" width="120 " height="162 " /></a>';
+				    str += '<a href="#" class="img "><img src="uploadfiles/thumb/201603221527067.png  " alt="'+data[i].name+'" title="'+data[i].name+'" width="120 " height="162 " /></a>';
                     str += '<a href="#" class="name ">'+data[i].name+'</a>';
                     str += '<a href="# " class="office ">呼吸内科</a>';
 				    str += '<a href="#" class="post ">'+data[i].job+'</a>'
-					str += '<a href="ys.html " class="btn more ">详细</a>';
-				    str += '<a href="NewsDetail-449.html " target="_blank " class="btn date ">预约</a>';
+					str += '<a href="ys.html?id='+data[i].id+'" class="btn more ">详细</a>';
 				    str += "</li>";
 				}
 				$("#doc").html(str);

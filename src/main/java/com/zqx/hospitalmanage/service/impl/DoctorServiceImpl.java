@@ -204,4 +204,9 @@ public class DoctorServiceImpl implements DoctorService {
 		return doctorDao.findByAdministrativeId(AdministrativeId);
 	}
 
+    @Override
+    public int findcount(String status) {
+        return this.doctorDao.countAllByStatus(status);
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.zqx.hospitalmanage.service;
 
 import com.zqx.hospitalmanage.pojo.Doctor;
+import com.zqx.hospitalmanage.pojo.Log;
 import com.zqx.hospitalmanage.pojo.Page;
 
 import java.util.List;
@@ -43,4 +44,6 @@ public interface DoctorService {
     public List<Doctor> findAllStats();
 
     public List<Doctor> findAllByAdministrative(String AdministrativeId);
+
+    public int findcount(String status);
 }

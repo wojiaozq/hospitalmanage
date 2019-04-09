@@ -32,4 +32,9 @@ public class SolvePatientServiceImpl implements SolvePatientService {
         solvePatient.setId(Utils.getUUID());
         solvePatientDao.save(solvePatient);
     }
+
+    @Transactional
+    public void del(String id) {
+        solvePatientDao.delebyotherid(id);
+    }
 }

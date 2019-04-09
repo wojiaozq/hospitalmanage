@@ -34,14 +34,9 @@ public class DoctorController {
     //添加一名医生--注册
     @RequestMapping("save")
     @ResponseBody
-    public String addDoctor(Doctor doctor, Log log,HttpSession session){
+    public String addDoctor(Doctor doctor,HttpSession session){
         Doctor doctor1=(Doctor)session.getAttribute("user");
-        String peratorname=doctor1.getName();
-        log.setPeratorname(peratorname);
-        log.setContent("添加一名医生");
-       // System.out.println(doctor);
         doctorService.add(doctor);
-        logService.addlog(log);
         return "success";
     }
     //一名医生--修改
@@ -110,13 +105,17 @@ public class DoctorController {
     //删除一名医生
     @RequestMapping("delete")
     @ResponseBody
-    public String  delete(String id,Log log){
-
+    public String  delete(String id,Log log,HttpSession session){
+        Doctor user = (Doctor) session.getAttribute("user");
         doctorService.updateStatus(id);
+        Doctor doctor=doctorService.findOneById(id);
+        if (doctor.getStatus().equals("离职")){
+            log.setContent("恢复编号为"+id+"的医生");
+        }else{
+            log.setContent("删除编号为"+id+"的医生");
+        }
+        log.setOperator(user.getName());
         logService.addlog(log);
-       // log.setPeratorname();
-       /* log.setContent("删除一名医生");
-        logService.addlog(log);*/
         return "success";
     }
 

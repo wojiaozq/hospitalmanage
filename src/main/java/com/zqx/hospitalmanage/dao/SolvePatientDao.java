@@ -4,6 +4,7 @@ import com.zqx.hospitalmanage.pojo.SolvePatient;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
@@ -20,5 +21,8 @@ public interface SolvePatientDao extends JpaRepository<SolvePatient,String>, Jpa
     //查詢某個問題的所有回答
     @Query(nativeQuery = true,value = "select * from hospital.solve_patient where problem_id=?;")
     public List<SolvePatient> findAllByProblemId(String problemId);
-
+    //删除所有回答
+    @Modifying
+    @Query(nativeQuery=true,value="delete from solve_patient  where patient_id=?;")
+    public void delebyotherid(String patientId);
 }

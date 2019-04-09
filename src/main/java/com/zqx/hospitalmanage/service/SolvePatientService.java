@@ -15,8 +15,7 @@ public interface SolvePatientService {
 
     public List<SolvePatient> findAllByProblem(String problemId);
     public void add(SolvePatient solvePatient);
-
-
+    public void del(String id);
 
 
 }

@@ -17,7 +17,13 @@ import java.util.List;
  **/
 public interface EvlauateDao  extends JpaRepository<Evlauate,String>, JpaSpecificationExecutor<Evlauate> {
 
-    @Query(value = "select e.id id, e.context context, e.case_id case_id,e.timer timer from caseform c left join evlauate e on c.id = e.case_id and c.doctor_id = ?;",nativeQuery = true)
-    public List<Evlauate> findByDoctorId(String doctorId);
+    @Query(nativeQuery = true,value = "select * from evlauate where context is null")
+    public List<Evlauate> findallnull();
+
+    @Query(nativeQuery = true,value = "select * from evlauate where doctorid = ? and context is not null ")
+    public List<Evlauate> findallbyid(String doctorid);
+
+    @Query(nativeQuery = true,value = "select count(*) from evlauate where doctorid = ?")
+    public int findcountbyid(String doctorid);
 
 }

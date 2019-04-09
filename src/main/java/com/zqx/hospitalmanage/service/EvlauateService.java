@@ -13,10 +13,15 @@ import java.util.List;
  **/
 public interface EvlauateService {
 
-    public List<Evlauate> findByDoctorId(String doctorId);
-
-    public void delete(String id);
-
     public void add(Evlauate evlauate);
-    public int countEvlauateByDoctorId(String doctorId);
+
+    public List<Evlauate> findallnull();
+
+    public Evlauate findbyid(String id);
+
+    public void update(Evlauate evlauate);
+
+    public List<Evlauate> findallbyid(String doctorid);
+
+    public int findcount(String doctorid);
 }

@@ -42,7 +42,7 @@ public class LoginController {
             session.setAttribute("user",doctor);
             return "success";
         }
-        return "用户名或密码错误";
+        return "账号或密码错误";
     }
 
     @RequestMapping("getUser")
@@ -70,20 +70,23 @@ public class LoginController {
 //            session.setAttribute("user",user);
             return "success";
         }else {
-            return "您输入的原密码错误";
+            return "404.html";
         }
 
     }
 
     @RequestMapping("toplogin")
     public String setplogin(String identification,String password,HttpSession session){
-        Patient patient=patientService.findPlogin(identification,password);
-        if(patient!=null){
-            session.setAttribute("puser",patient);
-        }
-        if (patient.getIdentification().equals(identification)&&patient.getPassword().equals(password)){
-            return "index.html";
-        }
-        return "账号或密码错误";
+             if (patientService.findPlogin(identification,password)!=null) {
+                 Patient patient=patientService.findPlogin(identification,password);
+                 session.setAttribute("puser",patient);
+                 return "index.html";
+             }
+        return "404.html";
+    }
+
+    @RequestMapping("404.html")
+    public String error(){
+        return "404.html";
     }
 }

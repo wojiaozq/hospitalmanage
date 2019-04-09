@@ -29,7 +29,7 @@ public interface AnnouncementDao extends JpaRepository<Announcement,String>, Jpa
     public List<Announcement> findByReleaseTime(Date startDate, Date endDate);
 
     //根据某一个时间值，查询该时间当前时间的公告
-    @Query(nativeQuery = true,value = "select * from announcement where release_time >= ?;")
+    @Query(nativeQuery = true,value = "select * from announcement where release_time = ?;")
     public List<Announcement> findByGtReleaseTime(Date startDate);
 
     @Query(nativeQuery = true,value = "select * from announcement limit ?,?;")

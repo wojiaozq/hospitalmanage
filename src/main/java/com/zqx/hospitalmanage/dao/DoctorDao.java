@@ -72,5 +72,9 @@ public interface DoctorDao extends JpaRepository<Doctor,String >, JpaSpecificati
 
     @Query(nativeQuery = true,value = "select * from doctor where status = ?;")
     public List<Doctor> findAllByStatus(String status);
+
+    @Query(nativeQuery = true,value = "select count(*) from doctor where status = ?;")
+    public List<Doctor> findAllcount(String status);
+
     
 }

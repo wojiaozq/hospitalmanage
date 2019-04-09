@@ -5,12 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import java.io.Serializable;
 
 @Entity
 @Table(name = "Patient")
 public class Patient {
   @Id
+
   private String id;
   private String name;
   private String identification;

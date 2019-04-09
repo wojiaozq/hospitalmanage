@@ -21,7 +21,12 @@
 			<div class="topHidden"></div>
 			<div class="toolBase">
 				<div class="BaseMark">
+					<ul>
+						<li>
+							<a th:href="@{/pCancellation}">注销</a>
+						</li>
 
+					</ul>
 				</div>
 			</div>
 			<div class="BaseMark logoBase">
@@ -119,7 +124,7 @@
 								</form>
 							</div>
 							<div class="listBtn">
-								<a href="update_pamyself.html" target="_blank">修改密码</a>
+								<a href="updatepwd.html" target="_blank">修改密码</a>
 								<a href="update_pamyself.html" target="_blank">修改个人信息</a>
 							</div>
 							<div class="listBtn">
@@ -142,6 +147,7 @@
 											<th scope="col">预约时间</th>
 											<th scope="col">科室</th>
 											<th scope="col">医生</th>
+											<th scope="col">挂号费用</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -149,6 +155,7 @@
 											<td th:text="${res.timedetails}"></td>
 											<td th:text="${res.administrativeName}"></td>
 											<td th:text="${res.doctorName}"></td>
+											<td th:text="${res.cost}"></td>
 										</tr>
 									</tbody>
 								</table>
@@ -168,20 +175,14 @@
 								<table class="table">
 									<thead>
 										<tr>
-											<th scope="col">就诊时间</th>
-											<th scope="col">科室</th>
-											<th scope="col">医生</th>
-											<th scope="col">我的评价</th>
-											<th scope="col">操作</th>
+											<th >医生姓名</th>
+											<th >操作</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td>Mark</td>
-											<td>Otto</td>
-											<td>@mdo</td>
-											<td>@mdo</td>
-											<td><a>写评价</a></td>
+										<tr th:each="eva :${ev}">
+											<td th:text="${eva.doctorname}"></td>
+											<td><a th:href="@{/findpingjiabyid(id=${eva.id})}">写评价</a></td>
 										</tr>
 									</tbody>
 								</table>
@@ -191,22 +192,13 @@
 					</ul>
 				</div>
 				<div class="clear"></div>
-				<div class="title01">我的问题</div>
+				<div class="title01">提问记录</div>
 				<div class="clear"></div>
 				<div class="newList">
-					<ul>
+					<ul id="ulP">
 						<li>
 							<div class="headLines">
-								<a href="newslist.html" title="互联智慧疼痛医联体全面启动" target="_blank" class="title">互联智慧疼痛医联体全面启动</a>
-								<p>12月24日-25日，“国家临床重点专科?中日医院疼痛医联体”启动仪式、“医院标题互联智慧疼痛医联体”成立仪式暨疼痛诊疗规范化培训班在巩义市人民医院举行。</p>
-							</div>
-							<div class="date">
-								<h3>发布时间</h3>
-								<h4>2016/12/29</h4>
-							</div>
-							<div class="listBtn">
-								<a href="newslist.html" title="互联智慧疼痛医联体全面启动" target="_blank">进入</a>
-								<a href="newslist.html" title="互联智慧疼痛医联体全面启动" target="_blank">删除</a>
+								<p>暂无</p>
 							</div>
 							<div class="clear"></div>
 						</li>
@@ -228,19 +220,19 @@
 				<div class="info">主办单位：医院标题 &nbsp; &nbsp;综合服务电话：120&nbsp;&nbsp; &nbsp;急救中心电话：120 &nbsp; 传真：120 &nbsp; 地 址：地址地址地址 &nbsp;<br/> 版权所有：医院标题 </div>
 				<ul>
 					<li class="first">
-						<a href="jianjie.html" target="_blank">关于我们</a>
+						<a href="#" target="_blank">关于我们</a>
 					</li>
 					<li>
-						<a href="Declaration.html" target="_blank">法律声明</a>
+						<a href="#" target="_blank">法律声明</a>
 					</li>
 					<li>
-						<a href="SiteMap.html" target="_blank">网站地图</a>
+						<a href="#" target="_blank">网站地图</a>
 					</li>
 					<li>
-						<a href="Article-57.html" target="_blank">联系我们</a>
+						<a href="#" target="_blank">联系我们</a>
 					</li>
 					<li>
-						<a href="Complain.html" target="_blank">院长(信访)信箱</a>
+						<a href="#" target="_blank">院长(信访)信箱</a>
 					</li>
 				</ul>
 				<div class="clear"></div>
@@ -257,7 +249,7 @@
 		<script language="javascript" type="text/javascript" src="js/Kunyi.Secondary.js"></script>
 		<script language="javascript" type="text/javascript" src="js/Kunyi.News.js"></script>
 
-		<script src="lib/jquery.1.9.1/jquery.min.js"></script>
+		<!-- <script src="lib/jquery.1.9.1/jquery.min.js"></script>-->
 		<script>
 			$(function () {
 				$.get("doctor/allStatus",function(data){
@@ -293,7 +285,7 @@
 							str += ' <div class="date"> <h3>发布时间</h3>  <h4>'+data[i].time.substr(0,10)+'</h4>      </div>';
 							str += ' <div class="listBtn">' +
 									'                     <a href="newslist.html?id='+data[i].id+'" title="'+data[i].head+'" target="_blank">进入</a>' +
-									'                     <a href="newslist.html?id='+data[i].id+'" title="'+data[i].head+'" target="_blank">删除</a>' +
+									'                     <a href="deleteprogreambyid?id='+data[i].id+'" title="'+data[i].head+'" >删除</a>' +
 									'                     </div>' +
 									'                     <div class="clear"></div>' +
 									'                     </li>';
