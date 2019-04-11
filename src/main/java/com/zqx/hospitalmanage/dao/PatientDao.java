@@ -31,9 +31,8 @@ public interface PatientDao  extends JpaRepository<Patient,String>, JpaSpecifica
     @Query(nativeQuery = true,value = "update Patient set password = ? where id =?;")
     public void updatePassword(String password, String id);
 
-    /*@Query(nativeQuery = true,value = "select * from (select p.name,p.Identification,p.sex,p.age,p.tel,p.address,r.timedetails,r.doctor_id ,r.mytime from\n" +
-            " Patient p, registration r where p.id=r.patient_id) as c where doctor_id= ? AND mytime>= ?;")
-    public List<PatientreVo> findAllpareginfo(String doctorid, Date date);*/
+    @Query(nativeQuery = true,value = "select * from Patient where identification = ? ")
+    public Patient findByident(String identification);
 
 
 }

@@ -23,7 +23,7 @@
 			<div class="topHidden"></div>
 			<div class="toolBase">
 				<div class="BaseMark">
-					<ul>
+					<ul id="myul">
 						<li>
 							<a href="plogin.html">登录</a>
 						</li>
@@ -243,17 +243,6 @@
 		$(function () {
 			$.get("doctor/allStatus",function(data){
 			    console.log(data);
-			    /**
-				 * <li>
-                 <a href="ys.html " target="_blank "><img src="uploadfiles/thumb/201603221527067.png " class="load " width="120 " height="162 " title="医生 " alt="医生 "></a>
-                 <a href="ys.html " target="_blank " title="医生 " class="ATitle ">医生</a>
-                 <h4>主任医师，科主任</h4>
-                 <p>医院标题呼吸内科科主任……</p>
-                 <div>
-                 <a class="coffee " target="_blank " href="ys.html ">详细</a>
-                 <a class="green " href="# " target="_blank ">预约</a>
-                 </div>
-                 </li>*/
 			    var str = "";
 			    for(var i = 0;i<data.length;++i){
 			        str += "<li>";
@@ -263,13 +252,36 @@
 			        str += '<p>'+data[i].job+'</p>';
 			        str += '<span hidden>'+data[i].id+'</span>';
 			        str += '<div> <a class="coffee " target="_blank " href="ys.html?id=' ;
-					str += data[i].id+' ">详细</a> <a class="green " href="# " target="_blank ">预约</a> </div> </li>';
+					str += data[i].id+' ">详细</a> </div> </li>';
 				}
 
 			    $("#lia").html(str);
 
 			});
+
+			$.get("index",function(data){
+				if(data == null ||data == ""){
+					return "";
+				}else{
+					var str = data;
+					/*for(var i = 0;i<data.length;++i){
+						str += "<li>";
+						str += "<a th:href=\"@{/pCancellation}\">注销</a>";
+						str += '</li>';
+					}*/
+					$("#myul").html(str);
+				}
+			})
         });
+
+		function f() {
+			$.get("pCancellation",function(data){
+				if(data != null ||data != ""){
+					alert("注销成功");
+					location.href="index.html";
+				}
+			})
+		}
 
 	</script>
 </html>

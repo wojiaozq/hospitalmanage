@@ -55,10 +55,16 @@
 				 	$ = layui.jquery;
 				//自定义验证规则
 			;
+			var sc = drawPic();
 
                 $("#login").click(function () {
 					var yzm=document.getElementById('verity').value;
 				//	alert(yzm);
+					//alert(sc);
+					//alert("newY="+newY);
+					if(newY != ""){
+						sc = newY;
+					}
 					if(yzm!=sc){
 						alert("验证码错误",'',function () {
 							location.reload();
@@ -93,10 +99,9 @@
 			//先阻止画布默认点击发生的行为再执行drawPic()方法
 			document.getElementById("canvas").onclick = function(e) {
 				e.preventDefault();
-				drawPic();
+				newY = drawPic();
 			};
-
-
+			var newY;
 
 			function drawPic() {
 				//获取到元素canvas
@@ -142,9 +147,6 @@
 				}
 				return _picTxt; //返回随机数字符串
 			}
-
-			sc=drawPic();
-			console(sc);
 
 		</script>
 	</body>

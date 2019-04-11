@@ -16,15 +16,12 @@ import java.util.List;
  **/
 public interface RegistrationService {
 
-    /*
-    public List<Registration> getByPatientName(String PatientName) ;
-    public void overRegistration(String id);*/
 
     public void addRegistration(Registration registration);
     public List<Registration>findallRegis();
     public List<Registration> findByDoctorId(String doctorId, Date date) ;
-    public String fincount(String doctorid);
-
-
-
+    public List<Registration>findabypid(String patientId);
+    public int finddoctorallcount(String doctorid);
+    public int finddoctorlastcount(String doctorid,Date date);
+    public int seltimecount(String doctorid,Date date);
 }

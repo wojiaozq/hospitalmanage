@@ -27,21 +27,30 @@
 										<span class="iconfont">&#xe606;</span>
 									</div>
 									<div class="right-text-con">
-										<p class="name">评价总数</p>
-										<!--th:if="${#strings.contains(ds.day01,'上午')}"-->
-										<p><span class="color-org">1</span>数量<span class="iconfont">&#xe628;</span></p>
+										<p class="name">评论总数</p>
+										<p><span class="color-org" id="evcount">0</span>数据<span class="iconfont">&#xe628;</span></p>
 									</div>
 								</a>
 							</li>
-
+							<li class="col-sm-12 col-md-4 col-xs-12">
+								<a href="javascript:;" class="clearfix">
+									<div class="icon-bg bg-blue f-l">
+										<span class="iconfont">&#xe602;</span>
+									</div>
+									<div class="right-text-con">
+										<p class="name">最近预约</p>
+										<p><span class="color-blue" id="lastre">0</span>数据<span class="iconfont">&#xe60f;</span></p>
+									</div>
+								</a>
+							</li>
 							<li class="col-sm-12 col-md-4 col-xs-12">
 								<a href="javascript:;" class="clearfix">
 									<div class="icon-bg bg-green f-l">
 										<span class="iconfont">&#xe605;</span>
 									</div>
 									<div class="right-text-con">
-										<p class="name">最近预约</p>
-										<p><span class="color-green">3</span>数据<span class="iconfont">&#xe60f;</span></p>
+										<p class="name">累计挂号数</p>
+										<p><span class="color-green" id="reallcount">7</span>数据<span class="iconfont">&#xe60f;</span></p>
 									</div>
 								</a>
 							</li>
@@ -68,6 +77,38 @@
 				var layer 	= layui.layer;
 				var $=layui.jquery;
 			});
+
+			$(function () {
+				$.get("doctor/findlast",function(data){
+					if(data == null ||data == ""){
+						return "";
+					}else{
+						var str = data;
+						$("#evcount").text(str);
+					}
+				})
+
+				$.get("doctor/findreconutall",function(data){
+					if(data == null ||data == ""){
+						return "";
+					}else{
+						var str = data;
+						$("#lastre").text(str);
+					}
+				})
+
+				$.get("doctor/findevcountall",function(data){
+					if(data == null ||data == ""){
+						return "";
+					}else{
+						var str = data;
+						console.log(data);
+						$("#reallcount").text(str);
+					}
+				})
+
+			});
+
 
 		</script>
 	</body>

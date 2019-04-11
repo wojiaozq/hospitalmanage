@@ -20,7 +20,7 @@
 			<div class="topHidden"></div>
 			<div class="toolBase">
 				<div class="BaseMark">
-					<ul>
+					<ul id="myul">
 						<li>
 							<a href="plogin.html">登录</a>
 						</li>
@@ -60,10 +60,10 @@
 							<a href="index.html" class="PAMenu">首页</a>
 						</li>
 						<li class="PMenu"><img src="images/ico_014.png" class="animated" width="15" height="8" />
-							<a href="#" id="Nav_AMenu0" class="PAMenu" title="院系公告">院系公告</a>
+							<a href="notice.html" id="Nav_AMenu0" class="PAMenu" title="院系公告">院系公告</a>
 						</li>
 						<li class="PMenu"><img src="images/ico_014.png" class="animated" width="15" height="8" />
-							<a href="#" class="PAMenu" title="交流论坛">交流论坛</a>
+							<a href="luntan.html" class="PAMenu" title="交流论坛">交流论坛</a>
 						</li>
 						<li class="PMenu"><img src="images/ico_014.png" class="animated" width="15" height="8" />
 							<a href="geren.html"  class="PAMenu" title="个人中心">个人中心</a>
@@ -172,25 +172,9 @@
 	</body>
 	<script>
 		$(function () {
+
 			$.get("problem/all",function (data) {
 			    var str = "";
-			    /***
-                 <li>
-                 <div class="headLines">
-                 <a href="newslist.html" title="互联智慧疼痛医联体全面启动" target="_blank" class="title">互联智慧疼痛医联体全面启动</a>
-                 <p>12月24日-25日，“国家临床重点专科?中日医院疼痛医联体”启动仪式、“医院标题互联智慧疼痛医联体”成立仪式暨疼痛诊疗规范化培训班在巩义市人民医院举行。</p>
-                 </div>
-                 <div class="date">
-                 <h3>发布时间</h3>
-                 <h4>2016/12/29</h4>
-                 <p>阅览次数<span>280</span></p>
-                 </div>
-                 <div class="listBtn">
-                 <a href="newslist.html" title="互联智慧疼痛医联体全面启动" target="_blank">进入</a>
-                 </div>
-                 <div class="clear"></div>
-                 </li>
-				 */
                 for (var i = 0; i < data.length; i++) {
 					str += "<li><div class=\"headLines\">";
 					str += ' <a href="newslist.html" title="'+data[i].head+'" target="_blank" class="title">'+data[i].head+'</a>';
@@ -206,7 +190,30 @@
 			    $("#ulP").html(str);
 
             })
+
+			$.get("index",function(data){
+				if(data == null ||data == ""){
+					return "";
+				}else{
+					var str = data;
+					/*for(var i = 0;i<data.length;++i){
+						str += "<li>";
+						str += "<a th:href=\"@{/pCancellation}\">注销</a>";
+						str += '</li>';
+					}*/
+					$("#myul").html(str);
+				}
+			})
         })
+
+		function f() {
+			$.get("pCancellation",function(data){
+				if(data != null ||data != ""){
+					alert("注销成功");
+					location.href="index.html";
+				}
+			})
+		}
 
 	</script>
 

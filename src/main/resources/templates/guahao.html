@@ -4,7 +4,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
 		<meta name="renderer" content="webkit" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<title>省医快讯 - 新闻动态 - 医院标题</title>
+		<title>生成挂号单</title>
 		<meta name="robots" content="All" />
 		<noscript><meta http-equiv="refresh" content="0; url=/noscript.htm" /></noscript>
 		<link rel="icon" href="favicon.ico" type="image/x-icon" />
@@ -77,35 +77,35 @@
 					<ul>
 						<li>
 							<div class="headLines">
-								<form class="form form-horizontal" action="registration/addguahao" method="post">
+								<form class="form form-horizontal" >
 									<div class="row cl">
 										<label class="form-label col-xs-4 col-sm-2">挂号单编号：</label>
 										<div class="formControls col-sm-3">
-											<input type="text" class="input-text" th:value="${myreg.id}" style="border: none;" name="id" readonly="true">
+											<input type="text" class="input-text" th:value="${myreg.id}" style="border: none;" id="id" readonly="true">
 										</div>
 										<label class="form-label col-xs-1 col-sm-2">预约时间：</label>
 										<div class="formControls col-xs-2 col-sm-3">
-											<input type="text" class="input-text" th:value="${myreg.timedetails}"   name="timedetails" style="border: none;" readonly="true">
+											<input type="text" class="input-text" th:value="${myreg.timedetails}"   id="timedetails" style="border: none;" readonly="true">
 										</div>
 									</div>
 									<div class="row cl">
 										<label class="form-label col-xs-4 col-sm-2">姓名：</label>
 										<div class="formControls col-sm-3">
-											<input type="text" class="input-text" th:value="${myreg.patientName}" style="border: none;"  name="patientName" readonly="true">
+											<input type="text" class="input-text" th:value="${myreg.patientName}" style="border: none;"  id="patientName" readonly="true">
 										</div>
 										<label class="form-label col-xs-1 col-sm-2">身份证号：</label>
 										<div class="formControls col-xs-2 col-sm-3">
-											<input type="text" class="input-text" th:value="${myreg.identification}"  name="identification" style="border: none;" readonly="true">
+											<input type="text" class="input-text" th:value="${myreg.identification}"  id="identification" style="border: none;" readonly="true">
 										</div>
 									</div>
 									<div class="row cl">
 										<label class="form-label col-xs-4 col-sm-2">医生姓名：</label>
 										<div class="formControls col-sm-3">
-											<input type="text" class="input-text" th:value="${myreg.doctorName}"  name="doctorName" style="border: none;" readonly="true">
+											<input type="text" class="input-text" th:value="${myreg.doctorName}"  id="doctorName" style="border: none;" readonly="true">
 										</div>
 										<label class="form-label col-xs-1 col-sm-2">科室：</label>
 										<div class="formControls col-xs-2 col-sm-3">
-											<input type="text" class="input-text" th:value="${myreg.administrativeName}" name="administrativeName" style="border: none;" readonly="true">
+											<input type="text" class="input-text" th:value="${myreg.administrativeName}" id="administrativeName" style="border: none;" readonly="true">
 										</div>
 									</div>
 									<div class="row cl">
@@ -115,17 +115,19 @@
 										</div>
 										<label class="form-label col-xs-1 col-sm-2">挂号费用：</label>
 										<div class="formControls col-xs-2 col-sm-3">
-											<input type="text" class="input-text" th:value="${myreg.cost}" style="border: none;" readonly="true" name="cost">
-											<input type="text" class="input-text" th:value="${myreg.doctorid}" style="border: none;"  name="doctorid" hidden>
-											<input type="text" class="input-text" th:value="${myreg.patientId}" style="border: none;"  name="patientId" hidden>
-											<input type="text" class="input-text" th:value="${myreg.mytime}" style="border: none;"  name="mytime" hidden>
+											<input type="text" class="input-text" th:value="${myreg.cost}" style="border: none;" readonly="true" id="cost">
+											<input type="text" class="input-text" th:value="${myreg.doctorid}" style="border: none;"  id="doctorid" hidden>
+											<input type="text" class="input-text" th:value="${myreg.patientId}" style="border: none;"  id="patientId" hidden>
+											<input type="text" class="input-text" th:value="${myreg.mytime}" style="border: none;"  id="mytime" hidden>
 										</div>
-                                        <button type="submit" style="width: 120px;background: #4fc5c4; color: #fff;" > 确认支付</button>
 									</div>
 									<div class="row cl">
 										<label class="form-label col-xs-4 col-sm-2"><b>病人注意</b></label><br />
 										<span>1：本挂号单号当日有效，请按上午下午时间段有序就诊，欠费永久记录电脑，在窗口付费补收</span><br/>
 
+									</div>
+									<div class="listBtn">
+										<a href="javascript:;" id="commit" target="_blank">确认支付</a>
 									</div>
 								</form>
 							</div>
@@ -141,6 +143,36 @@
 		<script language="javascript" type="text/javascript" src="js/Kunyi.Common.js"></script>
 		<script language="javascript" type="text/javascript" src="js/Kunyi.Secondary.js"></script>
 		<script language="javascript" type="text/javascript" src="js/Kunyi.News.js"></script>
-
 	</body>
+	<script>
+		$(function () {
+
+			$("#commit").click(function () {
+				var id = $("#id").val();
+				var timedetails = $("#timedetails").val();
+				var patientName = $("#patientName").val();
+				var identification = $("#identification").val();
+				var doctorName = $("#doctorName").val();
+				var administrativeName = $("#administrativeName").val();
+				var cost = $("#cost").val();
+				var doctorid = $("#doctorid").val();
+				var patientId = $("#patientId").val();
+				var mytime = $("#mytime").val();
+				$.get("registration/addguahao?id="+id+'&timedetails='+timedetails+'&patientName='+patientName+
+						'&identification='+ identification+'&doctorName='+doctorName+'&administrativeName='+ administrativeName+
+						'&cost='+cost+ '&doctorid='+doctorid +'&patientId='+patientId+'&mytime='+mytime, function(data){
+					if(data == 'success'){
+						alert('挂号成功');
+						location.href="geren.html";
+					}if (data == 'tolong'){
+						alert('当前时间段预约人数太多，请选择其他时间段');
+						location.href="keshiys.html";
+					} if(data == 'error'){
+						alert('预约时间有误，请重新选择');
+						location.href='keshiys.html';
+					}
+				});
+			});
+		});
+	</script>
 </html>

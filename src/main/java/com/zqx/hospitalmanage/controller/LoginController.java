@@ -77,11 +77,14 @@ public class LoginController {
 
     @RequestMapping("toplogin")
     public String setplogin(String identification,String password,HttpSession session){
-             if (patientService.findPlogin(identification,password)!=null) {
-                 Patient patient=patientService.findPlogin(identification,password);
-                 session.setAttribute("puser",patient);
-                 return "index.html";
-             }
+        Patient puser = (Patient)session.getAttribute("puser");
+        if(puser!=null){
+            session.removeAttribute("puser");
+        } if (patientService.findPlogin(identification,password)!=null) {
+            Patient patient=patientService.findPlogin(identification,password);
+            session.setAttribute("puser",patient);
+            return "index.html";
+        }
         return "404.html";
     }
 

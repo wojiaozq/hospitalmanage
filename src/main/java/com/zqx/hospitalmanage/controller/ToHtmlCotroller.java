@@ -2,7 +2,6 @@ package com.zqx.hospitalmanage.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.zqx.hospitalmanage.pojo.*;
-import com.zqx.hospitalmanage.pojo.vo.PatientreVo;
 import com.zqx.hospitalmanage.service.*;
 import com.zqx.hospitalmanage.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,10 +36,7 @@ public class ToHtmlCotroller {
     private AnnouncementService announcementService;
     @Autowired
     private PatientService patientService;
-    @Autowired
-    private CaseformService caseformService;
-    @Autowired
-    private ArticleService articleService;
+
     @Autowired
     private LogService logService;
     @Autowired
@@ -71,6 +67,7 @@ public class ToHtmlCotroller {
         }
         return "myindex.html";
     }
+
     @RequestMapping("getMenu")
     @ResponseBody
     public String getMenu(HttpSession session){
@@ -80,7 +77,6 @@ public class ToHtmlCotroller {
         }
         List<Role> role = user.getRole();
         Role role1 = role.get(0);
-//        role1.getName()
         List<Menu> all = menuService.findAll(role1.getId());
         Object o = JSONObject.toJSON(all);
         System.out.println(o.toString());
@@ -95,11 +91,9 @@ public class ToHtmlCotroller {
         }
         List<Role> role = user.getRole();
         Role role1 = role.get(0);
-//        role1.getName()
         List<Menu> all = menuService.findAll(role1.getId());//menu
         model.addAttribute("menu",all);
         return all;
-
     }
 
     @RequestMapping("Doctor_management.html")
@@ -113,7 +107,7 @@ public class ToHtmlCotroller {
     public String  getAllpatient(Model model){
         List<Patient> list = patientService.findAllpatient();
         model.addAttribute("puser",list);
-        return "Patient_management.html";
+        return "/Patient_management.html";
     }
 
     //根据姓名查找病人
@@ -138,12 +132,32 @@ public class ToHtmlCotroller {
         if(page.equals("index")||page.equals("index.html")||page.equals("keshi.html")||page.equals("keshimx.html")||page.equals("keshiys.html")||page.equals("notice.html")||page.equals("plogin.html")||page.equals("preg.html")||page.equals("luntan.html")||page.equals("news.html")||page.equals("404.html")){
             return page;
         }
-
         Object user = session.getAttribute("user");
         if(user==null){
             return "您还未登录，请登录";//===>页面
         }
         return page;
+    }
+
+    @RequestMapping("index")
+    @ResponseBody
+    public String cometoindex(HttpSession session){
+        Patient puser = (Patient)session.getAttribute("puser");
+        if(puser==null){
+            return "<li><a href=\"plogin.html\">登录</a> </li><li><a href=\\\"plogin.html\\\">注册</a> </li>";//===>页面
+        }else {
+            return "<li><a onclick=\"f()\">注销</a>\n</li>";
+        }
+    }
+    @RequestMapping("welcome")
+    @ResponseBody
+    public String hunaying(HttpSession session){
+        Patient puser = (Patient)session.getAttribute("puser");
+        if(puser!=null){
+            return "欢迎你"+puser.getName();
+        }else {
+            return "快捷菜单";
+        }
     }
 
     //根据id查找公告
@@ -159,8 +173,6 @@ public class ToHtmlCotroller {
     public String selectpatientById(String id,Model model){
         Patient patient=this.patientService.selepatient(id);
         model.addAttribute("pat",patient);
-        Caseform caseform=this.caseformService.findbypid(id);
-        model.addAttribute("case",caseform);
         return "/update_patient.html";
     }
 
@@ -218,18 +230,22 @@ public class ToHtmlCotroller {
         }
         String identification=puser.getIdentification();
         String password=puser.getPassword();
+        String pid=puser.getId();
         patient.setIdentification(identification);
         patient.setPassword(password);
         Patient patient1=this.patientService.findPlogin(identification,password);
-        List<Registration> list=this.registrationService.findallRegis();
+        List<Registration> list=this.registrationService.findabypid(pid);
         List<Evlauate> list1=this.evlauateService.findallnull();
+        List<Evlauate> list2 =this.evlauateService.finbypid(pid);
         model.addAttribute("ev",list1);
         model.addAttribute("pt",patient1);
         model.addAttribute("re",list);
+        model.addAttribute("myhis",list2);
         return "geren.html";
 
     }
 
+    //进入提问页面
     @RequestMapping("tiwen.html")
     public String findtiwen(HttpSession session){
         Patient puser = (Patient)session.getAttribute("puser");
@@ -238,6 +254,7 @@ public class ToHtmlCotroller {
         }
         return "tiwen.html";
     }
+
     //删除问题
     @RequestMapping("deleteprogreambyid")
     public String delbyid(String id){
@@ -246,6 +263,7 @@ public class ToHtmlCotroller {
         return "redirect:/geren.html";
     }
 
+    //自己修改信息
     @RequestMapping("update_pamyself.html")
     public String updatepatient(Patient patient, Model model,HttpSession session){
         Patient puser = (Patient)session.getAttribute("puser");
@@ -276,14 +294,13 @@ public class ToHtmlCotroller {
 
     @RequestMapping("plogin.html")
     public String toplogin(){
-
         return "plogin.html";
     }
+
     //请求挂号
     @RequestMapping("a")
     @ResponseBody
     public String addguahao(HttpSession session,String doctorname,String administrativeName,String doctorid,String startTime,Integer hang,Integer lie) throws ParseException {
-
         Patient puser = (Patient)session.getAttribute("puser");
         if(puser==null){
             return "/plogin.html";//===>页面
@@ -321,12 +338,10 @@ public class ToHtmlCotroller {
         registration.setTimedetails(thetime);
         registration.setDoctorid(did);
         registration.setIdentification(puser.getIdentification());
-
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
        // newtime = sdf.format(new Date());
         Date date=sdf.parse(newtime);
         registration.setMytime(date);//字符串类型转日期类型
-
         registration.setCost("20元");
         model.addAttribute("myreg",registration);
         return "guahao.html";
@@ -344,8 +359,9 @@ public class ToHtmlCotroller {
     @RequestMapping("Cancellation")
     public String zhuxiao(HttpSession session){
         session.removeAttribute("user");
-        return "tologin";
+        return "redirect:/tologin";
     }
+
     //前端注销登录
     @RequestMapping("pCancellation")
     public String dengchu(HttpSession session){
@@ -354,7 +370,7 @@ public class ToHtmlCotroller {
             session.removeAttribute("puser");
             return "redirect:/plogin.html";
         }
-        return "index.html";
+        return "redirect:/index.html";
     }
 
     @RequestMapping("findpingjiabyid")
@@ -367,7 +383,7 @@ public class ToHtmlCotroller {
         model.addAttribute("evla",evlauate);
         return "pingjia.html";
     }
-
+    //修改评价
     @RequestMapping("updatepingjia")
     public String updatepingjia(String id,String context,Evlauate evlauate,String fangshi,HttpSession session){
         evlauate.setContext(context);
@@ -390,6 +406,7 @@ public class ToHtmlCotroller {
         return "pingjia.html";
     }
 
+    //查找所有公告
     @RequestMapping("findgonggaobyid")
     public String selgonggaobyid(String id,Model model){
         Announcement announcement=announcementService.findById(id);
@@ -397,14 +414,15 @@ public class ToHtmlCotroller {
         return "/noticeshow.html";
     }
 
+    //修改密码
     @RequestMapping("uppatientpwd")
     @ResponseBody
     public String uppssword(String pwd1,String pwd2,HttpSession session){
         Patient puser = (Patient)session.getAttribute("puser");
         if (pwd1.equals(pwd2)){
-            String id=puser.getId();
             String password=pwd1;
-            patientService.uppwd(id,password);
+            patientService.uppwd(password,puser.getId());
+            session.removeAttribute("puser");
             return "success";
         }
         return "error";
@@ -416,6 +434,7 @@ public class ToHtmlCotroller {
         return "updatepwd.html";
     }
 
+    //展示所有评论
     @RequestMapping("My_evaluation")
     public String selallbydoctorid(HttpSession session,Model model){
         Doctor user = (Doctor) session.getAttribute("user");
@@ -425,12 +444,14 @@ public class ToHtmlCotroller {
         return "My_evaluation.html";
     }
 
+    //查找医生旗下所有评论
     @RequestMapping("findevbyid")
     public String selevbyid(String id,Model model){
        Evlauate evlauate = this.evlauateService.findbyid(id);
         model.addAttribute("theev",evlauate);
         return "/showevlauate.html";
     }
+
     //查询挂号记录
     @RequestMapping("Article_record.html")
     public String findguahao(HttpSession session,Model model){
@@ -441,6 +462,7 @@ public class ToHtmlCotroller {
         model.addAttribute("gua",mylist);
         return "/Article_record.html";
     }
+
     //医生查看挂号病人信息
     @RequestMapping("finddetils")
     public String selpatient(String patientId,Model model){
@@ -449,4 +471,13 @@ public class ToHtmlCotroller {
         model.addAttribute("mypat",patient);
         return "/showpatient.html";
     }
+
+    //病人删除评价
+    @RequestMapping("deltheev")
+    public String delbypid(String pid){
+        this.evlauateService.delbypid(pid);
+        return "geren.html";
+    }
+
+
 }

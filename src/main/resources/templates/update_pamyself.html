@@ -20,21 +20,6 @@
 <header>
     <div class="topHidden"></div>
     <div class="toolBase">
-        <div class="BaseMark">
-            <ul>
-                <li>
-                    <a href="Office-71.html">登录/注册</a>
-                </li>
-                <li>
-                    <a href="History.html">网上院史馆</a>
-                </li>
-
-            </ul>
-            <div class="language">选择语言</div>
-            <div class="langBtn animated"><i class="flag"></i>中文<i class="downBtn"></i>
-                <a href="javasript:;"><img src="images/ico_003.png" class="animated" width="13" height="13" />English</a>
-            </div>
-        </div>
     </div>
     <div class="BaseMark logoBase">
         <a href="Index.html"><img src="images/logo.jpg" class="load" /></a>
@@ -98,17 +83,22 @@
                             <div class="row cl">
                                 <label class="form-label col-xs-4 col-sm-2">姓名：</label>
                                 <div class="formControls col-sm-3">
-                                    <input type="text" class="input-text" th:value="${pt.name}"   name="name" >
+                                    <input type="text" class="input-text" th:value="${pt.name}"  name="name" >
                                 </div>
-                                <label class="form-label col-xs-1 col-sm-2">账号：</label>
+                                <label class="form-label col-xs-1 col-sm-2">性别：</label>
                                 <div class="formControls col-xs-2 col-sm-3">
-                                    <input type="text" class="input-text" th:value="${pt.identification}"   name="identification">
+                                 <!--<input type="text" class="input-text" th:value="${pt.sex}"  name="sex">-->
+				                   <span class="select-box">
+				                    <select name="sex" class="select">
+				                	<option value="男">男</option>
+				                	<option value="女">女</option>
+				                </select></span>
                                 </div>
                             </div>
                             <div class="row cl">
-                                <label class="form-label col-xs-4 col-sm-2">密码：</label>
+                                <label class="form-label col-xs-4 col-sm-2">年龄：</label>
                                 <div class="formControls col-sm-3">
-                                    <input type="password" class="input-text" th:value="${pt.password}"  name="password">
+                                    <input type="text" class="input-text" th:value="${pt.age}"  name="age">
                                 </div>
                                 <label class="form-label col-xs-1 col-sm-2">手机号：</label>
                                 <div class="formControls col-xs-2 col-sm-3">
@@ -118,9 +108,9 @@
                             <div class="row cl">
                                 <label class="form-label col-xs-4 col-sm-2">家庭住址：</label>
                                 <div class="formControls col-sm-3">
-                                    <input type="text" class="input-text" th:value="${pt.address}"   name="address">
-                                    <input type="text" class="input-text" th:value="${pt.sex}"   name="sex" hidden>
-                                    <input type="text" class="input-text" th:value="${pt.age}"   name="age" hidden>
+                                    <input type="text" class="input-text" th:value="${pt.address}"  name="address">
+                                    <input type="text" class="input-text" th:value="${pt.identification}" name="identification" hidden>
+                                    <input type="text" class="input-text" th:value="${pt.password}"  name="password" hidden>
                                 </div>
 
                             </div><br/>

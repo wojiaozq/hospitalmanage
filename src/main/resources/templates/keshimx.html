@@ -223,6 +223,14 @@
             });
         })
 
+		function f() {
+			$.get("pCancellation",function(data){
+				if(data != null ||data != ""){
+					alert("注销成功");
+					location.href="index.html";
+				}
+			})
+		}
 	</script>
 
 

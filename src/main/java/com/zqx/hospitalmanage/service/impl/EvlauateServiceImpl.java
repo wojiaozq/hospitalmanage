@@ -55,4 +55,14 @@ public class EvlauateServiceImpl implements EvlauateService {
     public int findcount(String doctorid) {
         return this.evlauateDao.findcountbyid(doctorid);
     }
+
+    @Override
+    public List<Evlauate> finbypid(String pid) {
+       return this.evlauateDao.findallbypatientid(pid);
+    }
+
+    @Override
+    public void delbypid(String pid) {
+        this.evlauateDao.delBypidev(pid);
+    }
 }

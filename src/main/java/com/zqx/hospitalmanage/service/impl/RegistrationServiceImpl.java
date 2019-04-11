@@ -41,8 +41,24 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     @Override
-    public String fincount(String doctorid) {
+    public List<Registration> findabypid(String patientId) {
+        return this.registrationDao.findbypatientid(patientId);
+    }
+
+    @Override
+    public int finddoctorallcount(String doctorid) {
         return this.registrationDao.findcountbyid(doctorid);
     }
+
+    @Override
+    public int finddoctorlastcount(String doctorid, Date date) {
+        return this.registrationDao.findcountlast(doctorid,date);
+    }
+
+    @Override
+    public int seltimecount(String doctorid, Date date) {
+        return this.registrationDao.findcountdatecount(doctorid,date);
+    }
+
 
 }

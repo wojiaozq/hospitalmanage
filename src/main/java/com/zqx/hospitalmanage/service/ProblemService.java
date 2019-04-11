@@ -21,4 +21,6 @@ public interface ProblemService {
 
     public void delprobleambyid(String id);
 
+    public int findallcount();
+
 }

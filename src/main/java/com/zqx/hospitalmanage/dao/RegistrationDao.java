@@ -22,7 +22,14 @@ public interface RegistrationDao extends JpaRepository<Registration,String>, Jpa
    public List<Registration> findByDoctorId(String id,Date date);
 
    @Query(nativeQuery = true,value = "select count(*) from registration where doctor_id = ?")
-   public String findcountbyid(String doctorid);
+   public int findcountbyid(String doctorid);
 
+   @Query(nativeQuery = true,value = "select count(*) from registration where doctor_id = ? and mytime>=?")
+   public int findcountlast(String doctorid,Date date);
 
+   @Query(nativeQuery = true,value = "select * from registration where patient_id = ?")
+   public List<Registration> findbypatientid(String patientId);
+
+   @Query(nativeQuery = true,value = "select count(*) from registration where doctor_id = ? and mytime=?")
+   public int findcountdatecount(String doctorid,Date date);
 }

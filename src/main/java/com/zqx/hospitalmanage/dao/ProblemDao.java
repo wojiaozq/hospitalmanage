@@ -19,4 +19,6 @@ public interface ProblemDao  extends JpaRepository<Problem,String>, JpaSpecifica
     @Query(nativeQuery = true ,value = "select * from problem where quizzer_id = ?;")
     public List<Problem> findByQuizzerId(String id);
 
+    @Query(nativeQuery = true ,value = "select count (*) from problem ;")
+    public int findallcount();
 }

@@ -14,9 +14,11 @@
 						<input type="text" class="input-text" placeholder="" id="name" name="name">
 					</div>
 					<label class="form-label col-xs-1 col-sm-2"><span class="c-red">*</span>性别：</label>
-					<div class="formControls col-xs-2 col-sm-3">
-						<input type="text" class="input-text"  placeholder="" id="sex" name="sex">
-					</div>
+					<div class="formControls col-xs-2 col-sm-3"><span class="select-box">
+				                    <select name="sex" class="select" id="sex">
+				                	<option value="男">男</option>
+				                	<option value="女" >女</option>
+				                	</select></span></div>
 				</div>
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>出生年月：</label>
@@ -35,7 +37,14 @@
 					</div>
 					<label class="form-label col-xs-1 col-sm-2"><span class="c-red">*</span>职称：</label>
 					<div class="formControls col-xs-2 col-sm-3">
-						<input type="text" class="input-text" value="" placeholder="" id="job" name="job">
+						<!--<input type="text" class="input-text" value="" placeholder="" id="job" name="job">-->
+						<span class="select-box">
+				                    <select class="select" id="job" name="job">
+				                	<option value="主治医生">主治医生</option>
+				                	<option value="专家" >专家</option>
+									<option value="教授" >教授</option>
+									<option value="副教授" >副教授</option>
+				                </select></span>
 					</div>
 				</div>
 				<div class="row cl">
@@ -99,6 +108,7 @@
 		<script type="text/javascript" src="static/h-ui/js/H-ui.js"></script>
 	</body>
 	<script>
+
         $(document).ready(function(){
             $.get("administrative/getAll",function(data,status){
                  // alert("Data: " + data + "\nStatus: " + status);
@@ -111,6 +121,7 @@
 				$('#administrativeId').html(str);
 
             });
+
             $('#save').click(function () {
                 var data = getData(); //eval('('+getData()+')');
 
@@ -130,6 +141,7 @@
 					}
                 })
             });
+
             function getData() {
                  var data = "";// = '{';
                 data += "username="+ $('#username').val()+'&';
@@ -146,7 +158,6 @@
                 data += "address="+ $('#address').val()+'&';
                 data += "education="+ $('#education').val()+'&';
                 data += "password="+ $('#password').val();
-                // data += '}';
                 return data;
 
             }

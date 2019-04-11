@@ -38,7 +38,7 @@
 						</div>
 					</div>
 				</div><br />
-				<div class="card-body">
+				<div class="card-body" id="tableAjax">
 					<table id="bootstrap-data-table" class="table table-striped table-bordered">
 						<thead>
 							<tr>
@@ -65,7 +65,7 @@
 								<td th:text="${u.tel}"></td>
 								<td>
 									<button class="look"  onclick='look(this)' title="查看详细信息并编辑"><i class="fa fa-pencil" style="color: blue"></i></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-									<button title="删除" onclick='del(this)' class='del' ><i class="fa fa-trash-o" style="color: red"></i></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<button title="切换状态" onclick='del(this)' class='del' ><i class="fa fa-random " style="color: red"></i></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								</td>
 							</tr>
 						</tbody>
@@ -102,6 +102,21 @@
 				   $.get("doctor/search?name="+name+"&start="+start+"&end="+end,function (data,status) {
 				       // console.log(data);
 				       var str ="";
+				       str += '<table id="bootstrap-data-table" class="table table-striped table-bordered">' +
+							   '<thead>' +
+							   '<tr>' +
+							   '<td hidden="hidden"></td>' +
+							   '<th>医生姓名</th>' +
+							   '<th>职称</th>' +
+							   '<th>入职时间</th>' +
+							   '<th>性别</th>' +
+							   '<th>所属科室</th>' +
+							   '<th>在职状态</th>' +
+							   '<th>联系方式</th>' +
+							   '<th>操作</th>' +
+							   '</tr>' +
+							   '</thead>' +
+							   '<tbody id="table">';
                        for (var i = 0; i < data.length; i++) {
 						   str += "<tr>";
 						   str += "<td hidden=\"hidden\">"+data[i].id+"</td>";
@@ -119,8 +134,9 @@
                                "                        </td>" +
                                "                        </tr>";
                        }
-                       $("#table").html("");
-                       $("#table").html(str);
+                       str += "</tbody></table>";
+                       $("#tableAjax").html("");
+                       $("#tableAjax").html(str);
                    });
 				});
             });
@@ -144,20 +160,20 @@
                     var sts = tr.find('td').eq(6).text();
                     // alert(tr.find('td').eq(0).text());
                     if(sts == "在职"){
-                        layer.alert("确定删除",function () {
+                        layer.alert("确定设置为离职？",function () {
                             $.get("doctor/delete?id="+d,function (data,state) {
                                 if(data=="success"){
                                     tr.find('td').eq(6).text('离职');
-                                    layer.alert("删除成功");
+                                    layer.alert("设置成功");
                                 }
                             });
                         });
                     }else{
-                        layer.alert("确定添加",function () {
+                        layer.alert("确定设置为在职？",function () {
                             $.get("doctor/delete?id="+d,function (data,state) {
                                 if(data=="success"){
                                     tr.find('td').eq(6).text('在职');
-                                    layer.alert("添加成功");
+                                    layer.alert("设置成功");
                                 }
                             });
                         });

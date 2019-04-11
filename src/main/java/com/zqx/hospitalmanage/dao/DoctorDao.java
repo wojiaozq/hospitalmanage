@@ -54,9 +54,6 @@ public interface DoctorDao extends JpaRepository<Doctor,String >, JpaSpecificati
     @Query(nativeQuery = true,value = "select * from doctor where administrative_id = ?;")
     public List<Doctor> findByAdministrativeId(String administrativeId);//根据科室id查询医生
 
-//    @Query(nativeQuery = true,value = "select count(id) from doctor;")
-//    public int count();
-    //查询获取VO对象
     @Query(nativeQuery = true,value = "select d.id ,d.name,d.job,a.name administrativeName,d.entry_time,d.sex,d.status,d.tel  from doctor d left join administrative a on d.administrative_id = a.id;")
     public List<Object[]> findAllDoctorVO();
 
@@ -74,7 +71,8 @@ public interface DoctorDao extends JpaRepository<Doctor,String >, JpaSpecificati
     public List<Doctor> findAllByStatus(String status);
 
     @Query(nativeQuery = true,value = "select count(*) from doctor where status = ?;")
-    public List<Doctor> findAllcount(String status);
+    public int findcountzz(String status);//查找在职医生数量
 
-    
+    @Query(nativeQuery = true,value = "select count(*) from doctor where age is not null ;")
+    public int findAllcount();      //查找离职医生的数量
 }

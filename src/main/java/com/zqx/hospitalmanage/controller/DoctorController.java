@@ -3,16 +3,14 @@ package com.zqx.hospitalmanage.controller;
 import com.zqx.hospitalmanage.pojo.Doctor;
 import com.zqx.hospitalmanage.pojo.Log;
 import com.zqx.hospitalmanage.pojo.Page;
-import com.zqx.hospitalmanage.service.DoctorService;
-import com.zqx.hospitalmanage.service.LogService;
+import com.zqx.hospitalmanage.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
-import javax.xml.ws.http.HTTPBinding;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -30,6 +28,10 @@ public class DoctorController {
     private DoctorService doctorService;
     @Autowired
     private LogService logService;
+    @Autowired
+    private RegistrationService registrationService;
+    @Autowired
+    private EvlauateService evlauateService;
 
     //添加一名医生--注册
     @RequestMapping("save")
@@ -43,7 +45,6 @@ public class DoctorController {
     @RequestMapping("update")
     @ResponseBody
     public String updateDoctor(Doctor doctor){
-//        System.out.println(doctor);
         doctorService.update(doctor);
         return "success";
     }
@@ -136,5 +137,41 @@ public class DoctorController {
     public List<Doctor> findByAdministrativeId(String aId){
         return doctorService.findAllByAdministrative(aId);
     }
+    //查找在职医生
+    @RequestMapping("findalot")
+    @ResponseBody
+    public int findcount(){
+       int i= doctorService.findcountzz("在职");
+
+       return i;
+    }
+
+    //查找医生最近预约人数
+    @RequestMapping("findlast")
+    @ResponseBody
+    public int findcougecoun(HttpSession session){
+        Doctor user = (Doctor) session.getAttribute("user");
+        int i= registrationService.finddoctorlastcount(user.getId(),new Date());
+        return i;
+    }
+
+    //查找医生旗下挂号总人数
+    @RequestMapping("findreconutall")
+    @ResponseBody
+    public int selcoureg(HttpSession session){
+        Doctor user = (Doctor) session.getAttribute("user");
+        int j= registrationService.finddoctorallcount(user.getId());
+        return j;
+    }
+
+    // 查找医生被评论的总数量
+    @RequestMapping("findevcountall")
+    @ResponseBody
+    public int findcounev(HttpSession session){
+        Doctor user = (Doctor) session.getAttribute("user");
+        int k= evlauateService.findcount(user.getId());
+        return k;
+    }
+
 
 }

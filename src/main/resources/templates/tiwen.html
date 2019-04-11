@@ -78,11 +78,8 @@
 										</div>
 									
 									</div>
-								
 								</form>
-						
 							<div class="listBtn">
-								<!--- newslist.html -->
 								<a href="javascript:;" id="commit" target="_blank">确认</a>
 							</div>
 							<div class="clear"></div>
@@ -107,6 +104,7 @@
                 $.get("problem/add?head="+head+'&context='+context,function(data){
                     if(data == 'success'){
                         alert('提问成功');
+                        location.href="geren.html";
                     }else{
                         alert('提问失败');
                     }

@@ -1,15 +1,12 @@
 package com.zqx.hospitalmanage.service.impl;
 
 import com.zqx.hospitalmanage.dao.PatientDao;
-import com.zqx.hospitalmanage.pojo.Caseform;
 import com.zqx.hospitalmanage.pojo.Patient;
-import com.zqx.hospitalmanage.pojo.vo.PatientreVo;
 import com.zqx.hospitalmanage.service.PatientService;
 import com.zqx.hospitalmanage.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 @Service
 public class PatientServiceImpl implements PatientService {
@@ -17,12 +14,10 @@ public class PatientServiceImpl implements PatientService {
     private PatientDao patientDao;
 
     @Override
-    public void addpatient(Patient patient, Caseform caseform) {
+    public void addpatient(Patient patient) {
         String uid=Utils.getUUID();
         patient.setId(uid);
-        caseform.setPatientId(uid);
         this.patientDao.save(patient);
-
     }
 
     @Override
@@ -73,6 +68,10 @@ public class PatientServiceImpl implements PatientService {
         this.patientDao.updatePassword(id,password);
     }
 
+    @Override
+    public Patient selbyident(String identification) {
+        return this.patientDao.findByident(identification);
+    }
 
 
 }

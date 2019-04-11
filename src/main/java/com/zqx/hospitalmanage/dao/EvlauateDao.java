@@ -4,7 +4,9 @@ import com.zqx.hospitalmanage.pojo.Evlauate;
 import org.hibernate.query.criteria.internal.expression.function.AggregationFunction;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -25,5 +27,16 @@ public interface EvlauateDao  extends JpaRepository<Evlauate,String>, JpaSpecifi
 
     @Query(nativeQuery = true,value = "select count(*) from evlauate where doctorid = ?")
     public int findcountbyid(String doctorid);
+
+    @Query(nativeQuery = true,value = "select * from evlauate where pid = ? and context is not null ")
+    public List<Evlauate> findallbypatientid(String pid);
+
+    @Query(nativeQuery = true,value = "select count (*) from evlauate where doctorid = ? and context is not null ")
+    public int finddocount(String doctorid);
+
+    @Transactional
+    @Modifying
+    @Query(nativeQuery = true,value = "delete from evlauate where pid =?")
+    public void delBypidev(String pid);
 
 }

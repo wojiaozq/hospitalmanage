@@ -69,59 +69,14 @@
         <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>电话号码：</label>
         <div class="formControls col-sm-3">
             <input type="text" class="input-text" th:value="${pat.tel}"  id="tel" name="tel">
-        </div>
-    </div>
-    <div class="order">
-        <span class="line"></span>
-        <span class="txt">病人病历信息</span>
-        <span class="line"></span>
-    </div>
-    <div class="row cl">
-        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>主诉：</label>
-        <div class="formControls col-sm-3">
-            <input type="text" class="input-text" th:value="${case.mainSuit}" id="mainSuit" name="mainSuit">
-        </div>
-        <label class="form-label col-xs-1 col-sm-2"><span class="c-red">*</span>入院时间：</label>
-        <div class="formControls col-xs-2 col-sm-3">
-            <input type="text" class="input-text" th:value="${#dates.format(case.time, 'yyyy/MM/dd')}"  id="time" name="time">
-        </div>
-    </div>
-    <div class="row cl">
-        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>现病史：</label>
-        <div class="formControls col-sm-3">
-            <input type="text" class="input-text" th:value="${case.presentIllness}"  id="presentIllness" name="presentIllness">
-        </div>
-        <label class="form-label col-xs-1 col-sm-2"><span class="c-red">*</span>既往史：</label>
-        <div class="formControls col-xs-2 col-sm-3">
-            <input type="text" class="input-text" th:value="${case.previousHistory}" id="previousHistory" name="previousHistory">
-        </div>
-    </div>
-    <div class="row cl">
-        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>检查结果：</label>
-        <div class="formControls col-sm-3">
-            <input type="text" class="input-text" th:value="${case.result}" id="result" name="result">
-        </div>
-        <label class="form-label col-xs-1 col-sm-2"><span class="c-red">*</span>诊断：</label>
-        <div class="formControls col-xs-2 col-sm-3">
-            <input type="text" class="input-text" th:value="${case.diagnosisInfo}"  id="diagnosisInfo" name="diagnosisInfo">
-        </div>
-    </div>
-    <div class="row cl">
-        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>治疗手段：</label>
-        <div class="formControls col-sm-3">
-            <input type="text" class="input-text" th:value="${case.cureMeans}"  id="cureMeans" name="cureMeans">
-        </div>
-        <label class="form-label col-xs-1 col-sm-2"><span class="c-red">*</span>过敏史：</label>
-        <div class="formControls col-xs-2 col-sm-3">
-            <input type="text" class="input-text" th:value="${case.allergy}"  id="allergy" name="allergy">
-            <input type="text"hidden class="input-text" th:value="${case.patientId}" name="patientId">
+            <input type="text" class="input-text" th:value="${pat.id}"  id="id" name="id" hidden>
         </div>
     </div>
 
     <div class="row cl">
         <div class="formControls col-sm-3"></div>
         <div class="formControls col-sm-2">
-            <button type="submit" id="update" class="btn btn-primary radius">确认修改</button>
+            <button type="submit" class="btn btn-primary radius">确认修改</button>
         </div>
         <div class="formControls col-xs-2 col-sm-2">
             <a class="btn btn-default radius" href="Patient_management.html">返回</a>

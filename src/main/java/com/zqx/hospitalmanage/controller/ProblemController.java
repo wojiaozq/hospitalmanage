@@ -51,4 +51,11 @@ public class ProblemController {
         return problemService.findAll();
     }
 
+    @RequestMapping("findalotof")
+    @ResponseBody
+    public int findallcount(){
+        int k=problemService.findallcount();
+        return k;
+    }
+
 }

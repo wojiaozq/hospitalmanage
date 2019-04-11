@@ -45,5 +45,8 @@ public interface DoctorService {
 
     public List<Doctor> findAllByAdministrative(String AdministrativeId);
 
-    public int findcount(String status);
+    public int findcountzz(String status);
+
+    public int findallcount();
+
 }

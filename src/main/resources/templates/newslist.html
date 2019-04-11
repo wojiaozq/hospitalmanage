@@ -78,28 +78,28 @@
 		<section class="BaseMark ">
 			<div class="bread ">您所在的位置<span><a href="index.html ">首页</a>><a href="news.html ">新闻动态</a> > 省医快讯</span></div>
 			<div class="baseLeft ">
-				<div class="title title05_19 ">新闻动态</div>
+				<div class="title title05_19 ">互助交流社区</div>
 			</div>
 			<div class="baseRight ">
-				<div class="title01 ">省医快讯</div>
+				<div class="title01 ">问答空间</div>
 				<div class="article detail ">
 					<h2 id="ida" th:text="${problem.id}" hidden></h2>
-					<h2 id="H2Title" >标题:<i th:text="${problem.head}"></i></h2>
+					<h2 id="H2Title" ><i th:text="${problem.head}" style="font-size:20px;font-weight:bold"></i></h2>
 					<div id="DIVTool " class="title04 ">
 						<span id="SPANDate " >发布日期：<i th:text="${#dates.format(problem.time, 'yyyy-MM-dd')}" ></i></span>
 
-						<div class="itemBase " id="phoneArticle"></div>
+						<!--<div class="itemBase " id="phoneArticle"></div>-->
 					</div>
 					<!--<div class=" clear "></div>-->
 					<div id="DIVContent " class="DIVContent ">
-						<i class="coffee">问题详细内容：</i>
-						<p th:text="${problem.context}">
+						<i class="title" style="font-size:16px">问题描述：</i>
+						<p th:text="${problem.context}" style="color:#0C0C0C;font-size:20px;font-weight:bold" >
 						</p>
 						<hr/>
 						<!-- 回答 -->
 						<i class="coffee">他人的回答</i>
 						<p>
-							<div id="theyAns">
+							<div id="theyAns" style="color: red">
 							</div>
 						</p>
 						<hr/>
@@ -109,14 +109,6 @@
 						</p>
 					</div>
 				</div>
-				<!--<div class="PrevNext ">-->
-					<!--<p><span>上一篇</span>-->
-						<!--<a disabled='disabled' title='已经是第一篇'>[已经是第一篇]</a>-->
-					<!--</p>-->
-					<!--<p><span>下一篇</span>-->
-						<!--<a href="NewsDetail-8478.html " title="豫医联盟医院标题分会成立 ">豫医联盟医院标题分会成立</a>-->
-					<!--</p>-->
-				<!--</div>-->
 
 			</div>
 			<div class="clear "></div>

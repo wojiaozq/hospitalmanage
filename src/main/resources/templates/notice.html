@@ -20,7 +20,7 @@
 			<div class="topHidden"></div>
 			<div class="toolBase">
 				<div class="BaseMark">
-					<ul>
+					<ul id="myul">
 						<li>
 							<a href="plogin.html">登录</a>
 						</li>
@@ -134,16 +134,16 @@
 				<div class="info">主办单位：医院标题 &nbsp; &nbsp;综合服务电话：120&nbsp;&nbsp; &nbsp;急救中心电话：120 &nbsp; 传真：120 &nbsp; 地 址：地址地址地址 &nbsp;<br/> 版权所有：医院标题 </div>
 				<ul>
 					<li class="first">
-						<a href="jianjie.html" target="_blank">关于我们</a>
+						<a href="#" target="_blank">关于我们</a>
 					</li>
 					<li>
-						<a href="Declaration.html" target="_blank">法律声明</a>
+						<a href="#" target="_blank">法律声明</a>
 					</li>
 					<li>
-						<a href="SiteMap.html" target="_blank">网站地图</a>
+						<a href="#" target="_blank">网站地图</a>
 					</li>
 					<li>
-						<a href="Article-57.html" target="_blank">联系我们</a>
+						<a href="#" target="_blank">联系我们</a>
 					</li>
 					<li>
 						<a href="Complain.html" target="_blank">院长(信访)信箱</a>
@@ -163,4 +163,31 @@
 		<script language="javascript" type="text/javascript" src="js/Kunyi.Secondary.js"></script>
 		<script language="javascript" type="text/javascript" src="js/Kunyi.News.js"></script>
 	</body>
+	<script>
+		$(function () {
+			$.get("index",function(data){
+				if(data == null ||data == ""){
+					return "";
+				}else{
+					var str = data;
+					/*for(var i = 0;i<data.length;++i){
+						str += "<li>";
+						str += "<a th:href=\"@{/pCancellation}\">注销</a>";
+						str += '</li>';
+					}*/
+					$("#myul").html(str);
+				}
+			})
+		});
+
+		function f() {
+			$.get("pCancellation",function(data){
+				if(data != null ||data != ""){
+					alert("注销成功");
+					location.href="index.html";
+				}
+			})
+		}
+
+	</script>
 </html>

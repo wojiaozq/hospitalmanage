@@ -41,8 +41,12 @@
 					<input type="text" class="input-text" value=""  id="name" name="name">
 				</div>
 				<label class="form-label col-xs-1 col-sm-2"><span class="c-red">*</span>性别：</label>
-				<div class="formControls col-xs-2 col-sm-3">
-					<input type="text" class="input-text" value=""  id="sex" name="sex">
+				<div class="formControls col-xs-2 col-sm-3"> <span class="select-box">
+				                    <select name="sex" class="select" id="sex">
+				                	<option value="男">男</option>
+				                	<option value="女" >女</option>
+				                </select></span>
+					<!--<input type="text" class="input-text" value=""  id="sex" name="sex">-->
 				</div>
 			</div>
 			<div class="row cl">
@@ -71,52 +75,6 @@
 					<input type="text" class="input-text" value=""  id="tel" name="tel">
 				</div>
 			</div>
-			<div class="order">
-				<span class="line"></span>
-				<span class="txt">病人病历信息</span>
-				<span class="line"></span>
-			</div>
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>主诉：</label>
-				<div class="formControls col-sm-3">
-					<input type="text" class="input-text" value=""  id="mainSuit" name="mainSuit">
-				</div>
-				<label class="form-label col-xs-1 col-sm-2"><span class="c-red">*</span>入院时间：</label>
-				<div class="formControls col-xs-2 col-sm-3">
-					<input type="text" class="input-text" value=""  id="time" name="time">
-				</div>
-			</div>
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>现病史：</label>
-				<div class="formControls col-sm-3">
-					<input type="text" class="input-text" value=""  id="presentIllness" name="presentIllness">
-				</div>
-				<label class="form-label col-xs-1 col-sm-2"><span class="c-red">*</span>既往史：</label>
-				<div class="formControls col-xs-2 col-sm-3">
-					<input type="text" class="input-text" value="" id="previousHistory" name="previousHistory">
-				</div>
-			</div>
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>检查结果：</label>
-				<div class="formControls col-sm-3">
-					<input type="text" class="input-text" value="" id="result" name="result">
-				</div>
-				<label class="form-label col-xs-1 col-sm-2"><span class="c-red">*</span>诊断：</label>
-				<div class="formControls col-xs-2 col-sm-3">
-					<input type="text" class="input-text" value=""  id="diagnosisInfo" name="diagnosisInfo">
-				</div>
-			</div>
-			<div class="row cl">
-				<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>治疗手段：</label>
-				<div class="formControls col-sm-3">
-					<input type="text" class="input-text" value=""  id="cureMeans" name="cureMeans">
-				</div>
-				<label class="form-label col-xs-1 col-sm-2"><span class="c-red">*</span>过敏史：</label>
-				<div class="formControls col-xs-2 col-sm-3">
-					<input type="text" class="input-text" value=""  id="allergy" name="allergy">
-				</div>
-			</div>
-
 
 			<div class="row cl">
 				<div class="formControls col-sm-3"></div>
@@ -144,8 +102,13 @@
 				// alert(data);
 				// alert(status);
 				if(data=="success"){
-
 					layer.alert('添加成功',function () {
+						window.parent.location.reload();
+						var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+						parent.layer.close(index); //再执行关闭
+					});
+				}if(data=="error"){
+					layer.alert('该身份证已经存在',function () {
 						window.parent.location.reload();
 						var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
 						parent.layer.close(index); //再执行关闭
@@ -153,6 +116,7 @@
 				}
 			})
 		});
+
 		function getData() {
 			var data = "";// = '{';
 			data += "name="+ $('#name').val()+'&';
@@ -161,17 +125,7 @@
 			data += "age="+ $('#age').val()+'&';
 			data += "identification="+ $('#identification').val()+'&';
 			data += "password="+ $('#password').val()+'&';
-			data += "tel="+ $('#tel').val()+'&';
-			data += "mainSuit="+ $('#mainSuit').val()+'&';
-			data += "time="+ $('#time').val()+'&';
-			data += "presentIllness="+ $('#presentIllness').val()+'&';
-			data += "previousHistory="+ $('#previousHistory').val()+'&';
-			data += "result="+ $('#result').val()+'&';
-			data += "diagnosisInfo="+ $('#diagnosisInfo').val()+'&';
-			data += "cureMeans="+ $('#cureMeans').val()+'&';
-			data += "allergy="+ $('#allergy').val();
-
-			// data += '}';
+			data += "tel="+ $('#tel').val();
 			return data;
 		}
 	});

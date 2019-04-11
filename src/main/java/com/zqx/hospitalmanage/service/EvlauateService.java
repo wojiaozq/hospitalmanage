@@ -24,4 +24,8 @@ public interface EvlauateService {
     public List<Evlauate> findallbyid(String doctorid);
 
     public int findcount(String doctorid);
+
+    public List<Evlauate> finbypid(String pid);
+
+    public void delbypid(String pid);
 }

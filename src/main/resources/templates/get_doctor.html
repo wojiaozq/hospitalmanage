@@ -16,7 +16,11 @@
 					</div>
 					<label class="form-label col-xs-1 col-sm-2"><span class="c-red">*</span>性别：</label>
 					<div class="formControls col-xs-2 col-sm-3">
-						<input type="text" th:value="${d.sex}" class="input-text"  placeholder="" id="sex" name="sex">
+						 <span class="select-box">
+				                    <select name="sex" class="select" id="sex">
+				                	<option value="男">男</option>
+				                	<option value="女" >女</option>
+				                </select></span>
 					</div>
 				</div>
 				<div class="row cl">
@@ -36,7 +40,13 @@
 					</div>
 					<label class="form-label col-xs-1 col-sm-2"><span class="c-red">*</span>职称：</label>
 					<div class="formControls col-xs-2 col-sm-3">
-						<input type="text" class="input-text" th:value="${d.job}" placeholder="" id="job" name="job">
+						<span class="select-box">
+				                    <select class="select" id="job" name="job">
+				                	<option value="主治医生">主治医生</option>
+				                	<option value="专家" >专家</option>
+									<option value="教授" >教授</option>
+									<option value="副教授" >副教授</option>
+				                </select></span>
 					</div>
 				</div>
 				<div class="row cl">
@@ -45,7 +55,7 @@
 						<span class="select-box"  >
 				<select id="administrativeId"  name="administrativeId" class="select" >
 					<!--<option>请选择</option>-->
-					<option th:value="${administrativeId}" th:text="${d.administrativeName}"></option>
+					<option th:value="${d.administrativeId}" th:text="${d.administrativeName}"></option>
 				</select>
 				</span>
 					</div>
@@ -103,12 +113,7 @@
 	<script>
         $(document).ready(function(){
 
-
             $.get("administrative/getAll",function(data,status){
-                 // alert("Data: " + data + "\nStatus: " + status);
-           		 // <option value="0">全部科室</option>
-
-				// var str = "<option >请选择</option>";
 				var str = "";
                  for (var i=0;i<data.length;++i){
                      str +="<option value=\""+data[i].id+"\">"+data[i].name+"</option>";

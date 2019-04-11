@@ -98,8 +98,8 @@
             var pwd2 = $("#pwd2").val();
             $.get("uppatientpwd?pwd1="+pwd1+'&pwd2='+pwd2,function(data){
                 if(data == 'success'){
-                    alert('修改成功');
-
+                    alert('修改成功,即将退出重新登陆');
+                    location.href="plogin.html"
                 }else{
                     alert('两次密码不一致');
                 }

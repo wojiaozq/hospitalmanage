@@ -47,4 +47,9 @@ public class ProblemServiceImpl implements ProblemService {
         this.problemDao.deleteById(id);
     }
 
+    @Override
+    public int findallcount() {
+        return this.problemDao.findallcount();
+    }
+
 }
