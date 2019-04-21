@@ -30,24 +30,6 @@
 					</ul>
 				</div>
 			</div>
-			<div class="BaseMark logoBase">
-				<a href="Index.html"><img src="images/logo.jpg" class="load" /></a>
-				<div class="searchBase">
-					<div class="itemBase">
-						<div class="divType" data-state="0">全站内容</div>
-						<ul>
-							<li data-id="1">全站内容</li>
-							<li data-id="2">医生查找</li>
-							<li data-id="3">新闻动态</li>
-						</ul>
-					</div>
-					<form method="get" action="#" onSubmit="return Kunyi.CheckSearchForm()">
-						<input type="hidden" id="Type" name="Type" value="1" />
-						<input type="text" name="SearchWords" placeholder="请输入您要查找内容的关键字" value="" autocomplete="off" onFocus="Kunyi.cls(event)" onBlur="Kunyi.res(event)" maxlength="28" id="SearchWords" />
-						<input type="submit" value="搜索" class="boxsub animated" />
-					</form>
-				</div>
-			</div>
 		</header>
 		<nav>
 			<div class="navBase">
@@ -153,9 +135,7 @@
 	<script>
 		$(function () {
 			$.get("administrative/getAll",function (data) {
-            	// <li>
-                // <a href="javascript:; " data-index="1 ">内科临床医学部</a>
-				// 	</li>
+
 				var str = "";
 			    for(var i =0;i<data.length;++i){
 			        str += "<li>";
@@ -171,11 +151,6 @@
 				return "";
 			}else{
 				var str = data;
-				/*for(var i = 0;i<data.length;++i){
-                    str += "<li>";
-                    str += "<a th:href=\"@{/pCancellation}\">注销</a>";
-                    str += '</li>';
-                }*/
 				$("#myul").html(str);
 			}
 		})

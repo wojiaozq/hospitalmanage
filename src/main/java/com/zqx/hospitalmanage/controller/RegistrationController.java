@@ -1,11 +1,9 @@
 package com.zqx.hospitalmanage.controller;
 
-import com.zqx.hospitalmanage.pojo.Doctor;
 import com.zqx.hospitalmanage.pojo.Evlauate;
 import com.zqx.hospitalmanage.pojo.Registration;
 import com.zqx.hospitalmanage.service.EvlauateService;
 import com.zqx.hospitalmanage.service.RegistrationService;
-import com.zqx.hospitalmanage.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,24 +31,45 @@ public class RegistrationController {
    @Autowired
     private EvlauateService evlauateService;
 
+   String Doctorid;
+   String Doctorname;
+   String pid;
+   String Commentator;
     @RequestMapping("addguahao")
     @ResponseBody
-    public String addregis(Registration registration,Evlauate evlauate) throws ParseException {
+    public String addregis(Registration registration) throws ParseException {
         String otime=(registration.getTimedetails()).substring(0,10);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date date1=sdf.parse(otime);
         Date date2=new Date();
+        String s = sdf.format(new Date());
+        Date newsdate=sdf.parse(s);
         if(date1.compareTo(date2)<0){
-            /*beginTime.compareTo(endTime)<0时，开始时间小于结束时间 */
             return "error";
-        }if ((registrationService.seltimecount(registration.getDoctorid(),date2))>20){
+        }if ((registrationService.seltimecount(registration.getDoctorid(),newsdate))>20){
             return "tolong";
         }
+       Registration re=registrationService.selbydateandpid(registration.getPatientId(),registration.getTimedetails());
+        if(re!=null){
+            return "repeat";
+        }
         registrationService.addRegistration(registration);
-        evlauate.setDoctorid(registration.getDoctorid());
-        evlauate.setDoctorname(registration.getDoctorName());
-        evlauate.setPid(registration.getPatientId());
-        evlauate.setCommentator(registration.getPatientName());
+        Doctorid=registration.getDoctorid();
+        Doctorname=registration.getDoctorName();
+        pid =registration.getPatientId();
+        Commentator=registration.getPatientName();
+
+        return "success";
+    }
+
+    @RequestMapping("okreg")
+    @ResponseBody
+    public String upreg(String id,Evlauate evlauate){
+        this.registrationService.updregis(id);
+        evlauate.setDoctorid(Doctorid);
+        evlauate.setDoctorname(Doctorname);
+        evlauate.setPid(pid);
+        evlauate.setCommentator(Commentator);
         evlauateService.add(evlauate);
         return "success";
     }

@@ -4,7 +4,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
 		<meta name="renderer" content="webkit" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<title>呼吸内科 - 科室导航 - 就诊指南 - 医院标题</title>
+		<title>医生信息</title>
 		<meta name="Keywords" content="医院标题,人民医院,省医,山西人民医院,咨询, 留言, 山西医院, 寻医问药" />
 		<meta name="Description" content="医院标题位于山西省太原市，建院于1906年，是一家三级甲等综合医院。医院秉承“患者至上，员工为本”的服务理念，弘扬“仁爱、博学、严谨、卓越”的医院精神，坚持“人民医院为人民”的办院宗旨，造就了一支业务精湛、医德高尚、纪律严明、作风过硬的职工队伍，树立了社会满意、患者信赖的良好形象。先后获得全国精神文明建设先进单位、全国文明单位、全国卫生系统先进集体、全国医院文化建设先进单位等多项荣誉称号。" />
 		<meta name="robots" content="All" />
@@ -33,24 +33,7 @@
 					</ul>
 				</div>
 			</div>
-			<div class="BaseMark logoBase">
-				<a href="Index.html"><img src="images/logo.jpg" class="load" /></a>
-				<div class="searchBase">
-					<div class="itemBase">
-						<div class="divType" data-state="0">全站内容</div>
-						<ul>
-							<li data-id="1">全站内容</li>
-							<li data-id="2">医生查找</li>
-							<li data-id="3">新闻动态</li>
-						</ul>
-					</div>
-					<form method="get" action="Search.html" onSubmit="return Kunyi.CheckSearchForm()">
-						<input type="hidden" id="Type" name="Type" value="1" />
-						<input type="text" name="SearchWords" placeholder="请输入您要查找内容的关键字" value="" autocomplete="off" onFocus="Kunyi.cls(event)" onBlur="Kunyi.res(event)" maxlength="28" id="SearchWords" />
-						<input type="submit" value="搜索" class="boxsub animated" />
-					</form>
-				</div>
-			</div>
+
 		</header>
 		<nav>
 			<div class="navBase">
@@ -63,7 +46,7 @@
 							<a href="index.html" class="PAMenu">首页</a>
 						</li>
 						<li class="PMenu current"><img src="images/ico_014.png" class="animated" width="15" height="8" />
-							<a href="#" id="Nav_AMenu0" class="PAMenu" title="就诊指南">就诊指南</a>
+							<a href="#" id="Nav_AMenu0" class="PAMenu" title="医生信息">医生信息</a>
 						</li>
 						<li class="PMenu "><img src="images/ico_014.png " class="animated " width="15 " height="8 " />
 							<a href="notice.html "  class="PAMenu " title="院系公告 ">院系公告</a>
@@ -80,9 +63,9 @@
 		</nav>
 		<section class="BaseMark ">
 			<div class="bread ">您所在的位置<span><a href="index.html ">首页</a>
-				<a href="ArticleList-54.html ">就诊指南</a> > 
-				<a href="DepartmentNav.html ">科室导航</a> > 
-				<a href="keshimx.html ">呼吸内科</a> > 专家介绍</span></div>
+				<a href="# ">科室导航</a> >
+				<a href="# ">医生信息</a> >
+				专家介绍</span></div>
 			<div class="baseLeft ">
 				<div class="partLeft ">
 					<div class="title partTitle ">
@@ -94,7 +77,7 @@
 								<a href="keshi.html"><em>科室简介</em></a>
 							</li>
 							<li class="active ">
-								<a href="keshiys.html "><em>专家介绍</em></a>
+								<a href="keshiys.html "><em>医生介绍</em></a>
 							</li>
 						</ul>
 					</div>
@@ -248,7 +231,7 @@
 			        str += "<li>";
 			        str += "<a href=\"ys.html \" target=\"_blank \"><img src=\"uploadfiles/thumb/201603221527067.png \" class=\"load \" width=\"120 \" height=\"162 \" title=\""+data[i].name+"\" alt=\"医生 \"></a>";
 			        str += '<a href="ys.html " target="_blank " title="'+data[i].name+' " class="ATitle ">'+data[i].name+'</a>';
-			        str += '<h4>'+data[i].administrativeName+','+data[i].job+'</h4>';
+			        str += '<h4>'+data[i].administrativeName+'</h4>';
 			        str += '<p>'+data[i].job+'</p>';
 			        str += '<span hidden>'+data[i].id+'</span>';
 			        str += '<div> <a class="coffee " target="_blank " href="ys.html?id=' ;
@@ -264,11 +247,6 @@
 					return "";
 				}else{
 					var str = data;
-					/*for(var i = 0;i<data.length;++i){
-						str += "<li>";
-						str += "<a th:href=\"@{/pCancellation}\">注销</a>";
-						str += '</li>';
-					}*/
 					$("#myul").html(str);
 				}
 			})

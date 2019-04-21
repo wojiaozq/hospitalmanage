@@ -60,5 +60,20 @@ public class RegistrationServiceImpl implements RegistrationService {
         return this.registrationDao.findcountdatecount(doctorid,date);
     }
 
+    @Override
+    public void delrebypid(String pid) {
+        this.registrationDao.deletebupid(pid);
+    }
+
+    @Override
+    public void updregis(String id) {
+        this.registrationDao.updateregist(id);
+    }
+
+    @Override
+    public Registration selbydateandpid(String pid, String timedetails) {
+        return this.registrationDao.findpidanddate(pid,timedetails);
+    }
+
 
 }

@@ -29,24 +29,6 @@
 					</ul>
 				</div>
 			</div>
-			<div class="BaseMark logoBase">
-				<a href="Index.html"><img src="images/logo.jpg" class="load" /></a>
-				<div class="searchBase">
-					<div class="itemBase">
-						<div class="divType" data-state="0">全站内容</div>
-						<ul>
-							<li data-id="1">全站内容</li>
-							<li data-id="2">医生查找</li>
-							<li data-id="3">新闻动态</li>
-						</ul>
-					</div>
-					<form method="get" action="Search.html" onSubmit="return Kunyi.CheckSearchForm()">
-						<input type="hidden" id="Type" name="Type" value="1" />
-						<input type="text" name="SearchWords" placeholder="请输入您要查找内容的关键字" value="" autocomplete="off" onFocus="Kunyi.cls(event)" onBlur="Kunyi.res(event)" maxlength="28" id="SearchWords" />
-						<input type="submit" value="搜索" class="boxsub animated" />
-					</form>
-				</div>
-			</div>
 		</header>
 		<nav>
 			<div class="navBase">
@@ -72,7 +54,7 @@
 			</div>
 		</nav>
 		<section class="BaseMark">
-			<div class="bread">您所在的位置<span><a href="index.html">首页</a>><a href="notice.html">新闻动态</a> > 省医快讯</span></div>
+			<div class="bread">您所在的位置<span><a href="index.html">首页</a>><a href="#">个人中心</a> </span></div>
 			<div class="baseLeft">
 				<div class="title title05_19">个人中心</div>
 				
@@ -98,7 +80,7 @@
 											<input type="text" class="input-text" th:value="${pt.name}" style="border: none;"  readonly="true">
 										</div>
 										<label class="form-label col-xs-1 col-sm-2">账号：</label>
-										<div class="formControls col-xs-2 col-sm-3">
+										<div class="formControls col-xs-2 col-sm-4">
 											<input type="text" class="input-text" th:value="${pt.identification}"  style="border: none;" readonly="true">
 										</div>
 									</div>
@@ -206,7 +188,7 @@
 									<thead>
 									<tr>
 										<th style="width: 80px">医生姓名</th>
-										<th style="width: 150px;vertical-align:top;">评价时间</th>
+										<th style="width: 220px;vertical-align:top;">评价时间</th>
 										<th style="width: 1100px">评价内容</th>
 										<th style="width: 100px">操作</th>
 									</tr>

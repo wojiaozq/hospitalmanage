@@ -4,7 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.io.Serializable;
 import java.util.Date;
 
 @Entity
@@ -32,6 +31,7 @@ public class Registration {
   private String timedetails;
   private String cost;
   private Date mytime;
+  private String status;
 
   public String getId() {
     return id;
@@ -111,5 +111,13 @@ public class Registration {
 
   public void setMytime(Date mytime) {
     this.mytime = mytime;
+  }
+
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
   }
 }

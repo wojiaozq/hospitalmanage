@@ -19,8 +19,8 @@ import java.util.List;
  **/
 public interface EvlauateDao  extends JpaRepository<Evlauate,String>, JpaSpecificationExecutor<Evlauate> {
 
-    @Query(nativeQuery = true,value = "select * from evlauate where context is null")
-    public List<Evlauate> findallnull();
+    @Query(nativeQuery = true,value = "select * from evlauate where context is null and pid=? ")
+    public List<Evlauate> findallnull(String pid);
 
     @Query(nativeQuery = true,value = "select * from evlauate where doctorid = ? and context is not null ")
     public List<Evlauate> findallbyid(String doctorid);

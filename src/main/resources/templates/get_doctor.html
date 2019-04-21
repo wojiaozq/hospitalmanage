@@ -77,7 +77,7 @@
 				<div class="row cl">
 					<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>身份证号：</label>
 					<div class="formControls col-sm-3">
-						<input type="text" class="input-text"  th:value="${d.username}"  readonly="readonly" placeholder="" id="username" name="username">
+						<input type="text" class="input-text"  th:value="${d.username}"  readonly="readonly" placeholder="" id="username" name="username" aria-readonly="true">
 					</div>
 					<label class="form-label col-xs-1 col-sm-2"><span class="c-red">*</span>登录密码：</label>
 					<div class="formControls col-xs-2 col-sm-3">
@@ -125,9 +125,6 @@
                 var data = getData(); //eval('('+getData()+')');
 				$.post('doctor/update',data,function (data,status) {
 					if(data=="success"){
-                        // layer.msg("添加成功");
-                        //关闭动作的关键代码
-                        //假设这是iframe页
                         layer.alert('修改成功',function () {
                             window.parent.location.reload();
                             var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引

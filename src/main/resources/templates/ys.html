@@ -5,7 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf8" />
         <meta name="renderer" content="webkit" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>呼吸内科 - 科室导航 - 就诊指南 - 医院标题</title>
+        <title>医生详细信息</title>
         <meta name="Keywords" content="医院标题,人民医院,省医,山西人民医院,咨询, 留言, 山西医院, 寻医问药" />
         <meta name="Description" content="医院标题位于山西省太原市，建院于1906年，是一家三级甲等综合医院。医院秉承“患者至上，员工为本”的服务理念，弘扬“仁爱、博学、严谨、卓越”的医院精神，坚持“人民医院为人民”的办院宗旨，造就了一支业务精湛、医德高尚、纪律严明、作风过硬的职工队伍，树立了社会满意、患者信赖的良好形象。先后获得全国精神文明建设先进单位、全国文明单位、全国卫生系统先进集体、全国医院文化建设先进单位等多项荣誉称号。" />
         <meta name="robots" content="All" />
@@ -26,24 +26,7 @@
 	<body>
 		<script language="javascript" type="text/javascript" src="js/Kunyi.Init.js"></script>
 		<header>
-			<div class="BaseMark logoBase">
-				<a href="Index.html"><img src="images/logo.jpg" class="load" /></a>
-				<div class="searchBase">
-					<div class="itemBase">
-						<div class="divType" data-state="0">全站内容</div>
-						<ul>
-							<li data-id="1">全站内容</li>
-							<li data-id="2">医生查找</li>
-							<li data-id="3">新闻动态</li>
-						</ul>
-					</div>
-					<form method="get" action="#" onsubmit="return Kunyi.CheckSearchForm()">
-						<input type="hidden" id="Type" name="Type" value="1" />
-						<input type="text" name="SearchWords" placeholder="请输入您要查找内容的关键字" value="" autocomplete="off" onfocus="Kunyi.cls(event)" onblur="Kunyi.res(event)" maxlength="28" id="SearchWords" />
-						<input type="submit" value="搜索" class="boxsub animated" />
-					</form>
-				</div>
-			</div>
+
 		</header>
 		<nav>
 			<div class="navBase">
@@ -62,10 +45,10 @@
 							<a href="notice.html" class="PAMenu " title="院系公告 ">院系公告</a>
 						</li>
 						<li class="PMenu "><img src="images/ico_014.png " class="animated " width="15 " height="8 " />
-							<a href="luntan.html" class="PAMenu " title="交流论坛 ">交流论坛</a>
+							<a href="news.html" class="PAMenu " title="交流论坛 ">交流论坛</a>
 						</li>
 						<li class="PMenu "><img src="images/ico_014.png " class="animated " width="15 " height="8 " />
-							<a href="geren.html" class="PAMenu " title="交流论坛 ">交流论坛</a>
+							<a href="geren.html" class="PAMenu " title="个人中心 ">个人中心</a>
 						</li>
 			</ul>
 				</div>
@@ -75,7 +58,7 @@
 			</div>
 		</nav>
 		<section class="BaseMark ">
-			<div class="bread ">您所在的位置<span><a href="index.html ">首页</a><a href="# ">就诊指南</a> > <a href="# ">科室导航</a> > <a href="# ">呼吸内科</a> > 医生</span></div>
+			<div class="bread ">您所在的位置<span><a href="index.html ">首页</a><a href="# ">就诊指南</a> > <a href="# ">科室导航</a> > <a href="# ">呼吸内科</a> > 医生详情</span></div>
 			<div class="doctorLeft ">
 				<img src="uploadfiles/thumb/201603221527067.png" id="DThumb " class="DThumb " width="112 " height="150 " alt="医生 " />
 				<h3 id="doctorname" th:text="${doctor.name}"  name="doctorname"></h3><h3 id="doctorid" hidden th:text="${doctor.id}"></h3>
@@ -86,7 +69,7 @@
 				<div class='import import1'></div>
 				<div class="title01 ">
 					<h3>所在科室：</h3>
-					<h1 th:text="${doctor.administrativeName}" id="administrativeName"></h1><span><a href="keshi.html">返回科室导航</a></span></div>
+					<h1 th:text="${doctor.administrativeName}" id="administrativeName"></h1><span><a href="keshi.html">返回医生介绍</a></span></div>
 				<div class="clear "></div>
 				<div id="DIVContent " class="article intro ">
 
@@ -99,11 +82,7 @@
 					<div class="visitList ">
 						
 						<table border="0" cellspacing="1">
-							<!--<tr>
-								<th style="text-align: left; width: 200px;">用户</th>
-								<th></th>
-								<th></th>
-							</tr>-->
+
 							<tr th:each="me:${myev}">
 								<td style="text-align: left; width: 120px;vertical-align:top;" th:text="${me.Commentator}">:</td>
 								<td style="text-align: left; width: 1200px;" th:text="${me.context}"></td>

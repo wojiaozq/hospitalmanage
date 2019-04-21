@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -32,4 +33,17 @@ public interface RegistrationDao extends JpaRepository<Registration,String>, Jpa
 
    @Query(nativeQuery = true,value = "select count(*) from registration where doctor_id = ? and mytime=?")
    public int findcountdatecount(String doctorid,Date date);
+
+   @Transactional
+   @Modifying
+   @Query(nativeQuery = true,value = "delete from registration where patient_id=?")
+   public void deletebupid(String pid);
+
+   @Transactional
+   @Modifying
+   @Query(nativeQuery = true,value = "update registration set status ='已就诊' where id = ? ")
+   public void updateregist(String id);
+
+   @Query(nativeQuery = true,value = "select * from registration where patient_id = ? and timedetails=? ")
+   public Registration findpidanddate(String pid,String timedetails);
 }

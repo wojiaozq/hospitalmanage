@@ -23,24 +23,6 @@
 				<div class="BaseMark">
 				</div>
 			</div>
-			<div class="BaseMark logoBase">
-				<a href="Index.html"><img src="images/logo.jpg" class="load" /></a>
-				<div class="searchBase">
-					<div class="itemBase">
-						<div class="divType" data-state="0">全站内容</div>
-						<ul>
-							<li data-id="1">全站内容</li>
-							<li data-id="2">医生查找</li>
-							<li data-id="3">新闻动态</li>
-						</ul>
-					</div>
-					<form method="get" action="Search.html" onSubmit="return Kunyi.CheckSearchForm()">
-						<input type="hidden" id="Type" name="Type" value="1" />
-						<input type="text" name="SearchWords" placeholder="请输入您要查找内容的关键字" value="" autocomplete="off" onFocus="Kunyi.cls(event)" onBlur="Kunyi.res(event)" maxlength="28" id="SearchWords" />
-						<input type="submit" value="搜索" class="boxsub animated" />
-					</form>
-				</div>
-			</div>
 		</header>
 		<nav>
 			<div class="navBase">
@@ -56,7 +38,7 @@
 							<a href="#" id="Nav_AMenu0" class="PAMenu" title="院系公告">院系公告</a>
 						</li>
 						<li class="PMenu"><img src="images/ico_014.png" class="animated" width="15" height="8" />
-							<a href="luntan.html"  class="PAMenu" title="交流论坛">交流论坛</a>
+							<a href="news.html"  class="PAMenu" title="交流论坛">交流论坛</a>
 						</li>
 						<li class="PMenu"><img src="images/ico_014.png" class="animated" width="15" height="8" />
 							<a href="geren.html"  class="PAMenu" title="个人中心">个人中心</a>
@@ -80,7 +62,7 @@
 								<form class="form form-horizontal" >
 									<div class="row cl">
 										<label class="form-label col-xs-4 col-sm-2">挂号单编号：</label>
-										<div class="formControls col-sm-3">
+										<div class="formControls col-sm-4">
 											<input type="text" class="input-text" th:value="${myreg.id}" style="border: none;" id="id" readonly="true">
 										</div>
 										<label class="form-label col-xs-1 col-sm-2">预约时间：</label>
@@ -90,17 +72,17 @@
 									</div>
 									<div class="row cl">
 										<label class="form-label col-xs-4 col-sm-2">姓名：</label>
-										<div class="formControls col-sm-3">
+										<div class="formControls col-sm-4">
 											<input type="text" class="input-text" th:value="${myreg.patientName}" style="border: none;"  id="patientName" readonly="true">
 										</div>
 										<label class="form-label col-xs-1 col-sm-2">身份证号：</label>
-										<div class="formControls col-xs-2 col-sm-3">
+										<div class="formControls col-xs-2 col-sm-4">
 											<input type="text" class="input-text" th:value="${myreg.identification}"  id="identification" style="border: none;" readonly="true">
 										</div>
 									</div>
 									<div class="row cl">
 										<label class="form-label col-xs-4 col-sm-2">医生姓名：</label>
-										<div class="formControls col-sm-3">
+										<div class="formControls col-sm-4">
 											<input type="text" class="input-text" th:value="${myreg.doctorName}"  id="doctorName" style="border: none;" readonly="true">
 										</div>
 										<label class="form-label col-xs-1 col-sm-2">科室：</label>
@@ -110,7 +92,7 @@
 									</div>
 									<div class="row cl">
 										<label class="form-label col-xs-4 col-sm-2">诊疗费：</label>
-										<div class="formControls col-sm-3">
+										<div class="formControls col-sm-4">
 											<input type="text" class="input-text" value="无"  readonly="true" style="border: none;">
 										</div>
 										<label class="form-label col-xs-1 col-sm-2">挂号费用：</label>
@@ -119,6 +101,7 @@
 											<input type="text" class="input-text" th:value="${myreg.doctorid}" style="border: none;"  id="doctorid" hidden>
 											<input type="text" class="input-text" th:value="${myreg.patientId}" style="border: none;"  id="patientId" hidden>
 											<input type="text" class="input-text" th:value="${myreg.mytime}" style="border: none;"  id="mytime" hidden>
+											<input type="text" class="input-text" th:value="${myreg.status}" style="border: none;"  id="status" hidden>
 										</div>
 									</div>
 									<div class="row cl">
@@ -158,9 +141,10 @@
 				var doctorid = $("#doctorid").val();
 				var patientId = $("#patientId").val();
 				var mytime = $("#mytime").val();
+				var status = $("#status").val();
 				$.get("registration/addguahao?id="+id+'&timedetails='+timedetails+'&patientName='+patientName+
 						'&identification='+ identification+'&doctorName='+doctorName+'&administrativeName='+ administrativeName+
-						'&cost='+cost+ '&doctorid='+doctorid +'&patientId='+patientId+'&mytime='+mytime, function(data){
+						'&cost='+cost+ '&doctorid='+doctorid +'&patientId='+patientId+'&mytime='+mytime+'&status='+status, function(data){
 					if(data == 'success'){
 						alert('挂号成功');
 						location.href="geren.html";
@@ -170,6 +154,9 @@
 					} if(data == 'error'){
 						alert('预约时间有误，请重新选择');
 						location.href='keshiys.html';
+					}if(data=='repeat'){
+                        alert("当前时间段您已经预约");
+                        location.href='keshiys.html';
 					}
 				});
 			});

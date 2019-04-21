@@ -32,8 +32,8 @@ public class EvlauateServiceImpl implements EvlauateService {
     }
 
     @Override
-    public List<Evlauate> findallnull() {
-        return this.evlauateDao.findallnull();
+    public List<Evlauate> findallnull(String pid) {
+        return this.evlauateDao.findallnull(pid);
     }
 
     @Override

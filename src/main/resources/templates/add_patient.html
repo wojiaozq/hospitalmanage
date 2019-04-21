@@ -98,23 +98,37 @@
 
 		$('#save').click(function () {
 			var data1 = getData(); //eval('('+getData()+')');
-			$.post('Patient/save',data1,function (data,status) {
-				// alert(data);
-				// alert(status);
-				if(data=="success"){
-					layer.alert('添加成功',function () {
-						window.parent.location.reload();
-						var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-						parent.layer.close(index); //再执行关闭
-					});
-				}if(data=="error"){
-					layer.alert('该身份证已经存在',function () {
-						window.parent.location.reload();
-						var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-						parent.layer.close(index); //再执行关闭
-					});
-				}
-			})
+
+			var name=$("#name").val();
+			var identification=$("#identification").val();
+			var tel=$("#tel").val();
+			var age=$("#age").val();
+			var address=$("#address").val();
+			var password=$("#password").val();
+			if(name==null||name==""||age==null||age==""||address==null||address==""||password==null||password==""){
+				alert("注册信息不全，请填写完整信息");
+				return false;
+			}if(identification.length!=18){
+				alert("请填写18位正确的身份证号")
+				return false;
+			}if(tel.length!=11){
+				alert("请填写11位正确手机号码")
+				return false;
+			}else{
+				$.post('Patient/save',data1,function (data,status) {
+					// alert(data);
+					// alert(status);
+					if(data=="success"){
+						layer.alert('添加成功',function () {
+							window.parent.location.reload();
+							var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+							parent.layer.close(index); //再执行关闭
+						});
+					}if(data=="error"){
+						alert("身份证已存在，不能重复注册")
+					}
+				})
+			}
 		});
 
 		function getData() {

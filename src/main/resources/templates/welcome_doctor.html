@@ -79,16 +79,7 @@
 			});
 
 			$(function () {
-				$.get("doctor/findlast",function(data){
-					if(data == null ||data == ""){
-						return "";
-					}else{
-						var str = data;
-						$("#evcount").text(str);
-					}
-				})
-
-				$.get("doctor/findreconutall",function(data){
+				$.get("doctor/findlast",function(data){//最近预约
 					if(data == null ||data == ""){
 						return "";
 					}else{
@@ -97,13 +88,21 @@
 					}
 				})
 
-				$.get("doctor/findevcountall",function(data){
+				$.get("doctor/findreconutall",function(data){//查找挂号总数
 					if(data == null ||data == ""){
 						return "";
 					}else{
 						var str = data;
-						console.log(data);
 						$("#reallcount").text(str);
+					}
+				})
+
+				$.get("doctor/findevcountall",function(data){//查找评论总数
+					if(data == null ||data == ""){
+						return "";
+					}else{
+						var str = data;
+						$("#evcount").text(str);
 					}
 				})
 

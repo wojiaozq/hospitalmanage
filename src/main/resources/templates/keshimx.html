@@ -4,7 +4,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
 		<meta name="renderer" content="webkit" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<title>呼吸内科 - 科室导航 - 就诊指南 - 医院标题</title>
+		<title>科室简介</title>
 		<meta name="robots" content="All" />
 		<noscript><meta http-equiv="refresh" content="0; url=/noscript.htm" /></noscript>
 		<link rel="icon" href="favicon.ico" type="image/x-icon" />
@@ -30,24 +30,7 @@
 					</ul>
 				</div>
 			</div>
-			<div class="BaseMark logoBase">
-				<a href="Index.html"><img src="images/logo.jpg" class="load" /></a>
-				<div class="searchBase">
-					<div class="itemBase">
-						<div class="divType" data-state="0">全站内容</div>
-						<ul>
-							<li data-id="1">全站内容</li>
-							<li data-id="2">医生查找</li>
-							<li data-id="3">新闻动态</li>
-						</ul>
-					</div>
-					<form method="get" action="Search.html" onsubmit="return Kunyi.CheckSearchForm()">
-						<input type="hidden" id="Type" name="Type" value="1" />
-						<input type="text" name="SearchWords" placeholder="请输入您要查找内容的关键字" value="" autocomplete="off" onfocus="Kunyi.cls(event)" onblur="Kunyi.res(event)" maxlength="28" id="SearchWords" />
-						<input type="submit" value="搜索" class="boxsub animated" />
-					</form>
-				</div>
-			</div>
+
 		</header>
 		<nav>
 			<div class="navBase">
@@ -60,7 +43,7 @@
 							<a href="index.html" class="PAMenu">首页</a>
 						</li>
 						<li class="PMenu current"><img src="images/ico_014.png" class="animated" width="15" height="8" />
-							<a href="jiuzhen.html" class="PAMenu" title="就诊指南">就诊指南</a>
+							<a href="jiuzhen.html" class="PAMenu" title="科室信息">科室信息</a>
 						</li>
 						<li class="PMenu "><img src="images/ico_014.png " class="animated " width="15 " height="8 " />
 							<a href="notice.html " class="PAMenu " title="院系公告' ">院系公告</a>
@@ -108,20 +91,6 @@
 		</section>
 		<section class="BaseMark PartIntro ">
 			<div class="introLeft ">
-				<div class="lefttitle ">科室栏目<span>Column sections</span></div>
-				<ul>
-					<li>
-						<a href="OfficeArticle-11.html ">科室简介</a>
-					</li>
-					<li id="LIExpertInfo2 ">
-						<a href="keshiys.html ">专家介绍</a>
-					</li>
-				</ul>
-				<ul class='margRt'>
-					<li>
-						<a href='OfficeNewsList-11-2.html' title='健康教育'>健康教育</a>
-					</li>
-				</ul>
 				<div class="clear "></div>
 			</div>
 			<div class="introRight ">
@@ -214,7 +183,7 @@
 				    str += "<li>";
 				    str += '<a href="#" class="img "><img src="uploadfiles/thumb/201603221527067.png  " alt="'+data[i].name+'" title="'+data[i].name+'" width="120 " height="162 " /></a>';
                     str += '<a href="#" class="name ">'+data[i].name+'</a>';
-                    str += '<a href="# " class="office ">呼吸内科</a>';
+                    str += '<a href="#" class="post ">'+data[i].administrativeName+'</a>';
 				    str += '<a href="#" class="post ">'+data[i].job+'</a>'
 					str += '<a href="ys.html?id='+data[i].id+'" class="btn more ">详细</a>';
 				    str += "</li>";

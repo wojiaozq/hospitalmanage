@@ -15,7 +15,7 @@ public interface EvlauateService {
 
     public void add(Evlauate evlauate);
 
-    public List<Evlauate> findallnull();
+    public List<Evlauate> findallnull(String pid);
 
     public Evlauate findbyid(String id);
 

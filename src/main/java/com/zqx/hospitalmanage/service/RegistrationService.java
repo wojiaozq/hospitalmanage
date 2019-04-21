@@ -24,4 +24,7 @@ public interface RegistrationService {
     public int finddoctorallcount(String doctorid);
     public int finddoctorlastcount(String doctorid,Date date);
     public int seltimecount(String doctorid,Date date);
+    public void delrebypid(String pid);
+    public void updregis(String id);
+    public Registration selbydateandpid(String pid,String timedetails);
 }

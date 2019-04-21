@@ -29,6 +29,8 @@
 				<tr>
 					<th>预约患者</th>
 					<th>预约时间</th>
+					<th>状态</th>
+					<th hidden>id</th>
 					<th>操作</th>
 				</tr>
 				</thead>
@@ -36,7 +38,12 @@
 				<tr th:each="hao : ${gua}">
 					<td th:text="${hao.patientName}"></td>
 					<td th:text="${hao.timedetails}"></td>
-					<td ><a th:href="@{/finddetils(patientId=${hao.patientId})}">查看详情</a></td>
+					<td th:text="${hao.status}" id="status"></td>
+					<td hidden th:text="${hao.id}" id="id"></td>
+					<td >
+						<a th:href="@{/finddetils(patientId=${hao.patientId})}">查看详情</a>&nbsp;&nbsp;&nbsp;
+						<a style="color: red" onclick="f()" id="ok">确认就诊</a>
+					</td>
 				</tr>
 				</tbody>
 			</table>
@@ -55,5 +62,21 @@
 <script src="assets/js/lib/data-table/buttons.colVis.min.js"></script>
 <script src="assets/js/init/datatables-init.js"></script>
 </body>
-
+	<script>
+		$(function () {
+			var status=$("#status").text();
+			if (status=="已就诊") {
+				$("#ok").hide();
+			}
+		})
+		function f(){
+			var id=$("#id").text();
+			$.get("registration/okreg?id="+id,function(data){
+				if(data == 'success'){
+					alert('就诊成功');
+					window.location.reload();
+				}
+			});
+		}
+	</script>
 </html>

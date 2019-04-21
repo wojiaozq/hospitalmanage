@@ -34,7 +34,7 @@
 											<div class="col col-md-2"><label for="textarea-input" class=" form-control-label">内容</label></div>
 											<div class="col-12 col-md-9"><textarea id="content" name="content" rows="9" placeholder="请注意公告内容不得超过200字" class="form-control"></textarea></div>
 										</div>
-										<center><button  type="reset" class="btn btn-lg btn-info "><span>重置</span></button>&nbsp;&nbsp;&nbsp;
+										<center><button  type="button" class="btn btn-lg btn-info " onclick="f()"><span>返回</span></button>&nbsp;&nbsp;&nbsp;
 										<button id="save" type="button" class="btn btn-lg btn-info "><span id="payment-button-amount">确定</span></button></center>
 									</form>
 								</div>
@@ -50,16 +50,24 @@
 
 				$(document).ready(function(){
 					$('#save').click(function () {
+
 						var data = getData(); //eval('('+getData()+')');
-						$.post('Announcement/addannou',data,function (data,status) {
-							if(data=="success"){
-								layer.alert('添加成功',function () {
-									window.parent.location.reload();
-									var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-									parent.layer.close(index); //再执行关闭
-								});
-							}
-						})
+						var topic=$("#topic").val();
+						var content=$("#content").val();
+						if (topic.length==0||content.length==0) {
+							alert("标题或内容不能为空")
+						}else{
+							$.post('Announcement/addannou',data,function (data,status) {
+								if(data=="success"){
+									layer.alert('添加成功',function () {
+										window.parent.location.reload();
+										var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+										parent.layer.close(index); //再执行关闭
+									});
+								}
+							})
+						}
+
 					});
 					function getData() {
 						var data = "";
@@ -68,6 +76,12 @@
 						return data;
 					}
 				});
+
+				function f() {
+					window.parent.location.reload();
+					var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+					parent.layer.close(index); //再执行关闭
+				}
 			</script>
 	</body>
 

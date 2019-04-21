@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -129,7 +130,7 @@ public class ToHtmlCotroller {
     //页面跳转
     @RequestMapping("{page}")
     public String toPage(@PathVariable("page") String page, HttpSession session){
-        if(page.equals("index")||page.equals("index.html")||page.equals("keshi.html")||page.equals("keshimx.html")||page.equals("keshiys.html")||page.equals("notice.html")||page.equals("plogin.html")||page.equals("preg.html")||page.equals("luntan.html")||page.equals("news.html")||page.equals("404.html")){
+        if(page.equals("index")||page.equals("index.html")||page.equals("keshi.html")||page.equals("keshimx.html")||page.equals("keshiys.html")||page.equals("notice.html")||page.equals("plogin.html")||page.equals("preg.html")||page.equals("news.html")||page.equals("404.html")){
             return page;
         }
         Object user = session.getAttribute("user");
@@ -144,7 +145,7 @@ public class ToHtmlCotroller {
     public String cometoindex(HttpSession session){
         Patient puser = (Patient)session.getAttribute("puser");
         if(puser==null){
-            return "<li><a href=\"plogin.html\">登录</a> </li><li><a href=\\\"plogin.html\\\">注册</a> </li>";//===>页面
+            return "<li><a href=\"plogin.html\">登录</a> </li><li><a href=\"preg.html\">注册</a> </li>";//===>页面
         }else {
             return "<li><a onclick=\"f()\">注销</a>\n</li>";
         }
@@ -234,9 +235,9 @@ public class ToHtmlCotroller {
         patient.setIdentification(identification);
         patient.setPassword(password);
         Patient patient1=this.patientService.findPlogin(identification,password);
-        List<Registration> list=this.registrationService.findabypid(pid);
-        List<Evlauate> list1=this.evlauateService.findallnull();
-        List<Evlauate> list2 =this.evlauateService.finbypid(pid);
+        List<Registration> list=this.registrationService.findabypid(pid);//查找挂号记录
+        List<Evlauate> list1=this.evlauateService.findallnull(pid);//查找所有待评价
+        List<Evlauate> list2 =this.evlauateService.finbypid(pid);//展示所有评价
         model.addAttribute("ev",list1);
         model.addAttribute("pt",patient1);
         model.addAttribute("re",list);
@@ -287,7 +288,7 @@ public class ToHtmlCotroller {
         String s = sdf.format(new Date());
         Date date=sdf.parse(s);
         announcement.setReleaseTime(date);
-        List<Announcement> list=announcementService.findannBytime(date);
+        List<Announcement> list=announcementService.findAll();
         model.addAttribute("annt",list);
         return "notice.html";
     }
@@ -328,9 +329,9 @@ public class ToHtmlCotroller {
 
     //生成挂号单
     @RequestMapping("guahao.html")
-    public String toguo(Model model,Registration registration,HttpSession session) throws ParseException {
+    public String toguo(Model model,Registration registration,HttpSession session)  {
         Patient puser = (Patient)session.getAttribute("puser");
-        registration.setId(Utils.getUUID());
+        registration.setId(Utils.getUUID().substring(0,22));
         registration.setAdministrativeName(keshi);
         registration.setDoctorName(dname);
         registration.setPatientId(puser.getId());
@@ -338,11 +339,16 @@ public class ToHtmlCotroller {
         registration.setTimedetails(thetime);
         registration.setDoctorid(did);
         registration.setIdentification(puser.getIdentification());
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-       // newtime = sdf.format(new Date());
-        Date date=sdf.parse(newtime);
-        registration.setMytime(date);//字符串类型转日期类型
         registration.setCost("20元");
+        registration.setStatus("未就诊");
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, -1); //得到前一天
+        Date date = calendar.getTime();
+
+      //  Date mdate=new Date();
+        registration.setMytime(date);
+
         model.addAttribute("myreg",registration);
         return "guahao.html";
     }
@@ -454,10 +460,12 @@ public class ToHtmlCotroller {
 
     //查询挂号记录
     @RequestMapping("Article_record.html")
-    public String findguahao(HttpSession session,Model model){
+    public String findguahao(HttpSession session,Model model) throws ParseException {
         Doctor user = (Doctor) session.getAttribute("user");
         String doctorid=user.getId();
-        Date date=new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String s = sdf.format(new Date());
+        Date date=sdf.parse(s);
         List<Registration> mylist= registrationService.findByDoctorId(doctorid,date);//根据医生id查询今天以后所有挂号信息；
         model.addAttribute("gua",mylist);
         return "/Article_record.html";
@@ -476,7 +484,7 @@ public class ToHtmlCotroller {
     @RequestMapping("deltheev")
     public String delbypid(String pid){
         this.evlauateService.delbypid(pid);
-        return "geren.html";
+        return "redirect:/geren.html";
     }
 
 
