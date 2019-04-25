@@ -98,14 +98,20 @@
             $("#commit").click(function () {
                 var head = $("#head").val();
                 var context = $("#context").val();
-                $.get("problem/add?head="+head+'&context='+context,function(data){
-                    if(data == 'success'){
-                        alert('提问成功');
-                        location.href="geren.html";
-                    }else{
-                        alert('提问失败');
-                    }
-                });
+                if(context.length==0||head.length==0){
+                	alert("标题或内容不能为空");
+                	return false;
+				}else{
+					$.get("problem/add?head="+head+'&context='+context,function(data){
+						if(data == 'success'){
+							alert('提问成功');
+							location.href="geren.html";
+						}else{
+							alert('提问失败');
+						}
+					});
+				}
+
             });
         });
 	</script>

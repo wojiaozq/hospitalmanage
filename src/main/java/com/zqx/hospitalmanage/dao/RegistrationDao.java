@@ -19,8 +19,8 @@ import java.util.List;
  **/
 public interface RegistrationDao extends JpaRepository<Registration,String>, JpaSpecificationExecutor<Registration> {
 
-   @Query(nativeQuery = true,value = "select * from registration where doctor_id = ? and mytime>=? ;")
-   public List<Registration> findByDoctorId(String id,Date date);
+   @Query(nativeQuery = true,value = "select * from registration where doctor_id = ? ")
+   public List<Registration> findByDoctorId(String id);
 
    @Query(nativeQuery = true,value = "select count(*) from registration where doctor_id = ?")
    public int findcountbyid(String doctorid);

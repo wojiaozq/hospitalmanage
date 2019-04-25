@@ -38,9 +38,17 @@ public class LoginController {
     @RequestMapping(value = "loginDc",method = RequestMethod.POST)
     public String login(String username, String password, HttpSession session){
         Doctor doctor = doctorService.login(username, password);
-        if(doctor!=null){
+        if(doctor.getUsername().equals("root")){
             session.setAttribute("user",doctor);
             return "success";
+        }
+        if(doctor!=null){
+            if (doctor.getStatus().equals("离职")){
+                return "你已离职，无法登录";
+            }else{
+                session.setAttribute("user",doctor);
+                return "success";
+            }
         }
         return "账号或密码错误";
     }
@@ -76,16 +84,17 @@ public class LoginController {
     }
 
     @RequestMapping("toplogin")
+    @ResponseBody
     public String setplogin(String identification,String password,HttpSession session){
         Patient puser = (Patient)session.getAttribute("puser");
         if(puser!=null){
             session.removeAttribute("puser");
-        } if (patientService.findPlogin(identification,password)!=null) {
+        }if (patientService.findPlogin(identification,password)!=null) {
             Patient patient=patientService.findPlogin(identification,password);
             session.setAttribute("puser",patient);
-            return "index.html";
+            return "success";
         }
-        return "404.html";
+        return "账号或密码错误";
     }
 
     @RequestMapping("404.html")

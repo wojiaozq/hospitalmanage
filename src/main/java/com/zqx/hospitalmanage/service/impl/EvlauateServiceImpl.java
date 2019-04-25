@@ -65,4 +65,9 @@ public class EvlauateServiceImpl implements EvlauateService {
     public void delbypid(String pid) {
         this.evlauateDao.delBypidev(pid);
     }
+
+    @Transactional
+    public void delete(String id) {
+        this.evlauateDao.deleteById(id);
+    }
 }

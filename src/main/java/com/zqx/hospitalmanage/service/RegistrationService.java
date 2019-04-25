@@ -19,7 +19,7 @@ public interface RegistrationService {
 
     public void addRegistration(Registration registration);
     public List<Registration>findallRegis();
-    public List<Registration> findByDoctorId(String doctorId, Date date) ;
+    public List<Registration> findByDoctorId(String doctorId) ;
     public List<Registration>findabypid(String patientId);
     public int finddoctorallcount(String doctorid);
     public int finddoctorlastcount(String doctorid,Date date);

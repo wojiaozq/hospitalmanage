@@ -123,17 +123,39 @@
             });
             $('#save').click(function () {
                 var data = getData(); //eval('('+getData()+')');
-				$.post('doctor/update',data,function (data,status) {
-					if(data=="success"){
-                        layer.alert('修改成功',function () {
-                            window.parent.location.reload();
-                            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-                            parent.layer.close(index); //再执行关闭
 
-                        });
+				var tel=$("#tel").val();
+				var username=$("#username").val();
+				var name=$("#name").val();
+				var job=$("#job").val();
+				var entryTime=$("#entryTime").val();
+				var age=$("#age").val();
+				var birthday=$("#birthday").val();
+				var graduationSchool=$("#graduationSchool").val();
+				var administrativeId=$("#administrativeId").val();
+				var goodProject=$("#goodProject").val();
+				var education=$("#education").val();
+				var password=$("#password").val();
+				if(name.length==0||job.length==0||entryTime.length==0||age.length==0||birthday.length==0||graduationSchool.length==0||goodProject.length==0||education.length==0||password.length==0){
+					alert("所有信息都必须填写，不能为空");
+					return false;
+				}if (tel.length!=11) {
+					alert("请输入11位手机号码");
+					return false;
+				}else{
+					$.post('doctor/update',data,function (data,status) {
+						if(data=="success"){
+							layer.alert('修改成功',function () {
+								window.parent.location.reload();
+								var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+								parent.layer.close(index); //再执行关闭
 
-					}
-                })
+							});
+
+						}
+					})
+				}
+
             });
             function getData() {
                  var data = "";// = '{';

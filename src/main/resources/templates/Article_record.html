@@ -32,6 +32,7 @@
 					<th>状态</th>
 					<th hidden>id</th>
 					<th>操作</th>
+					<th>完成就诊</th>
 				</tr>
 				</thead>
 				<tbody>
@@ -42,7 +43,10 @@
 					<td hidden th:text="${hao.id}" id="id"></td>
 					<td >
 						<a th:href="@{/finddetils(patientId=${hao.patientId})}">查看详情</a>&nbsp;&nbsp;&nbsp;
-						<a style="color: red" onclick="f()" id="ok">确认就诊</a>
+					</td>
+					<td>
+						<span style="width: 80px;height: 10px" th:if="${hao.status}eq'未就诊'">
+							<a style="color: red" th:href="@{/registration/okreg(id=${hao.id})}">确认</a></span>
 					</td>
 				</tr>
 				</tbody>
@@ -62,21 +66,5 @@
 <script src="assets/js/lib/data-table/buttons.colVis.min.js"></script>
 <script src="assets/js/init/datatables-init.js"></script>
 </body>
-	<script>
-		$(function () {
-			var status=$("#status").text();
-			if (status=="已就诊") {
-				$("#ok").hide();
-			}
-		})
-		function f(){
-			var id=$("#id").text();
-			$.get("registration/okreg?id="+id,function(data){
-				if(data == 'success'){
-					alert('就诊成功');
-					window.location.reload();
-				}
-			});
-		}
-	</script>
+
 </html>

@@ -36,8 +36,8 @@ public class RegistrationServiceImpl implements RegistrationService {
     }
 
     @Override
-    public List<Registration> findByDoctorId(String doctorId, Date date) {
-        return this.registrationDao.findByDoctorId(doctorId,date);
+    public List<Registration> findByDoctorId(String doctorId) {
+        return this.registrationDao.findByDoctorId(doctorId);
     }
 
     @Override

@@ -52,7 +52,7 @@
 					<div class="formControls col-sm-3">
 						<span class="select-box">
 				<select id="administrativeId" name="administrativeId" class="select" >
-					<option>请选择</option>
+					<option value="1">请选择</option>
 				</select>
 				</span>
 					</div>
@@ -125,21 +125,44 @@
             $('#save').click(function () {
                 var data = getData(); //eval('('+getData()+')');
 
+				var tel=$("#tel").val();
+				var username=$("#username").val();
+				var name=$("#name").val();
+				var job=$("#job").val();
+				var entryTime=$("#entryTime").val();
+				var age=$("#age").val();
+				var birthday=$("#birthday").val();
+				var graduationSchool=$("#graduationSchool").val();
+				var administrativeId=$("#administrativeId").val();
+				var goodProject=$("#goodProject").val();
+				var education=$("#education").val();
+				var password=$("#password").val();
+				if(name.length==0||job.length==0||entryTime.length==0||administrativeId=="请选择"||age.length==0||birthday.length==0||graduationSchool.length==0||goodProject.length==0||education.length==0||password.length==0){
+						alert("所有信息都必须填写，不能为空");
+						return false;
+				}if (tel.length!=11) {
+					alert("请输入11位手机号码");
+					return false;
+				}if (username.length!=18){
+					alert("请输入18位正确身份证号码")
+					return false;
+				}else{
+					$.post('doctor/save',data,function (data,status) {
+						if(data=="success"){
+							// layer.msg("添加成功");
+							//关闭动作的关键代码
+							//假设这是iframe页
+							layer.alert('添加成功',function () {
+								window.parent.location.reload();
+								var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+								parent.layer.close(index); //再执行关闭
 
-				$.post('doctor/save',data,function (data,status) {
-					if(data=="success"){
-                        // layer.msg("添加成功");
-                        //关闭动作的关键代码
-                        //假设这是iframe页
-                        layer.alert('添加成功',function () {
-                            window.parent.location.reload();
-                            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-                            parent.layer.close(index); //再执行关闭
+							});
 
-                        });
+						}
+					})
+				}
 
-					}
-                })
             });
 
             function getData() {

@@ -63,7 +63,6 @@ public class RegistrationController {
     }
 
     @RequestMapping("okreg")
-    @ResponseBody
     public String upreg(String id,Evlauate evlauate){
         this.registrationService.updregis(id);
         evlauate.setDoctorid(Doctorid);
@@ -71,6 +70,6 @@ public class RegistrationController {
         evlauate.setPid(pid);
         evlauate.setCommentator(Commentator);
         evlauateService.add(evlauate);
-        return "success";
+        return "redirect:/Article_record.html";
     }
 }

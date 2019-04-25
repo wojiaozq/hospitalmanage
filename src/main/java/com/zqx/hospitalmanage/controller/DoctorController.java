@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -151,7 +152,12 @@ public class DoctorController {
     @ResponseBody
     public int findcougecoun(HttpSession session){
         Doctor user = (Doctor) session.getAttribute("user");
-        int i= registrationService.finddoctorlastcount(user.getId(),new Date());
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, -1); //得到前一天，如果是后两天就+2
+        Date date = calendar.getTime();
+        int i= registrationService.finddoctorlastcount(user.getId(),date);
+
         return i;
     }
 

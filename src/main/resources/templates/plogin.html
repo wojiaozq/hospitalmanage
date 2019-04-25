@@ -9,28 +9,42 @@
 	<body>
 		<br/><br/><br/><br/><br/><br/><br/><br/>
 		<div class="form-div">
-			<form id="reg-form" action="toplogin" method="post">
+			<form id="reg-form">
 				<table>
 					<tr>
 						<td>账号</td>
-						<td><input type="text" name="identification"></td>
+						<td><input type="text" name="identification" id="identification"></td>
 					</tr>
 					<tr>
 						<td>密码</td>
-						<td><input type="password" name="password"></td>
+						<td><input type="password" name="password" id="password"></td>
 					</tr>													
 				</table>
 				<div class="buttons">
-					<input value="登录" type="submit" style="margin-right:20px; margin-top:20px;">
+					<input value="登录" type="submit" style="margin-right:20px; margin-top:20px;" id="login">
 					<a href="preg.html" style="margin-right:45px; margin-top:20px;">没有账号，去注册</a>
 				</div>
 				<br class="clear">
 			</form>
 		</div>
-		<!--<script type="text/javascript">
-			$(document).ready(function() {
-				$('#reg-form').easyform();
-			});
-		</script>-->
+		<script type="text/javascript">
+			$("#login").click(function () {
+				var identification= $("#identification").val();
+				var password=$("#password").val();
+				if(identification.length==0||password.length==0){
+					alert("用户名或密码不能为空");
+					return false;
+				}else{
+					var jsonVal = {'identification':$('#identification').val(),'password':$('#password').val()};
+					$.post("toplogin",jsonVal,function(result) {
+						if (result == "success") {
+							window.location.href = 'index.html';
+						} else {
+							alert(result);
+						}
+					})
+				}}
+			);
+		</script>
 	</body>
 </html>

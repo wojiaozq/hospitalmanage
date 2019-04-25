@@ -25,7 +25,7 @@ public interface EvlauateDao  extends JpaRepository<Evlauate,String>, JpaSpecifi
     @Query(nativeQuery = true,value = "select * from evlauate where doctorid = ? and context is not null ")
     public List<Evlauate> findallbyid(String doctorid);
 
-    @Query(nativeQuery = true,value = "select count(*) from evlauate where doctorid = ?")
+    @Query(nativeQuery = true,value = "select count(*) from evlauate where doctorid = ? and context is not null")
     public int findcountbyid(String doctorid);
 
     @Query(nativeQuery = true,value = "select * from evlauate where pid = ? and context is not null ")

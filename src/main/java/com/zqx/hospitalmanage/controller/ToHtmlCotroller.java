@@ -466,7 +466,7 @@ public class ToHtmlCotroller {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String s = sdf.format(new Date());
         Date date=sdf.parse(s);
-        List<Registration> mylist= registrationService.findByDoctorId(doctorid,date);//根据医生id查询今天以后所有挂号信息；
+        List<Registration> mylist= registrationService.findByDoctorId(doctorid);//根据医生id查询所有挂号信息；
         model.addAttribute("gua",mylist);
         return "/Article_record.html";
     }
@@ -482,10 +482,9 @@ public class ToHtmlCotroller {
 
     //病人删除评价
     @RequestMapping("deltheev")
-    public String delbypid(String pid){
-        this.evlauateService.delbypid(pid);
+    public String delbypid(String id){
+      this.evlauateService.delete(id);
         return "redirect:/geren.html";
     }
-
 
 }

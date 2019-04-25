@@ -66,17 +66,18 @@
                     <form class="form form-horizontal" id="form-article-add">
                         <div class="row cl">
                             <label class="form-label col-xs-4 col-sm-2"></label>
-                            <div class="formControls col-sm-8">
+                            <div class="formControls col-sm-6">
                                 <input type="text" class="input-text" th:value="${ance.topic}" style="border: none ;text-align: center" readonly="true"/>
                             </div>
 
                         </div>
                         <div class="row cl">
                             <label class="form-label col-xs-4 col-sm-2"></label>
-                            <div class="formControls col-xs-4 col-sm-8">
-                                <textarea rows="10" cols="123" th:text="${ance.content}" style="border: none ;text-align: center" readonly="true"></textarea>
+                            <div class="formControls col-xs-4 col-sm-6">
+                                <textarea rows="8" cols="123" th:text="'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+${ance.content}" style="border: none" readonly="true"></textarea>
                             </div>
                         </div>
+                        <a href="notice.html" style="color: red">返回</button>
                     </form>
                     <div class="clear"></div>
                 </li>

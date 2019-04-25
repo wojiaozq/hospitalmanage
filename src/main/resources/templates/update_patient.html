@@ -42,7 +42,11 @@
         </div>
         <label class="form-label col-xs-1 col-sm-2"><span class="c-red">*</span>性别：</label>
         <div class="formControls col-xs-2 col-sm-3">
-            <input type="text" class="input-text" th:value="${pat.sex}"  id="sex" name="sex">
+           <!-- <input type="text" class="input-text" th:value="${pat.sex}"  id="sex" name="sex">-->
+            <select name="sex" class="select" id="sex" style="width: 60px;height: 25px">
+                <option value="男">男</option>
+                <option value="女" >女</option>
+            </select>
         </div>
     </div>
     <div class="row cl">
@@ -76,7 +80,7 @@
     <div class="row cl">
         <div class="formControls col-sm-3"></div>
         <div class="formControls col-sm-2">
-            <button type="submit" class="btn btn-primary radius">确认修改</button>
+            <button type="submit" class="btn btn-primary radius" onclick="return f()">确认修改</button>
         </div>
         <div class="formControls col-xs-2 col-sm-2">
             <a class="btn btn-default radius" href="Patient_management.html">返回</a>
@@ -89,3 +93,25 @@
 <script type="text/javascript" src="static/h-ui/js/H-ui.js"></script>
 </body>
 </html>
+<script>
+
+        function f(){
+            var name=$("#name").val();
+            var identification=$("#identification").val();
+            var tel=$("#tel").val();
+            var age=$("#age").val();
+            var address=$("#address").val();
+            var password=$("#password").val();
+
+            if(name==null||name==""||age==null||age==""||address==null||address==""||password==null||password==""){
+                alert("修改信息不能为空，请填写完整信息");
+                return false;
+            }if(tel.length!=11){
+                alert("请填写11位正确手机号码")
+                return false;
+            }
+            return true;
+        }
+
+
+</script>

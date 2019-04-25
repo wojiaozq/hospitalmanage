@@ -2,6 +2,7 @@ package com.zqx.hospitalmanage.service;
 
 import com.zqx.hospitalmanage.pojo.Evlauate;
 
+import javax.persistence.Id;
 import java.util.List;
 
 /**
@@ -28,4 +29,6 @@ public interface EvlauateService {
     public List<Evlauate> finbypid(String pid);
 
     public void delbypid(String pid);
+
+    public void delete(String id);
 }
